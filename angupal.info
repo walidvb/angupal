@@ -1,0 +1,6 @@
+name               = angupal
+description        =  Creates a hook to do it all in angular, except admin
+version            = 0.0
+core               = 7.x
+engine             = phptemplate
+stylesheets[all][] = style.css
