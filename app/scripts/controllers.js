@@ -2,6 +2,7 @@
 (function() {
   'use strict';  angular.module('myApp').controller('officeCtrl', [
     '$scope', 'officeService', function($scope, service) {
+      $scope.test = 3;
       $scope.data = {};
       service.getBlaise().then(function(data) {
         console.log(data);
@@ -23,6 +24,8 @@
         return $scope.data.masai = data.data.nodes[0].node;
       });
     }
-  ]);
+  ]).controller('testCtrl', function($scope) {
+    return $scope.test = 3;
+  });
 
 }).call(this);

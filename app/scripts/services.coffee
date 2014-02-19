@@ -2,6 +2,19 @@
 
 
 angular.module('myApp', ['ngResource'])
+	.service('drupal', ['$http', ($http) ->
+		auth = null
+		getAuth = -> 
+			if auth
+				return auth
+			else
+				$http
+					url: base_path + 'user'
+					method: 'GET'
+
+		@auth = ->
+			getAuth()
+	])
 	.service('officeService', ['$http', ($http) ->
 		@getBlaise = ->
 			get 'node/1.json'

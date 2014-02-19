@@ -1,0 +1,18 @@
+@import 'mixins';
+
+
+.editable{
+	position: relative;
+	overflow: hidden;
+	.edit{
+		position: absolute;
+		top: -20px;
+		right: 10px;
+		@include transition($duration: 0.2s, $delay: 0.5s);
+	}
+
+	&:hover .edit{
+		top: 5px;
+		@include transition($duration: 0.2s);
+	}
+}

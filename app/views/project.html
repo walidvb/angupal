@@ -1,7 +1,8 @@
 <div class="project slide-vert" data-side-icon="project.icon">
+		<div drupal-edit="project.nid"></div>
 		<div class="slides">
 			<div class="slide" ng-repeat="slide in project.imgs">
-				<img ng-src="slide">
+				<img ng-src="{{slide}}" class="img-responsive">
 			</div>
 		</div>
 
