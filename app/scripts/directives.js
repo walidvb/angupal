@@ -36,6 +36,23 @@
         }
       };
     }
+  ]).directive("myFullscreen", [
+    "$timeout", "$window", function(timer, $window) {
+      return function(scope, elem, attrs) {
+        var setSize;
+
+        setSize = function() {
+          var menu_height;
+
+          menu_height = (attrs.myFullscreen ? 0 : angular.element("#menu").height());
+          return angular.element(elem).height($window.innerHeight - menu_height).css("overflow", "auto");
+        };
+        angular.element($window).bind("resize", function() {
+          return setSize();
+        });
+        return timer(setSize, 0);
+      };
+    }
   ]).directive("myProject", [
     function() {
       return {

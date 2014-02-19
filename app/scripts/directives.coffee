@@ -29,6 +29,15 @@ angular.module('myApp').
 		        return
 		    )
 		]).
+	directive("myFullscreen", [ "$timeout", "$window", (timer, $window) ->
+  	(scope, elem, attrs) ->
+      setSize = ->
+        menu_height = (if attrs.myFullscreen then 0 else angular.element("#menu").height())
+        angular.element(elem).height($window.innerHeight - menu_height).css "overflow", "auto"
+      angular.element($window).bind "resize", ->
+        setSize()
+      timer setSize, 0
+ 	]).
 	directive("myProject", [
 		  () ->  
 		      scope:
