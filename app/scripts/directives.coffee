@@ -18,28 +18,53 @@ angular.module('myApp').
 		($timeout) ->
 			controller: ($scope) ->
 				$scope.horizontal = new Array
-				$scope.vertical = new Array
+			transclude: false
 			priority: 500
 			link: (scope, elem, attrs) ->
 				$timeout(() ->
-					console.log attrs.swiper, angular.element elem
+					$this = angular.element elem
 					options = 
 						mousewheelControl: true
 						mousewheelControlForceToAxis: true
 						keyboardControl: true
 						resizeReInit: true
 						grabCursor: true
+
 					if attrs.swiper == 'vert'
-						options.slideClass = 'slide-vert'
-						options.mode = 'vertical'
-						$this = angular.element elem
-						scope.vertical.push $this.swiper(options)
+						#Create and Add pagers to the dom
+						pagination = angular.element '<div class="vert-pagination"/>'
+						$this.append pagination
+						options.slideClass             = 'slide-vert'
+						options.mode                   = 'vertical'
+						options.pagination             = '.vert-pagination'
+						options.paginationElement      = 'div'
+						options.paginationElementClass = 'vert-pager'
+						options.paginationActiveClass  = 'active'
+						options.paginationVisibleClass = 'visible'
+						options.paginationClickable    = true						
+						options.onSwiperCreated = (swiper) ->
+							# add info
+							info = angular.element '#info'
+							pagination.append info
+							#move pagination to center
+							pagination.css 'marginTop', -pagination.height()/2
+						# remove first item and change color to white
+						options.onSlideChangeStart = (swiper, direction) ->
+							angular.element('body').removeClass 'initial-state'
+						options.onSlideChangeEnd = (swiper, direction) ->
+							swiper.removeSlide 0
+							swiper.swipeTo(0, 0, false)
+							swiper.removeCallbacks 'SlideChangeEnd'
+							angular.element('body').addClass 'normal-state'
+
+						scope.vertical = $this.swiper(options)
+						
+						return
 					else
 						options.slideClass = 'slide-horz'
-						$this = angular.element elem
-						scope.horizontal.push $this.swiper(options)
-					
-
-
+						
+					if attrs.settings == 'bio'
+						options.scrollContainer =  true
+					scope.horizontal.push $this.swiper(options)
 				, 1000)
 	])

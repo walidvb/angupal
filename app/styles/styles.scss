@@ -1,8 +1,25 @@
 @import 'mixins';
 $tablet: "(min-width: 767px)";
 $theme-color: #b8e0d0;
+
+body{
+	@include transition($duration: 1s);
+	background-color: white;
+	&.initial-state{
+		background-color: $theme-color;
+
+	}
+}
 #logo{
 	background-color: $theme-color;
+	position: relative;
+	h1{
+		visibility: hidden;
+	}
+	img{
+		@include center();
+		max-width: 60%;
+	}
 }
 
 
@@ -14,6 +31,7 @@ $theme-color: #b8e0d0;
 		top: -20px;
 		right: 10px;
 		@include transition($duration: 0.2s, $delay: 0.5s);
+		z-index: 10;
 	}
 
 	&:hover .edit{
@@ -31,29 +49,58 @@ $theme-color: #b8e0d0;
 	height: 100%;
 	.slide{
 		display: inline-block;
-		white-space: normal;
 		vertical-align: middle;
 		position: relative;
+
 		img{
 			max-height: 100%;
+			@include center();
+		}
+	}
+}
+
+.vert-pagination{
+	opacity: 0;
+	@include transition();
+	.normal-state &{
+		opacity: 1;
+	}
+	position: fixed;
+	top: 50%;
+	right: 15px;
+	.vert-pager{
+		margin-bottom: 5px;
+		height: 30px;
+		cursor: pointer;
+		&:after{
+			content: '';
 			margin: auto;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			@media #{$tablet}{
-				position: relative;
+			@include transition($duration: .3s);
+			@include circle($size: 20px, $color: $theme-color);
+			background-color: $theme-color;
+			display: block;
+		}
+		&.active:after{
+			@include circle($size: 25px, $color: $theme-color);
+			background-color: transparent;
+		}
+		@media #{$tablet}{
+			&:after{
+				@include circle($size: 5px, $color: $theme-color);
+			}
+			&.active:after{
+				@include circle($size: 10px, $color: $theme-color);
 			}
 		}
 	}
 }
 
-
 //------------------bio
 .slides .bio-content{
-	min-width: 75%;
-	width: 75%;
+
+	
 	.bio-body{
-		text-transform: justify;
+		text-align: justify;
 	}
 }
 

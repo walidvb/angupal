@@ -2,8 +2,25 @@
 
 @mixin transition($property: all, $duration: 0.3s, $easing: ease-out, $delay: 0s) {
 	-webkit-transition: $property $duration $easing $delay;
-	   -moz-transition: $property $duration $easing $delay;
-	    -ms-transition: $property $duration $easing $delay;
-	     -o-transition: $property $duration $easing $delay;
-	        transition: $property $duration $easing $delay;
+	-moz-transition: $property $duration $easing $delay;
+	-ms-transition: $property $duration $easing $delay;
+	-o-transition: $property $duration $easing $delay;
+	transition: $property $duration $easing $delay;
+}
+
+@mixin center() {
+	margin: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+@mixin circle($size: 15px, $color: black) {
+	width: $size;
+	height: $size;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
+	border: 1px solid fade-out(black, 0.5);
 }

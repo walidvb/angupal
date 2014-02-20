@@ -23,15 +23,15 @@
     '$timeout', function($timeout) {
       return {
         controller: function($scope) {
-          $scope.horizontal = new Array;
-          return $scope.vertical = new Array;
+          return $scope.horizontal = new Array;
         },
+        transclude: false,
         priority: 500,
         link: function(scope, elem, attrs) {
           return $timeout(function() {
-            var $this, options;
+            var $this, options, pagination;
 
-            console.log(attrs.swiper, angular.element(elem));
+            $this = angular.element(elem);
             options = {
               mousewheelControl: true,
               mousewheelControlForceToAxis: true,
@@ -40,15 +40,41 @@
               grabCursor: true
             };
             if (attrs.swiper === 'vert') {
+              pagination = angular.element('<div class="vert-pagination"/>');
+              $this.append(pagination);
               options.slideClass = 'slide-vert';
               options.mode = 'vertical';
-              $this = angular.element(elem);
-              return scope.vertical.push($this.swiper(options));
+              options.pagination = '.vert-pagination';
+              options.paginationElement = 'div';
+              options.paginationElementClass = 'vert-pager';
+              options.paginationActiveClass = 'active';
+              options.paginationVisibleClass = 'visible';
+              options.paginationClickable = true;
+              options.onSwiperCreated = function(swiper) {
+                var info;
+
+                info = angular.element('#info');
+                pagination.append(info);
+                return pagination.css('marginTop', -pagination.height() / 2);
+              };
+              options.onSlideChangeStart = function(swiper, direction) {
+                return angular.element('body').removeClass('initial-state');
+              };
+              options.onSlideChangeEnd = function(swiper, direction) {
+                swiper.removeSlide(0);
+                swiper.swipeTo(0, 0, false);
+                swiper.removeCallbacks('SlideChangeEnd');
+                return angular.element('body').addClass('normal-state');
+              };
+              scope.vertical = $this.swiper(options);
+              return;
             } else {
               options.slideClass = 'slide-horz';
-              $this = angular.element(elem);
-              return scope.horizontal.push($this.swiper(options));
             }
+            if (attrs.settings === 'bio') {
+              options.scrollContainer = true;
+            }
+            return scope.horizontal.push($this.swiper(options));
           }, 1000);
         }
       };

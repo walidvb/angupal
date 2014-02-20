@@ -5,11 +5,9 @@
       $scope.test = 3;
       $scope.data = {};
       service.getBlaise().then(function(data) {
-        console.log(data);
         return $scope.data.blaise = data.data;
       });
       return service.getDidier().then(function(data) {
-        console.log(data);
         return $scope.data.didier = data.data;
       });
     }
@@ -17,7 +15,6 @@
     '$scope', 'projectService', function($scope, service) {
       $scope.data = {};
       service.getProjects().then(function(data) {
-        console.log('all', data);
         return $scope.data.projects = data.data.nodes;
       });
       return service.getMasai().then(function(data) {
