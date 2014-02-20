@@ -23,7 +23,8 @@
     '$timeout', function($timeout) {
       return {
         controller: function($scope) {
-          return $scope.horizontal = new Array;
+          $scope.horizontal = new Array;
+          return $scope.vertical = new Array;
         },
         priority: 500,
         link: function(scope, elem, attrs) {
@@ -42,7 +43,7 @@
               options.slideClass = 'slide-vert';
               options.mode = 'vertical';
               $this = angular.element(elem);
-              return scope.vertical = $this.swiper(options);
+              return scope.vertical.push($this.swiper(options));
             } else {
               options.slideClass = 'slide-horz';
               $this = angular.element(elem);

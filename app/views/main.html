@@ -14,8 +14,10 @@
         <article class="slide bio-content" my-bio="data.didier"></article>
       </div>
     </section>
-    <section id="projects" class="col-xs-12 slide-vert" ng-controller="projectCtrl">
-      <div ng-repeat="project in data.projects" my-project="project.node" my-fullscreen="y"></div>
+    <section id="projects" class="col-xs-12 slide-vert" ng-controller="projectCtrl" swiper="vert">
+      <div class="swiper-wrapper">
+        <div class="slide-vert" ng-repeat="project in data.projects" my-project="project.node" my-fullscreen="y"></div>
+      </div>
   </section>
   </div>
 </div>

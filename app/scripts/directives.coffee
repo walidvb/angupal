@@ -18,6 +18,7 @@ angular.module('myApp').
 		($timeout) ->
 			controller: ($scope) ->
 				$scope.horizontal = new Array
+				$scope.vertical = new Array
 			priority: 500
 			link: (scope, elem, attrs) ->
 				$timeout(() ->
@@ -32,7 +33,7 @@ angular.module('myApp').
 						options.slideClass = 'slide-vert'
 						options.mode = 'vertical'
 						$this = angular.element elem
-						scope.vertical = $this.swiper options
+						scope.vertical.push $this.swiper(options)
 					else
 						options.slideClass = 'slide-horz'
 						$this = angular.element elem
