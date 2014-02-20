@@ -33,12 +33,12 @@ angular.module('myApp').
 						options.mode = 'vertical'
 						$this = angular.element elem
 						scope.vertical = $this.swiper options
+						return
 					else
 						options.slideClass = 'slide-horz'
 						$this = angular.element elem
-						scope.horizontal.push $this.swiper(options)
-					
-
-
+					if attrs.settings == 'bio'
+						options.scrollContainer =  true
+					scope.horizontal.push $this.swiper(options)
 				, 1000)
 	])

@@ -1,6 +1,20 @@
 /* _mixins.scss */
-#logo {
+body {
   background-color: #b8e0d0; }
+
+#logo {
+  background-color: #b8e0d0;
+  position: relative; }
+  #logo h1 {
+    visibility: hidden; }
+  #logo img {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 60%; }
 
 .editable {
   position: relative;
@@ -29,7 +43,6 @@
   height: 100%; }
   .slides .slide {
     display: inline-block;
-    white-space: normal;
     vertical-align: middle;
     position: relative; }
     .slides .slide img {
@@ -37,16 +50,12 @@
       margin: auto;
       position: absolute;
       top: 0;
-      bottom: 0; }
-      @media (min-width: 767px) {
-        .slides .slide img {
-          position: relative; } }
+      bottom: 0;
+      left: 0;
+      right: 0; }
 
-.slides .bio-content {
-  min-width: 75%;
-  width: 75%; }
-  .slides .bio-content .bio-body {
-    text-transform: justify; }
+.slides .bio-content .bio-body {
+  text-align: justify; }
 
 .debug section {
   border: 1px solid #b7e0cf;

@@ -42,12 +42,16 @@
               options.slideClass = 'slide-vert';
               options.mode = 'vertical';
               $this = angular.element(elem);
-              return scope.vertical = $this.swiper(options);
+              scope.vertical = $this.swiper(options);
+              return;
             } else {
               options.slideClass = 'slide-horz';
               $this = angular.element(elem);
-              return scope.horizontal.push($this.swiper(options));
             }
+            if (attrs.settings === 'bio') {
+              options.scrollContainer = true;
+            }
+            return scope.horizontal.push($this.swiper(options));
           }, 1000);
         }
       };

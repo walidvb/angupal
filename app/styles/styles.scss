@@ -1,8 +1,20 @@
 @import 'mixins';
 $tablet: "(min-width: 767px)";
 $theme-color: #b8e0d0;
+
+body{
+	background-color: $theme-color;
+}
 #logo{
 	background-color: $theme-color;
+	position: relative;
+	h1{
+		visibility: hidden;
+	}
+	img{
+		@include center();
+		max-width: 60%;
+	}
 }
 
 
@@ -31,18 +43,11 @@ $theme-color: #b8e0d0;
 	height: 100%;
 	.slide{
 		display: inline-block;
-		white-space: normal;
 		vertical-align: middle;
 		position: relative;
 		img{
 			max-height: 100%;
-			margin: auto;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			@media #{$tablet}{
-				position: relative;
-			}
+			@include center();
 		}
 	}
 }
@@ -50,10 +55,10 @@ $theme-color: #b8e0d0;
 
 //------------------bio
 .slides .bio-content{
-	min-width: 75%;
-	width: 75%;
+
+	
 	.bio-body{
-		text-transform: justify;
+		text-align: justify;
 	}
 }
 
