@@ -1,19 +1,21 @@
 
-<div class="row">
-  <section id="logo" class="col-xs-12 slide-vert" my-fullscreen>
-    <h1>CollinFontaine</h1>
-    <img src="" alt="" class="img-responsive">
+<div class="row top-swiper-container" swiper="vert" my-fullscreen="y">
+  <div class="swiper-wrapper">
+    <section id="logo" class="col-xs-12 slide-vert" my-fullscreen="y">
+      <h1>CollinFontaine</h1>
+      <img src="" alt="" class="img-responsive">
+    </section>
+    <section id="masai" class="col-xs-12 slide-vert" ng-controller="projectCtrl" my-fullscreen="y">
+      <div my-project="data.masai"></div>
+    </section>
+    <section id="bio" class="col-xs-12 slide-vert" ng-controller="officeCtrl" scroll-snap="horz" my-fullscreen="y">
+      <div class="slides">
+        <article class="slide bio-content" my-bio="data.blaise"></article>
+        <article class="slide bio-content" my-bio="data.didier"></article>
+      </div>
+    </section>
+    <section id="projects" class="col-xs-12 slide-vert" ng-controller="projectCtrl">
+      <div ng-repeat="project in data.projects" my-project="project.node" my-fullscreen="y"></div>
   </section>
-  <section id="masai" class="col-xs-12 slide-vert" ng-controller="projectCtrl" my-fullscreen>
-    <div my-project="data.masai"></div>
-  </section>
-  <section id="bio" class="col-xs-12 slide-vert" ng-controller="officeCtrl" my-fullscreen>
-    <div class="slides">
-      <article class="slide bio-content" my-bio="data.blaise"></article>
-      <article class="slide bio-content" my-bio="data.didier"></article>
-    </div>
-  </section>
-  <section id="projects" class="col-xs-12" ng-controller="projectCtrl">
-    <div ng-repeat="project in data.projects" my-project="project.node" my-fullscreen></div>
-  </section>
+  </div>
 </div>

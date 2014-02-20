@@ -19,6 +19,39 @@
         templateUrl: "views/bio.html"
       };
     }
+  ]).directive("swiper", [
+    '$timeout', function($timeout) {
+      return {
+        controller: function($scope) {
+          return $scope.horizontal = new Array;
+        },
+        priority: 500,
+        link: function(scope, elem, attrs) {
+          return $timeout(function() {
+            var $this, options;
+
+            console.log(attrs.swiper, angular.element(elem));
+            options = {
+              mousewheelControl: true,
+              mousewheelControlForceToAxis: true,
+              keyboardControl: true,
+              resizeReInit: true,
+              grabCursor: true
+            };
+            if (attrs.swiper === 'vert') {
+              options.slideClass = 'slide-vert';
+              options.mode = 'vertical';
+              $this = angular.element(elem);
+              return scope.vertical = $this.swiper(options);
+            } else {
+              options.slideClass = 'slide-horz';
+              $this = angular.element(elem);
+              return scope.horizontal.push($this.swiper(options));
+            }
+          }, 1000);
+        }
+      };
+    }
   ]);
 
 }).call(this);

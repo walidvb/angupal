@@ -47,7 +47,7 @@
           if (attrs.myFullscreen === 'y') {
             return angular.element(elem).css({
               height: $window.innerHeight,
-              overflowY: 'auto'
+              overflowY: 'hidden'
             });
           } else {
             return angular.element(elem).width(angular.element('.container').innerWidth);

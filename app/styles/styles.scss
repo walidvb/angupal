@@ -1,4 +1,9 @@
 @import 'mixins';
+$tablet: "(min-width: 767px)";
+$theme-color: #b8e0d0;
+#logo{
+	background-color: $theme-color;
+}
 
 
 .editable{
@@ -14,5 +19,53 @@
 	&:hover .edit{
 		top: 5px;
 		@include transition($duration: 0.2s);
+	}
+}
+
+//----------------sliders
+.project{
+	height: 100%;
+}
+
+.slides{
+	height: 100%;
+	.slide{
+		display: inline-block;
+		white-space: normal;
+		vertical-align: middle;
+		position: relative;
+		img{
+			max-height: 100%;
+			margin: auto;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			@media #{$tablet}{
+				position: relative;
+			}
+		}
+	}
+}
+
+
+//------------------bio
+.slides .bio-content{
+	min-width: 75%;
+	width: 75%;
+	.bio-body{
+		text-transform: justify;
+	}
+}
+
+//------------------dev
+$debug-color: $theme-color;
+.debug{
+	section{
+		border: 1px solid darken($debug-color, 0.3);
+		background-color: fade-out($debug-color, 0.8)
+	}
+	.slide{
+		background-color: darken(complement($debug-color), 0.3);
+		border: 1px solid darken(complement($debug-color), 1);
 	}
 }

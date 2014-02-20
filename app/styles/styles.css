@@ -1,4 +1,7 @@
 /* _mixins.scss */
+#logo {
+  background-color: #b8e0d0; }
+
 .editable {
   position: relative;
   overflow: hidden; }
@@ -18,3 +21,36 @@
     -ms-transition: all 0.2s ease-out 0s;
     -o-transition: all 0.2s ease-out 0s;
     transition: all 0.2s ease-out 0s; }
+
+.project {
+  height: 100%; }
+
+.slides {
+  height: 100%; }
+  .slides .slide {
+    display: inline-block;
+    white-space: normal;
+    vertical-align: middle;
+    position: relative; }
+    .slides .slide img {
+      max-height: 100%;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0; }
+      @media (min-width: 767px) {
+        .slides .slide img {
+          position: relative; } }
+
+.slides .bio-content {
+  min-width: 75%;
+  width: 75%; }
+  .slides .bio-content .bio-body {
+    text-transform: justify; }
+
+.debug section {
+  border: 1px solid #b7e0cf;
+  background-color: rgba(184, 224, 208, 0.2); }
+.debug .slide {
+  background-color: #e0b7c7;
+  border: 1px solid #deb4c5; }

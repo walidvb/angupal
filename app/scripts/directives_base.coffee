@@ -35,7 +35,8 @@ angular.module('myApp').
         if attrs.myFullscreen == 'y' 
         	angular.element(elem).css
         		height: $window.innerHeight
-        		overflowY: 'auto'
+        		# TODO
+        		overflowY: 'hidden'
         else
         	angular.element(elem).width(angular.element('.container').innerWidth)
 
