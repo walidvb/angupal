@@ -15,8 +15,11 @@ angular.module('myApp')
 				for item, i in pagers
 					classes = angular.element(item).attr('class') + ' vert-pager'
 					$(item).attr('data-title', slideNames[i]).append $('<div class="vert-pager-dot></div>')
-			, 1000)
 
+			, 1000)
+		window.onresize = ()->
+			console.log $scope
+			$scope.digest
 	.controller('officeCtrl', ['$scope', 'officeService', ($scope, service) ->
 		$scope.data = {}
 		service.getBlaise().then (data) ->

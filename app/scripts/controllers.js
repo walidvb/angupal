@@ -6,7 +6,7 @@
       horz: new Array
     };
     $scope.data = {};
-    return $scope.initPagers = function() {
+    $scope.initPagers = function() {
       return $timeout(function() {
         var classes, i, item, pager, pagers, pagination, slideNames, _i, _j, _len, _len1, _ref, _results;
 
@@ -26,6 +26,10 @@
         }
         return _results;
       }, 1000);
+    };
+    return window.onresize = function() {
+      console.log($scope);
+      return $scope.digest;
     };
   }).controller('officeCtrl', [
     '$scope', 'officeService', function($scope, service) {

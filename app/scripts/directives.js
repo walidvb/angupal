@@ -48,7 +48,7 @@
               options.paginationActiveClass = 'active';
               options.paginationVisibleClass = 'visible';
               options.paginationClickable = true;
-              options.initialSlide = 0;
+              options.initialSlide = 2;
               options.onSwiperCreated = function(swiper) {
                 angular.element('navigation').css('marginTop', -pagination.height() / 2);
                 return scope.initPagers();
@@ -78,7 +78,10 @@
               };
             }
             if (attrs.id === 'bio') {
-              options.scrollContainer = true;
+              console.log('h');
+              if (window.innerWidth > 767) {
+                options.slidesPerView = 2;
+              }
             }
             return $this.swiper(options);
           }, 1000);
