@@ -23,11 +23,11 @@
     '$timeout', function($timeout) {
       return {
         controller: function($scope) {
-          return $scope.horizontal = new Array;
+          $scope.horizontal = new Array;
+          return $scope.pagination = null;
         },
-        transclude: false,
         priority: 500,
-        link: function(scope, elem, attrs) {
+        link: function($scope, elem, attrs) {
           return $timeout(function() {
             var $this, options, pagination;
 
@@ -41,6 +41,7 @@
             };
             if (attrs.swiper === 'vert') {
               pagination = angular.element('<div class="vert-pagination"/>');
+              $scope.pagination = pagination;
               $this.append(pagination);
               options.slideClass = 'slide-vert';
               options.mode = 'vertical';
@@ -58,23 +59,27 @@
                 return pagination.css('marginTop', -pagination.height() / 2);
               };
               options.onSlideChangeStart = function(swiper, direction) {
-                return angular.element('body').removeClass('initial-state');
+                angular.element('body').removeClass('initial-state');
+                return pagination.removeClass('faded');
               };
               options.onSlideChangeEnd = function(swiper, direction) {
                 swiper.removeSlide(0);
                 swiper.swipeTo(0, 0, false);
-                swiper.removeCallbacks('SlideChangeEnd');
-                return angular.element('body').addClass('normal-state');
+                angular.element('body').addClass('ready-state');
+                return swiper.removeCallbacks('SlideChangeEnd');
               };
-              scope.vertical = $this.swiper(options);
+              $scope.vertical = $this.swiper(options);
               return;
             } else {
               options.slideClass = 'slide-horz';
+              options.onSlideChangeStart = function() {
+                return angular.element('.vert-pagination').addClass('faded');
+              };
             }
             if (attrs.settings === 'bio') {
               options.scrollContainer = true;
             }
-            return scope.horizontal.push($this.swiper(options));
+            return $scope.horizontal.push($this.swiper(options));
           }, 1000);
         }
       };

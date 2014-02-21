@@ -1,12 +1,12 @@
 /* _mixins.scss */
-body {
+body, #logo {
   -webkit-transition: all 1s ease-out 0s;
   -moz-transition: all 1s ease-out 0s;
   -ms-transition: all 1s ease-out 0s;
   -o-transition: all 1s ease-out 0s;
   transition: all 1s ease-out 0s;
   background-color: white; }
-  body.initial-state {
+  body.initial-state, body.initial-state, #logo.initial-state, #logo.initial-state {
     background-color: #b8e0d0; }
 
 #logo {
@@ -52,7 +52,8 @@ body {
   .slides .slide {
     display: inline-block;
     vertical-align: middle;
-    position: relative; }
+    position: relative;
+    height: 100%; }
     .slides .slide img {
       max-height: 100%;
       margin: auto;
@@ -60,20 +61,29 @@ body {
       top: 0;
       bottom: 0;
       left: 0;
-      right: 0; }
+      right: 0;
+      padding: 10px 10px; }
 
 .vert-pagination {
-  opacity: 0;
-  -webkit-transition: all 0.3s ease-out 0s;
-  -moz-transition: all 0.3s ease-out 0s;
-  -ms-transition: all 0.3s ease-out 0s;
-  -o-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
+  opacity: 1;
+  -webkit-transition: all 0.3s ease-out 0.3s;
+  -moz-transition: all 0.3s ease-out 0.3s;
+  -ms-transition: all 0.3s ease-out 0.3s;
+  -o-transition: all 0.3s ease-out 0.3s;
+  transition: all 0.3s ease-out 0.3s;
   position: fixed;
   top: 50%;
   right: 15px; }
-  .normal-state .vert-pagination {
-    opacity: 1; }
+  .initial-state .vert-pagination {
+    opacity: 0; }
+  .ready-state .vert-pagination {
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s; }
+  .vert-pagination.faded {
+    opacity: 0.6; }
   .vert-pagination .vert-pager {
     margin-bottom: 5px;
     height: 30px;
@@ -81,24 +91,24 @@ body {
     .vert-pagination .vert-pager:after {
       content: '';
       margin: auto;
-      -webkit-transition: all 0.3s ease-out 0s;
-      -moz-transition: all 0.3s ease-out 0s;
-      -ms-transition: all 0.3s ease-out 0s;
-      -o-transition: all 0.3s ease-out 0s;
-      transition: all 0.3s ease-out 0s;
+      -webkit-transition: all 0.1s ease-out 0s;
+      -moz-transition: all 0.1s ease-out 0s;
+      -ms-transition: all 0.1s ease-out 0s;
+      -o-transition: all 0.1s ease-out 0s;
+      transition: all 0.1s ease-out 0s;
       width: 20px;
       height: 20px;
       -webkit-border-radius: 50%;
       border-radius: 50%;
-      border: 1px solid rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(184, 224, 208, 0.5);
       background-color: #b8e0d0;
       display: block; }
-    .vert-pagination .vert-pager.active:after {
+    .vert-pagination .vert-pager.active:after, .vert-pagination .vert-pager:hover:after {
       width: 25px;
       height: 25px;
       -webkit-border-radius: 50%;
       border-radius: 50%;
-      border: 1px solid rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(184, 224, 208, 0.5);
       background-color: transparent; }
     @media (min-width: 767px) {
       .vert-pagination .vert-pager:after {
@@ -106,17 +116,27 @@ body {
         height: 5px;
         -webkit-border-radius: 50%;
         border-radius: 50%;
-        border: 1px solid rgba(0, 0, 0, 0.5); }
-      .vert-pagination .vert-pager.active:after {
+        border: 1px solid rgba(184, 224, 208, 0.5); }
+      .vert-pagination .vert-pager.active:after, .vert-pagination .vert-pager:hover:after§ {
         width: 10px;
         height: 10px;
         -webkit-border-radius: 50%;
         border-radius: 50%;
-        border: 1px solid rgba(0, 0, 0, 0.5); } }
+        border: 1px solid rgba(184, 224, 208, 0.5); } }
 
-.slides .bio-content .bio-body {
-  text-align: justify; }
+#bio .slides .slide {
+  width: 70%;
+  margin: auto;
+  display: block; }
+  #bio .slides .slide .bio-body {
+    text-align: justify; }
 
+@media (min-width: 767px) {
+  #masai {
+    width: 55% !important; }
+
+  #bio {
+    width: 45% !important; } }
 .debug section {
   border: 1px solid #b7e0cf;
   background-color: rgba(184, 224, 208, 0.2); }
