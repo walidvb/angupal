@@ -6,4 +6,9 @@ var myApp = angular.module('myApp', [
   'ngSanitize',
 ])
   .config(function () {
+	
+
   });
+Mousetrap.bind('a d m i n', function(){
+			window.location = base_path + 'admin/content';
+	});
