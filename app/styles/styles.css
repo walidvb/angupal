@@ -64,33 +64,47 @@ body, #logo {
       right: 0;
       padding: 10px 10px; }
 
-.vert-pagination {
+navigation {
+  color: #b8e0d0;
+  position: fixed;
+  top: 50%;
+  right: 15px;
   opacity: 1;
   -webkit-transition: all 0.3s ease-out 0.3s;
   -moz-transition: all 0.3s ease-out 0.3s;
   -ms-transition: all 0.3s ease-out 0.3s;
   -o-transition: all 0.3s ease-out 0.3s;
   transition: all 0.3s ease-out 0.3s;
-  position: fixed;
-  top: 50%;
-  right: 15px; }
-  .initial-state .vert-pagination {
+  display: inline-block; }
+  .initial-state navigation {
     opacity: 0; }
-  .ready-state .vert-pagination {
+  .ready-state navigation {
     -webkit-transition: all 0.3s ease-out 0s;
     -moz-transition: all 0.3s ease-out 0s;
     -ms-transition: all 0.3s ease-out 0s;
     -o-transition: all 0.3s ease-out 0s;
     transition: all 0.3s ease-out 0s; }
-  .vert-pagination.faded {
+  navigation.faded {
     opacity: 0.6; }
-  .vert-pagination .vert-pager {
+  navigation .vert-pagination .vert-pager {
     margin-bottom: 5px;
     height: 30px;
     cursor: pointer; }
-    .vert-pagination .vert-pager:after {
+    navigation .vert-pagination .vert-pager:after {
+      content: attr(data-title);
+      display: inline;
+      float: right;
+      text-align: right; }
+      @media (min-width: 767px) {
+        navigation .vert-pagination .vert-pager:after {
+          opacity: 0; } }
+    @media (min-width: 767px) {
+      navigation .vert-pagination .vert-pager:hover:after, navigation .vert-pagination .vert-pager.active:after {
+        opacity: 1; } }
+    navigation .vert-pagination .vert-pager:before {
       content: '';
-      margin: auto;
+      margin: 3px 10px;
+      float: right;
       -webkit-transition: all 0.1s ease-out 0s;
       -moz-transition: all 0.1s ease-out 0s;
       -ms-transition: all 0.1s ease-out 0s;
@@ -102,41 +116,58 @@ body, #logo {
       border-radius: 50%;
       border: 1px solid rgba(184, 224, 208, 0.5);
       background-color: #b8e0d0;
-      display: block; }
-    .vert-pagination .vert-pager.active:after, .vert-pagination .vert-pager:hover:after {
-      width: 25px;
-      height: 25px;
+      display: inline;
+      position: relative;
+      top: 2.5px;
+      left: 0; }
+    navigation .vert-pagination .vert-pager.active:before, navigation .vert-pagination .vert-pager:hover:before {
+      width: 15px;
+      height: 15px;
       -webkit-border-radius: 50%;
       border-radius: 50%;
       border: 1px solid rgba(184, 224, 208, 0.5);
-      background-color: transparent; }
+      background-color: transparent;
+      top: 0;
+      left: 2.5px; }
     @media (min-width: 767px) {
-      .vert-pagination .vert-pager:after {
+      navigation .vert-pagination .vert-pager:before {
         width: 5px;
         height: 5px;
         -webkit-border-radius: 50%;
         border-radius: 50%;
         border: 1px solid rgba(184, 224, 208, 0.5); }
-      .vert-pagination .vert-pager.active:after, .vert-pagination .vert-pager:hover:after§ {
-        width: 10px;
-        height: 10px;
+      navigation .vert-pagination .vert-pager.active:before, navigation .vert-pagination .vert-pager:hover:before§ {
+        width: 15px;
+        height: 15px;
         -webkit-border-radius: 50%;
         border-radius: 50%;
         border: 1px solid rgba(184, 224, 208, 0.5); } }
+  navigation #info span {
+    float: right;
+    font-size: large;
+    margin: 0 10px; }
+    @media (min-width: 767px) {
+      navigation #info span {
+        margin: 0px 5px;
+        font-size: normal; } }
 
-#bio .slides .slide {
-  width: 70%;
-  margin: auto;
-  display: block; }
-  #bio .slides .slide .bio-body {
-    text-align: justify; }
+#bio .slides {
+  white-space: nowrap; }
+  #bio .slides .slide {
+    white-space: normal;
+    position: relative; }
+    #bio .slides .slide .bio-content {
+      padding-top: 20px;
+      width: 70%;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      text-align: justify; }
 
-@media (min-width: 767px) {
-  #masai {
-    width: 55% !important; }
-
-  #bio {
-    width: 45% !important; } }
 .debug section {
   border: 1px solid #b7e0cf;
   background-color: rgba(184, 224, 208, 0.2); }

@@ -16,11 +16,8 @@ angular.module('myApp').
 	]).
 	directive("swiper", ['$timeout'
 		($timeout) ->
-			controller: ($scope) ->
-				$scope.horizontal = new Array
-				$scope.pagination = null
 			priority: 500
-			link: ($scope, elem, attrs) ->
+			link: (scope, elem, attrs) ->
 				$timeout(() ->
 					$this = angular.element elem
 					options = 
@@ -31,10 +28,11 @@ angular.module('myApp').
 						grabCursor: true
 
 					if attrs.swiper == 'vert'
+						initialState = true
 						#Create and Add pagers to the dom
-						pagination = angular.element '<div class="vert-pagination"/>'
-						$scope.pagination = pagination
-						$this.append pagination
+						pagination = $ '<div class="vert-pagination"/>'
+						scope.swipers.vertPagination = pagination
+						angular.element('navigation').prepend pagination
 						options.slideClass             = 'slide-vert'
 						options.mode                   = 'vertical'
 						options.pagination             = '.vert-pagination'
@@ -42,28 +40,25 @@ angular.module('myApp').
 						options.paginationElementClass = 'vert-pager'
 						options.paginationActiveClass  = 'active'
 						options.paginationVisibleClass = 'visible'
-						options.paginationClickable    = true		
+						options.paginationClickable    = true
+						options.initialSlide	= 0
 						options.onSwiperCreated = (swiper) ->
-							# add info
-							info = angular.element '#info'
-							pagination.append info
 							#move pagination to center
-							pagination.css 'marginTop', -pagination.height()/2
-
-						# remove first item and change color to white
+							angular.element('navigation').css 'marginTop', -pagination.height()/2
+							scope.initPagers()
 						options.onSlideChangeStart = (swiper, direction) ->
 							angular.element('body').removeClass 'initial-state'
 							pagination.removeClass 'faded'
+							scope.initPagers()
 						options.onSlideChangeEnd = (swiper, direction) ->
-							swiper.removeSlide 0
-							swiper.swipeTo(0, 0, false)
-							angular.element('body').addClass 'ready-state'
-
-							swiper.removeCallbacks 'SlideChangeEnd'
-
-
-						$scope.vertical = $this.swiper(options)
-						
+							if initialState
+								swiper.removeSlide 0
+								swiper.swipeTo(0, 0, false)
+								angular.element('body').addClass 'ready-state'
+								initialState = false
+							scope.initPagers
+							
+						scope.swipers.vertical = $this.swiper(options)
 						return
 					else
 						options.slideClass = 'slide-horz'
@@ -71,6 +66,6 @@ angular.module('myApp').
 							angular.element('.vert-pagination').addClass 'faded'
 					if attrs.settings == 'bio'
 						options.scrollContainer =  true
-					$scope.horizontal.push $this.swiper(options)
+					$this.swiper(options)
 				, 1000)
 	])

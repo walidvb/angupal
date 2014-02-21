@@ -3,6 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!-- Built by the great vbbros! More info on vbbros.net or info@vbbros.net  -->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,7 +60,9 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script>
-          var base_path = "http://localhost/collinfontaine/";
+          var base_path = 'http://'+location.hostname+'/';
+          if(base_path == 'http://localhost/')
+            base_path += 'collinfontaine/'
           var basePath = base_path;
         </script>
 

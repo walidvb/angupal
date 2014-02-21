@@ -1,11 +1,12 @@
-<div id="info">
-    <div class="vert-pager" id="info-pager">
-      
+<navigation>
+  <div id="info">
+    <div id="info-content">
     </div>
-  <div id="info-content">
-  </div>
+    <span class="glyphicon glyphicon-info-sign" id="info-pager">
+    </span>
 </div>
-<div class="row top-swiper-container" swiper="vert" my-fullscreen="y">
+</navigation>
+<div class="row top-swiper-container" swiper="vert" my-fullscreen="y" ng-controller="mainCtrl">
   <div class="swiper-wrapper">
     <section id="logo" class="col-xs-12 slide-vert" my-fullscreen="y" data-name="">
       <h1>CollinFontaine</h1>
@@ -16,13 +17,13 @@
     </section>
     <section id="bio" class="col-xs-12 slide-vert" ng-controller="officeCtrl" swiper="horz" my-fullscreen="y" data-name="Bio">
       <div class="slides swiper-wrapper">
-        <article class="slide slide-horz" my-bio="data.blaise"></article>
-        <article class="slide slide-horz" my-bio="data.didier"></article>
+        <div class="slide slide-horz" my-bio="data.blaise"></div>
+        <div class="slide slide-horz" my-bio="data.didier"></div>
       </div>
     </section>
-    <section id="projects" class="col-xs-12 slide-vert" ng-controller="projectCtrl" data-name="">
-        <div ng-repeat="project in data.projects" my-project="project.node" my-fullscreen="y" data-name="Projects"></div>
-  </section>
+    <section id="projects" class="col-xs-12 slide-vert" ng-controller="projectCtrl" data-name="Bureau">
+        <div ng-repeat="project in data.projects" my-project="project.node" my-fullscreen="y" data-name="{{project.node.title}}"></div>
+    </section>
   </div>
 </div>
 
