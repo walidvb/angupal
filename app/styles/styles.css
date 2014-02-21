@@ -1,6 +1,13 @@
 /* _mixins.scss */
-body {
-  background-color: #b8e0d0; }
+body, #logo {
+  -webkit-transition: all 1s ease-out 0s;
+  -moz-transition: all 1s ease-out 0s;
+  -ms-transition: all 1s ease-out 0s;
+  -o-transition: all 1s ease-out 0s;
+  transition: all 1s ease-out 0s;
+  background-color: white; }
+  body.initial-state, body.initial-state, #logo.initial-state, #logo.initial-state {
+    background-color: #b8e0d0; }
 
 #logo {
   background-color: #b8e0d0;
@@ -27,7 +34,8 @@ body {
     -moz-transition: all 0.2s ease-out 0.5s;
     -ms-transition: all 0.2s ease-out 0.5s;
     -o-transition: all 0.2s ease-out 0.5s;
-    transition: all 0.2s ease-out 0.5s; }
+    transition: all 0.2s ease-out 0.5s;
+    z-index: 10; }
   .editable:hover .edit {
     top: 5px;
     -webkit-transition: all 0.2s ease-out 0s;
@@ -44,7 +52,8 @@ body {
   .slides .slide {
     display: inline-block;
     vertical-align: middle;
-    position: relative; }
+    position: relative;
+    height: 100%; }
     .slides .slide img {
       max-height: 100%;
       margin: auto;
@@ -52,10 +61,112 @@ body {
       top: 0;
       bottom: 0;
       left: 0;
-      right: 0; }
+      right: 0;
+      padding: 10px 10px; }
 
-.slides .bio-content .bio-body {
-  text-align: justify; }
+navigation {
+  color: #b8e0d0;
+  position: fixed;
+  top: 50%;
+  right: 15px;
+  opacity: 1;
+  -webkit-transition: all 0.3s ease-out 0.3s;
+  -moz-transition: all 0.3s ease-out 0.3s;
+  -ms-transition: all 0.3s ease-out 0.3s;
+  -o-transition: all 0.3s ease-out 0.3s;
+  transition: all 0.3s ease-out 0.3s;
+  display: inline-block; }
+  .initial-state navigation {
+    opacity: 0; }
+  .ready-state navigation {
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s; }
+  navigation.faded {
+    opacity: 0.6; }
+  navigation .vert-pagination .vert-pager {
+    margin-bottom: 5px;
+    height: 30px;
+    cursor: pointer; }
+    navigation .vert-pagination .vert-pager:after {
+      content: attr(data-title);
+      display: inline;
+      float: right;
+      text-align: right; }
+      @media (min-width: 767px) {
+        navigation .vert-pagination .vert-pager:after {
+          opacity: 0; } }
+    @media (min-width: 767px) {
+      navigation .vert-pagination .vert-pager:hover:after, navigation .vert-pagination .vert-pager.active:after {
+        opacity: 1; } }
+    navigation .vert-pagination .vert-pager:before {
+      content: '';
+      margin: 3px 10px;
+      float: right;
+      -webkit-transition: all 0.1s ease-out 0s;
+      -moz-transition: all 0.1s ease-out 0s;
+      -ms-transition: all 0.1s ease-out 0s;
+      -o-transition: all 0.1s ease-out 0s;
+      transition: all 0.1s ease-out 0s;
+      width: 20px;
+      height: 20px;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 224, 208, 0.5);
+      background-color: #b8e0d0;
+      display: inline;
+      position: relative;
+      top: 2.5px;
+      left: 0; }
+    navigation .vert-pagination .vert-pager.active:before, navigation .vert-pagination .vert-pager:hover:before {
+      width: 15px;
+      height: 15px;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 224, 208, 0.5);
+      background-color: transparent;
+      top: 0;
+      left: 2.5px; }
+    @media (min-width: 767px) {
+      navigation .vert-pagination .vert-pager:before {
+        width: 5px;
+        height: 5px;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        border: 1px solid rgba(184, 224, 208, 0.5); }
+      navigation .vert-pagination .vert-pager.active:before, navigation .vert-pagination .vert-pager:hover:before§ {
+        width: 15px;
+        height: 15px;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        border: 1px solid rgba(184, 224, 208, 0.5); } }
+  navigation #info span {
+    float: right;
+    font-size: large;
+    margin: 0 10px; }
+    @media (min-width: 767px) {
+      navigation #info span {
+        margin: 0px 5px;
+        font-size: normal; } }
+
+#bio .slides {
+  white-space: nowrap; }
+  #bio .slides .slide {
+    white-space: normal;
+    position: relative; }
+    #bio .slides .slide .bio-content {
+      padding-top: 20px;
+      width: 70%;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      text-align: justify; }
 
 .debug section {
   border: 1px solid #b7e0cf;

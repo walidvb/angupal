@@ -16,3 +16,11 @@
 	left: 0;
 	right: 0;
 }
+
+@mixin circle($size: 15px, $color: black) {
+	width: $size;
+	height: $size;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
+	border: 1px solid fade-out($color, 0.5);
+}

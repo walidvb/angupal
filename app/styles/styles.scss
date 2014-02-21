@@ -2,8 +2,13 @@
 $tablet: "(min-width: 767px)";
 $theme-color: #b8e0d0;
 
-body{
-	background-color: $theme-color;
+body, #logo{
+	@include transition($duration: 1s);
+	background-color: white;
+	&.initial-state, &.initial-state {
+		background-color: $theme-color;
+
+	}
 }
 #logo{
 	background-color: $theme-color;
@@ -26,6 +31,7 @@ body{
 		top: -20px;
 		right: 10px;
 		@include transition($duration: 0.2s, $delay: 0.5s);
+		z-index: 10;
 	}
 
 	&:hover .edit{
@@ -45,23 +51,123 @@ body{
 		display: inline-block;
 		vertical-align: middle;
 		position: relative;
+		height: 100%;
 		img{
 			max-height: 100%;
 			@include center();
+			padding: 10px 10px;
+		}
+	}
+}
+$circle-size: 15px;
+navigation{
+	color: $theme-color;
+	position: fixed;
+	top: 50%;
+	right: 15px;
+	opacity: 1;
+	@include transition($delay: 0.3s);
+	display: inline-block;
+	.initial-state &{
+		opacity: 0;
+	}
+	.ready-state &{
+		@include transition($delay: 0s);
+	}
+	
+	&.faded{
+		opacity: 0.6;
+	}
+	.vert-pagination{
+
+		.vert-pager{
+			margin-bottom: 5px;
+			height: 30px;
+			cursor: pointer;
+			&:after{
+				content: attr(data-title);
+				display: inline;
+				float: right;
+				text-align: right;
+				@media #{$tablet}{
+					opacity: 0;
+					
+				}
+				
+			}
+			&:hover:after, &.active:after{
+				@media #{$tablet}{
+					opacity: 1;
+				}
+			}
+			$half: $circle-size/2;
+			&:before{
+				content: '';
+				margin: 3px 10px;
+				float: right;
+				@include transition($duration: .1s);
+				@include circle($size: 20px, $color: $theme-color);
+				background-color: $theme-color;
+				display: inline;
+				position: relative;
+				
+				top: $half - 5;
+				left: 0;
+			}
+			&.active:before, &:hover:before{
+				@include circle($size: 15px, $color: $theme-color);
+				background-color: transparent;
+				top: 0;
+				left: $half - 5;
+			}
+			@media #{$tablet}{
+				&:before{
+					@include circle($size: 5px, $color: $theme-color);
+				}
+				&.active:before, &:hover:before§	{
+					@include circle($size: $circle-size, $color: $theme-color);
+				}
+			}
+		}
+	}
+	#info{
+		span{
+			float: right;
+			@media #{$tablet}{
+				margin: 0px 5px;
+				font-size: normal;
+			}
+			font-size: large;
+			margin: 0 10px;
 		}
 	}
 }
 
-
 //------------------bio
-.slides .bio-content{
+#bio .slides{
+	white-space: nowrap;
 
-	
-	.bio-body{
-		text-align: justify;
+	.slide{
+		white-space: normal;
+		position: relative;
+
+		.bio-content{
+			padding-top: 20px;
+			width: 70%;
+			@include center();
+			margin: auto;
+			text-align: justify;	
+		}
 	}
 }
-
+@media #{$tablet} {
+	// #masai{
+	// 	width: 55%!important;
+	// }
+	// #bio{
+	// 	width: 45%!important;
+	// }
+}
 //------------------dev
 $debug-color: $theme-color;
 .debug{

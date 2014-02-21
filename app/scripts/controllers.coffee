@@ -1,22 +1,37 @@
 'use strict'
 angular.module('myApp')
+	.controller 'mainCtrl', ($scope, $timeout) ->
+		$scope.swipers = 
+			vertical: null
+			horz: new Array
+		$scope.data = {};
+		$scope.initPagers = () ->
+			$timeout(() ->
+				console.log $scope.swipers.vertPagination
+				slideNames = new Array
+				slideNames.push pager.attributes['data-name'].value for pager in $scope.swipers.vertical.slides
+				pagination =  angular.element('.vert-pagination')
+				pagers = pagination.find 'div.vert-pager'
+					
+				for item, i in pagers
+					classes = angular.element(item).attr('class') + ' vert-pager'
+					console.log classes
+					$(item).attr('data-title', slideNames[i]).append $('<div class="vert-pager-dot></div>')
+				pagination.remove
+			, 1000)
+
 	.controller('officeCtrl', ['$scope', 'officeService', ($scope, service) ->
-		$scope.test = 3
 		$scope.data = {}
 		service.getBlaise().then (data) ->
-			console.log data
 			$scope.data.blaise = data.data
 		service.getDidier().then (data) ->
-			console.log data
 			$scope.data.didier = data.data
 	])
 	.controller('projectCtrl', ['$scope', 'projectService', ($scope, service) ->
 			$scope.data = {}
 			service.getProjects().then (data) ->
-				console.log 'all', data
 				$scope.data.projects = data.data.nodes
 			service.getMasai().then (data) ->
 				$scope.data.masai = data.data.nodes[0].node
 		])
-	.controller 'testCtrl', ($scope) ->
-		$scope.test = 3
+

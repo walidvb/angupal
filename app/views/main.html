@@ -1,22 +1,29 @@
-
-<div class="row top-swiper-container" swiper="vert" my-fullscreen="y">
+<navigation>
+  <div id="info">
+    <div id="info-content">
+    </div>
+    <span class="glyphicon glyphicon-info-sign" id="info-pager">
+    </span>
+</div>
+</navigation>
+<div class="row top-swiper-container" swiper="vert" my-fullscreen="y" ng-controller="mainCtrl">
   <div class="swiper-wrapper">
-    <section id="logo" class="col-xs-12 slide-vert" my-fullscreen="y">
+    <section id="logo" class="col-xs-12 slide-vert" my-fullscreen="y" data-name="">
       <h1>CollinFontaine</h1>
         <img src="http://localhost/collinfontaine/sites/all/modules/custom/angupal/app/images/collin_Fontaine.svg" alt="" class="img-responsive">
     </section>
-    <section id="masai" class="col-xs-12 slide-vert" ng-controller="projectCtrl" my-fullscreen="y">
+    <section id="masai" class="col-xs-12 slide-vert" ng-controller="projectCtrl" my-fullscreen="y" data-name="Masai">
       <div my-project="data.masai"></div>
     </section>
-    <section id="bio" class="col-xs-12 slide-vert" ng-controller="officeCtrl" swiper="horz" my-fullscreen="y">
+    <section id="bio" class="col-xs-12 slide-vert" ng-controller="officeCtrl" swiper="horz" my-fullscreen="y" data-name="Bio">
       <div class="slides swiper-wrapper">
-        <article class="slide slide-horz bio-content" my-bio="data.blaise"></article>
-        <article class="slide slide-horz bio-content" my-bio="data.didier"></article>
+        <div class="slide slide-horz" my-bio="data.blaise"></div>
+        <div class="slide slide-horz" my-bio="data.didier"></div>
       </div>
     </section>
-    <section id="projects" class="col-xs-12 slide-vert" ng-controller="projectCtrl">
-      <div ng-repeat="project in data.projects" my-project="project.node" my-fullscreen="y"></div>
-  </section>
+    <section id="projects" class="col-xs-12 slide-vert" ng-controller="projectCtrl" data-name="Bureau">
+        <div ng-repeat="project in data.projects" my-project="project.node" my-fullscreen="y" data-name="{{project.node.title}}"></div>
+    </section>
   </div>
-</div
+</div>
 
