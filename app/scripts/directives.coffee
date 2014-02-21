@@ -49,6 +49,7 @@ angular.module('myApp').
 						options.onSlideChangeStart = (swiper, direction) ->
 							angular.element('body').removeClass 'initial-state'
 							pagination.removeClass 'faded'
+							console.log 'startChange'
 							scope.initPagers()
 						options.onSlideChangeEnd = (swiper, direction) ->
 							if initialState
@@ -56,7 +57,8 @@ angular.module('myApp').
 								swiper.swipeTo(0, 0, false)
 								angular.element('body').addClass 'ready-state'
 								initialState = false
-							scope.initPagers
+							console.log 'endChange'
+							scope.initPagers()
 							
 						scope.swipers.vertical = $this.swiper(options)
 						return

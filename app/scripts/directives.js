@@ -56,6 +56,7 @@
               options.onSlideChangeStart = function(swiper, direction) {
                 angular.element('body').removeClass('initial-state');
                 pagination.removeClass('faded');
+                console.log('startChange');
                 return scope.initPagers();
               };
               options.onSlideChangeEnd = function(swiper, direction) {
@@ -65,7 +66,8 @@
                   angular.element('body').addClass('ready-state');
                   initialState = false;
                 }
-                return scope.initPagers;
+                console.log('endChange');
+                return scope.initPagers();
               };
               scope.swipers.vertical = $this.swiper(options);
               return;

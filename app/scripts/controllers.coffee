@@ -15,8 +15,8 @@ angular.module('myApp')
 					
 				for item, i in pagers
 					classes = angular.element(item).attr('class') + ' vert-pager'
-					newPager = angular.element '<div class="vert-pager'+''+'" data-title="'+slideNames[i]+'"><div class="vert-pager-dot></div></div>'
-					$(item).replaceWith newPager
+					console.log classes
+					$(item).attr('data-title', slideNames[i]).append $('<div class="vert-pager-dot></div>')
 				pagination.remove
 			, 1000)
 
