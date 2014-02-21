@@ -26,7 +26,6 @@ angular.module('myApp').
 						keyboardControl: true
 						resizeReInit: true
 						grabCursor: true
-
 					if attrs.swiper == 'vert'
 						initialState = true
 						#Create and Add pagers to the dom
@@ -42,6 +41,7 @@ angular.module('myApp').
 						options.paginationVisibleClass = 'visible'
 						options.paginationClickable    = true
 						options.initialSlide	= 0
+
 						options.onSwiperCreated = (swiper) ->
 							#move pagination to center
 							angular.element('navigation').css 'marginTop', -pagination.height()/2
@@ -66,8 +66,11 @@ angular.module('myApp').
 						options.slideClass = 'slide-horz'
 						options.onSlideChangeStart = () ->
 							angular.element('.vert-pagination').addClass 'faded'
-					if attrs.settings == 'bio'
+					if attrs.id == 'bio'
 						options.scrollContainer =  true
+						
+
+
 					$this.swiper(options)
 				, 1000)
 	])

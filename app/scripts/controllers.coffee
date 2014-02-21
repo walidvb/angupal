@@ -7,7 +7,6 @@ angular.module('myApp')
 		$scope.data = {};
 		$scope.initPagers = () ->
 			$timeout(() ->
-				console.log $scope.swipers.vertPagination
 				slideNames = new Array
 				slideNames.push pager.attributes['data-name'].value for pager in $scope.swipers.vertical.slides
 				pagination =  angular.element('.vert-pagination')
@@ -15,9 +14,7 @@ angular.module('myApp')
 					
 				for item, i in pagers
 					classes = angular.element(item).attr('class') + ' vert-pager'
-					console.log classes
 					$(item).attr('data-title', slideNames[i]).append $('<div class="vert-pager-dot></div>')
-				pagination.remove
 			, 1000)
 
 	.controller('officeCtrl', ['$scope', 'officeService', ($scope, service) ->

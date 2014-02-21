@@ -8,9 +8,8 @@
     $scope.data = {};
     return $scope.initPagers = function() {
       return $timeout(function() {
-        var classes, i, item, pager, pagers, pagination, slideNames, _i, _j, _len, _len1, _ref;
+        var classes, i, item, pager, pagers, pagination, slideNames, _i, _j, _len, _len1, _ref, _results;
 
-        console.log($scope.swipers.vertPagination);
         slideNames = new Array;
         _ref = $scope.swipers.vertical.slides;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -19,13 +18,13 @@
         }
         pagination = angular.element('.vert-pagination');
         pagers = pagination.find('div.vert-pager');
+        _results = [];
         for (i = _j = 0, _len1 = pagers.length; _j < _len1; i = ++_j) {
           item = pagers[i];
           classes = angular.element(item).attr('class') + ' vert-pager';
-          console.log(classes);
-          $(item).attr('data-title', slideNames[i]).append($('<div class="vert-pager-dot></div>'));
+          _results.push($(item).attr('data-title', slideNames[i]).append($('<div class="vert-pager-dot></div>')));
         }
-        return pagination.remove;
+        return _results;
       }, 1000);
     };
   }).controller('officeCtrl', [

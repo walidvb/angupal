@@ -77,7 +77,7 @@
                 return angular.element('.vert-pagination').addClass('faded');
               };
             }
-            if (attrs.settings === 'bio') {
+            if (attrs.id === 'bio') {
               options.scrollContainer = true;
             }
             return $this.swiper(options);
