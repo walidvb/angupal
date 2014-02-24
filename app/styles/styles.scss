@@ -12,11 +12,11 @@ body, #logo{
 }
 
 #main{
-		@include transition($duration: 0.8s);
-		.info-open &{
-			-webkit-filter: blur(4px);
-		}
+	@include transition($duration: 0.8s);
+	.info-open &{
+		-webkit-filter: blur(4px);
 	}
+}
 #logo{
 	background-color: $theme-color;
 	position: relative;
@@ -64,9 +64,25 @@ body, #logo{
 		img{
 			max-height: 100%;
 			@include center();
-			padding: 10px 10px;
+			
+		}
+	//------------------text slides
+	&.slide-text{
+		position: relative;
+		.slide-text-wrapper{
+			padding-top: 20px;
+			width: 70%;
+			@include center();
+			margin: auto;
+			text-align: justify;	
 		}
 	}
+
+	@media #{$tablet} {
+
+
+}
+}
 }
 $circle-size: 15px;
 navigation{
@@ -139,71 +155,49 @@ navigation{
 			}
 		}
 	}
-	#info{
-		span{
-			float: right;
-			@media #{$tablet}{
-				margin: 0px 5px;
-				font-size: normal;
-			}
-			font-size: large;
-			margin: 0 10px;
-		}
-	}
+	
 }
 
-//------------------bio
-#bio .slides{
-	white-space: nowrap;
 
-	.slide{
-		white-space: normal;
-		position: relative;
-
-		.bio-content{
-			padding-top: 20px;
-			width: 70%;
-			@include center();
-			margin: auto;
-			text-align: justify;	
-		}
-	}
-}
-@media #{$tablet} {
-	// #masai{
-	// 	width: 55%!important;
-	// }
-	// #bio{
-	// 	width: 45%!important;
-	// }
-}
 
 //------------------info
-#info-wrapper{
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	text-align: center;
-	background: rgba(255,255,255,0.4);
-	opacity: 0;
-	display: none;
-	visibility: hiddden;
-	@include transition($property: all, $duration:0.8s);
-	.info-open &{
-		visibility: visible;
-		opacity: 1;
-
+#info{
+	span{
+		float: right;
+		@media #{$tablet}{
+			margin: 0px 5px;
+			font-size: normal;
+		}
+		font-size: large;
+		margin: 0 10px;
 	}
-	#info-content{
-		position: absolute;
+
+	#info-wrapper{
+		position: fixed;
 		top: 0;
 		bottom: 0;
-		width: 70%;
+		right: 0;
+		left: 0;
+		text-align: center;
+		background: rgba(255,255,255,0.4);
+		opacity: 0;
+		display: none;
+		visibility: hiddden;
+		@include transition($property: all, $duration:0.8s);
+		.info-open &{
+			visibility: visible;
+			opacity: 1;
+
+		}
+		#info-content{
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 70%;
+		}
+
 	}
 }
-
 //------------------dev
 $debug-color: $theme-color;
 .debug{
