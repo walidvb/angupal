@@ -1,13 +1,6 @@
-<navigation>
-  <div id="info">
-    <div id="info-content">
-    </div>
-    <span class="glyphicon glyphicon-info-sign" id="info-pager">
-    </span>
-</div>
-</navigation>
-<div class="row top-swiper-container" swiper="vert" my-fullscreen="y" ng-controller="mainCtrl">
-  <div class="swiper-wrapper">
+
+<div class="row top-swiper-container" swiper="vert" my-fullscreen="y" ng-controller="mainCtrl" ng-class="{'info-open': infoOpen}">
+  <div id="main"class="swiper-wrapper">
     <section id="logo" class="col-xs-12 slide-vert" my-fullscreen="y" data-name="">
       <h1>CollinFontaine</h1>
         <img src="http://localhost/collinfontaine/sites/all/modules/custom/angupal/app/images/collin_Fontaine.svg" alt="" class="img-responsive">
@@ -25,5 +18,17 @@
         <div ng-repeat="project in data.projects" my-project="project.node" my-fullscreen="y" data-name="{{project.node.title}}"></div>
     </section>
   </div>
+  <navigation ng-controller="infoCtrl">
+  <div id="info">
+    <div id="info-wrapper">
+      <div id="info-content" my-html="data.info.body.value">
+      </div>
+    </div>
+    <span class="glyphicon glyphicon-info-sign" id="info-pager" ng-click="toggleInfo()">
+
+    </span>
 </div>
+</navigation>
+</div>
+
 

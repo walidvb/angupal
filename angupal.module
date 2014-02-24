@@ -15,17 +15,7 @@
 	  $items['ng/home'] = array(
 	  	'title' => 'ng',
 	  	'page callback' => 'ng_index',
-	    // 'page arguments' => array(),
 	  	'access arguments' => array('View published content'),
-	    // 'type' => ,
-	    // 'file' => ,
-	  	);
-	  $items['ng/logo'] = array(
-	  	'title' => 'ng-logo',
-	  	'access arguments' => array('View published content'),
-	  	'page callback' => function(){
-	  		return drupal_json_encode(theme_get_setting('logo'));
-	  	}
 	  	);
 	  return $items;
 	}

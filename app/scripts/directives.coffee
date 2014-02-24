@@ -3,7 +3,11 @@ angular.module('myApp').
 		  () ->  
 		      scope:
 		        project: "=myProject"
-	
+		      contrsoller: ($scope) ->
+		      		$scope.$watchCollection($scope.project, () ->
+				      	$scope.project.first = $scope.project.imgs.splice(0, 1)[0]
+				      	console.log 'project watched'
+				     	)
 		      replace: true
 		      templateUrl: "views/project.html"
 		  
@@ -41,7 +45,7 @@ angular.module('myApp').
 						options.paginationActiveClass  = 'active'
 						options.paginationVisibleClass = 'visible'
 						options.paginationClickable    = true
-						options.initialSlide	= 2
+						options.initialSlide	= 0
 						options.onSwiperCreated = (swiper) ->
 							#move pagination to center
 							angular.element('navigation').css 'marginTop', -pagination.height()/2
@@ -67,10 +71,8 @@ angular.module('myApp').
 						options.onSlideChangeStart = () ->
 							angular.element('.vert-pagination').addClass 'faded'
 					if attrs.id == 'bio'
-						console.log 'h'
 						if window.innerWidth > 767
 							options.slidesPerView = 2
 					$this.swiper(options)
-
 				, 1000)
 	])

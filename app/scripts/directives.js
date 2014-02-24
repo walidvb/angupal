@@ -6,6 +6,12 @@
         scope: {
           project: "=myProject"
         },
+        contrsoller: function($scope) {
+          return $scope.$watchCollection($scope.project, function() {
+            $scope.project.first = $scope.project.imgs.splice(0, 1)[0];
+            return console.log('project watched');
+          });
+        },
         replace: true,
         templateUrl: "views/project.html"
       };
@@ -48,7 +54,7 @@
               options.paginationActiveClass = 'active';
               options.paginationVisibleClass = 'visible';
               options.paginationClickable = true;
-              options.initialSlide = 2;
+              options.initialSlide = 0;
               options.onSwiperCreated = function(swiper) {
                 angular.element('navigation').css('marginTop', -pagination.height() / 2);
                 return scope.initPagers();
@@ -78,7 +84,6 @@
               };
             }
             if (attrs.id === 'bio') {
-              console.log('h');
               if (window.innerWidth > 767) {
                 options.slidesPerView = 2;
               }

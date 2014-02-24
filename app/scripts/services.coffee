@@ -29,6 +29,17 @@ angular.module('myApp', ['ngResource'])
 				)
 		@
 	])
+	.service('nodeService', ['$http', ($http) ->
+		@getNode = (nid)->
+			get 'node/'+nid+'.json'
+			
+		get = (url) ->
+			data = $http(
+				url : base_path + url
+				method : 'GET'
+				)
+		@
+	])
 	.service('projectService', ['$http', ($http) ->
 		@getMasai = ->
 			get 'node/4/project.json'

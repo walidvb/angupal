@@ -39,6 +39,23 @@
       };
       return this;
     }
+  ]).service('nodeService', [
+    '$http', function($http) {
+      var get;
+
+      this.getNode = function(nid) {
+        return get('node/' + nid + '.json');
+      };
+      get = function(url) {
+        var data;
+
+        return data = $http({
+          url: base_path + url,
+          method: 'GET'
+        });
+      };
+      return this;
+    }
   ]).service('projectService', [
     '$http', function($http) {
       var get;

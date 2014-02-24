@@ -1,6 +1,16 @@
 'use strict'
 angular.module('myApp')
+	.filter('first', (input) ->
+		console.log input
+		'hello'
+		)
+	.filter('exceptFirst', (input) ->
+		console.log input
+		'hi'
+		)
 	.controller 'mainCtrl', ($scope, $timeout) ->
+		$scope.toggleInfo = () ->
+			$scope.infoOpen = !$scope.infoOpen
 		$scope.swipers = 
 			vertical: null
 			horz: new Array
@@ -21,17 +31,22 @@ angular.module('myApp')
 			console.log $scope
 			$scope.digest
 	.controller('officeCtrl', ['$scope', 'officeService', ($scope, service) ->
-		$scope.data = {}
+		$scope.data = $scope.data || {}
 		service.getBlaise().then (data) ->
 			$scope.data.blaise = data.data
 		service.getDidier().then (data) ->
 			$scope.data.didier = data.data
 	])
 	.controller('projectCtrl', ['$scope', 'projectService', ($scope, service) ->
-			$scope.data = {}
+			$scope.data = $scope.data || {}
 			service.getProjects().then (data) ->
 				$scope.data.projects = data.data.nodes
 			service.getMasai().then (data) ->
 				$scope.data.masai = data.data.nodes[0].node
 		])
 
+	.controller('infoCtrl', ['$scope', 'nodeService', ($scope, service) ->
+			$scope.data = $scope.data || {}
+			service.getNode(5).then (data) ->
+				$scope.data.info = data.data
+		])

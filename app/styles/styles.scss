@@ -10,6 +10,13 @@ body, #logo{
 
 	}
 }
+
+#main{
+		@include transition($duration: 0.8s);
+		.info-open &{
+			-webkit-filter: blur(4px);
+		}
+	}
 #logo{
 	background-color: $theme-color;
 	position: relative;
@@ -47,7 +54,9 @@ body, #logo{
 
 .slides{
 	height: 100%;
+	white-space: nowrap;
 	.slide{
+		white-space: normal;
 		display: inline-block;
 		vertical-align: middle;
 		position: relative;
@@ -168,6 +177,33 @@ navigation{
 	// 	width: 45%!important;
 	// }
 }
+
+//------------------info
+#info-wrapper{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	text-align: center;
+	background: rgba(255,255,255,0.4);
+	opacity: 0;
+	display: none;
+	visibility: hiddden;
+	@include transition($property: all, $duration:0.8s);
+	.info-open &{
+		visibility: visible;
+		opacity: 1;
+
+	}
+	#info-content{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 70%;
+	}
+}
+
 //------------------dev
 $debug-color: $theme-color;
 .debug{
