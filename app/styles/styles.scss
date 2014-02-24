@@ -71,11 +71,58 @@ body, #logo{
 	&.slide-text{
 		position: relative;
 		.slide-text-wrapper{
-			padding-top: 20px;
 			width: 70%;
 			@include center();
 			margin: auto;
-			text-align: justify;	
+			text-align: justify;
+			height: 90%;
+			overflow: hidden;
+			&:after, &:before{
+				
+				width: 100%;
+				height: 20px;
+				position: absolute;
+
+				background-image: -webkit-gradient(
+					linear,
+					left top,
+					left bottom,
+					color-stop(0, transparent),
+					color-stop(1, #FFFFFF)
+				);
+				background-image: -o-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+				background-image: -moz-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+				background-image: -webkit-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+				background-image: -ms-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+				background-image: linear-gradient(to bottom, transparent 0%, #FFFFFF 100%);
+			}
+			&.has-more-up:before{
+				top: 0;
+				content: '';
+			}
+			&.has-more-down:after{
+				content: '';
+				bottom: 0;
+			}
+			.page-controls{
+				position: absolute;
+				background: rgba(255,255,255,0.8);
+				bottom: 0px;
+				right: 0px;
+				.control{
+					width: 35px;
+					height: 35px;
+					padding: 0px 5px;
+					font-size: 1.8em;
+					line-height: 1.3em;
+					text-align: center;
+					display: inline-block;
+					
+				}
+			}
+			.html-content{
+				display: block;
+			}
 		}
 	}
 

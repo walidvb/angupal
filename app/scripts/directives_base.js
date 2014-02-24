@@ -26,8 +26,8 @@
         scope: {
           myHtml: "="
         },
-        replace: true,
-        template: "<span ng-bind-html='trustMe(myHtml)'></span>",
+        replace: false,
+        template: "<span ng-bind-html='trustMe(myHtml)' class='html-content'></span>",
         controller: function($scope, $element) {
           $scope.trustMe = function(html) {
             return $sce.trustAsHtml(html);

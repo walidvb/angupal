@@ -2,8 +2,8 @@
 		<div drupal-edit="project.nid"></div>
 		<div class="slides swiper-wrapper">
 			<div ng-if="project.body.length > 1" class="slide slide-text slide-horz">
-				<div class="slide-text-wrapper">
-					<div my-html="project.body"></div>
+				<div class="slide-text-wrapper" my-multipage>
+					<div my-html="project.body" ></div>
 				</div>
 			</div>
 			<div class="slide slide-horz" my-fullscreen="x" ng-repeat="slide in project.imgs">

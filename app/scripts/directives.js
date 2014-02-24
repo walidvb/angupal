@@ -16,6 +16,77 @@
         templateUrl: "sites/all/themes/angupal/app/views/project.html"
       };
     }
+  ]).directive('myMultipage', [
+    function() {
+      return {
+        controller: function($scope) {
+          var goTo;
+
+          $scope.next = function() {
+            return goTo('next');
+          };
+          $scope.prev = function() {
+            return goTo('prev');
+          };
+          return goTo = function(direction) {
+            var h, newOffset, page;
+
+            h = $scope.page.height();
+            console.log('page', $scope.page);
+            newOffset = direction === 'next' ? $scope.pageOffset - h : $scope.pageOffset + h;
+            page = $scope.page.find('.html-content');
+            console.log('newOffset', newOffset, 'h', h, 'page.height', page.height());
+            if (newOffset > 0) {
+              newOffset = 0;
+              return;
+            }
+            if (-newOffset > page.height()) {
+              newOffset = $scope.pageOffset;
+              return;
+            }
+            page.animate({
+              'opacity': 0
+            }, 'ease-out', function() {
+              $(this).css({
+                '-webkit-transform': 'translateY(' + newOffset + 'px)',
+                '-moz-transform': 'translateY(' + newOffset + 'px)',
+                'transform': 'translateY(' + newOffset + 'px)'
+              });
+              return page.stop().animate({
+                'opacity': 1
+              }, 'ease-out');
+            });
+            $scope.pageOffset = newOffset;
+            return $scope.pageIndex = direction === 'next' ? $scope.pageIndex + 1 : $scope.pageIndex - 1;
+          };
+        },
+        link: function(scope, elm, attrs) {
+          var controls, next, prev;
+
+          scope.page = angular.element(elm);
+          console.log('page height', scope.page.height(), 'content height', scope.page.find('.html-content').height());
+          console.log(scope);
+          if (scope.page.height() <= scope.page.find('.html-content').height()) {
+            scope.pageIndex = null;
+            return;
+          }
+          next = angular.element('<div class="control next"/>').text('+').bind('click', function() {
+            return scope.next();
+          });
+          prev = angular.element('<div class="control prev"/>').text('-').bind('click', function() {
+            return scope.prev();
+          });
+          controls = angular.element('<div class="page-controls">').append(prev).append(next);
+          angular.element(elm).append(controls);
+          scope.controls = {
+            prev: prev,
+            next: next
+          };
+          scope.pageOffset = 0;
+          return scope.pageIndex = 0;
+        }
+      };
+    }
   ]).directive("myBio", [
     function() {
       return {
@@ -54,7 +125,7 @@
               options.paginationActiveClass = 'active';
               options.paginationVisibleClass = 'visible';
               options.paginationClickable = true;
-              options.initialSlide = 0;
+              options.initialSlide = 2;
               options.onSwiperCreated = function(swiper) {
                 angular.element('navigation').css('marginTop', -pagination.height() / 2);
                 return scope.initPagers();
