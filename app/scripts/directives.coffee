@@ -9,14 +9,14 @@ angular.module('myApp').
 				      	console.log 'project watched'
 				     	)
 		      replace: true
-		      templateUrl: "views/project.html"
+		      templateUrl: "sites/all/themes/angupal/app/views/project.html"
 		  
 	]).
 	directive("myBio", [
 		() ->
 			scope:
 				bio: "=myBio"
-			templateUrl: "views/bio.html"
+			templateUrl: "sites/all/themes/angupal/app/views/bio.html"
 	]).
 	directive("swiper", ['$timeout'
 		($timeout) ->

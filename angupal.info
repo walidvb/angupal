@@ -1,5 +1,5 @@
 name               = angupal
-description        =  Creates a hook to do it all in angular, except admin
+description        =  Themes main and only page
 version            = 0.0
 core               = 7.x
 engine             = phptemplate
