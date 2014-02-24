@@ -16,6 +16,12 @@ body, #logo{
 	.info-open &{
 		-webkit-filter: blur(4px);
 	}
+	.navs-open &{
+		-webkit-filter: blur(4px);
+	@media #{$tablet} {
+			-webkit-filter: blur(0px);
+		}
+	}
 }
 #logo{
 	background-color: $theme-color;
@@ -83,22 +89,22 @@ body, #logo{
 				height: 20px;
 				position: absolute;
 				
-			&:before{
-				top: 0;
-				content: '';
-				background-image: -webkit-gradient(
-					linear,
-					left bottom,
-					left top,
-					color-stop(0, transparent),
-					color-stop(1, #FFFFFF)
-				);
-				background-image: -o-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
-				background-image: -moz-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
-				background-image: -webkit-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
-				background-image: -ms-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
-				background-image: linear-gradient(to bottom, transparent 0%, #FFFFFF 100%);
-			}
+				&:before{
+					top: 0;
+					content: '';
+					background-image: -webkit-gradient(
+						linear,
+						left bottom,
+						left top,
+						color-stop(0, transparent),
+						color-stop(1, #FFFFFF)
+						);
+					background-image: -o-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+					background-image: -moz-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+					background-image: -webkit-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+					background-image: -ms-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+					background-image: linear-gradient(to bottom, transparent 0%, #FFFFFF 100%);
+				}
 			}
 			&:after{
 				content: '';
@@ -109,47 +115,62 @@ body, #logo{
 					left bottom,
 					color-stop(0, transparent),
 					color-stop(1, #FFFFFF)
-				);
+					);
 				background-image: -o-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
 				background-image: -moz-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
 				background-image: -webkit-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
 				background-image: -ms-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
 				background-image: linear-gradient(to bottom, transparent 0%, #FFFFFF 100%);
 			}
-			}
-			.page-controls{
-				position: absolute;
-				background: rgba(255,255,255,0.8);
-				bottom: 0px;
-				right: 0px;
-				.control{
-					width: 35px;
-					height: 35px;
-					padding: 0px 5px;
-					font-size: 1.8em;
-					line-height: 1.3em;
-					text-align: center;
-					display: inline-block;
-					
-				}
-			}
-			.html-content{
-				display: block;
+		}
+		.page-controls{
+			position: absolute;
+			background: rgba(255,255,255,0.8);
+			bottom: 0px;
+			right: 0px;
+			.control{
+				width: 35px;
+				height: 35px;
+				padding: 0px 5px;
+				font-size: 1.8em;
+				line-height: 1.3em;
+				text-align: center;
+				display: inline-block;
+
 			}
 		}
+		.html-content{
+			display: block;
+		}
 	}
+}
 
 }
 
 $circle-size: 15px;
 navigation{
-	color: $theme-color;
-	position: fixed;
-	top: 50%;
-	right: 15px;
-	opacity: 1;
-	@include transition($delay: 0.3s);
-	display: inline-block;
+	.nav-trigger{
+		position: fixed;
+		width: 15px;
+		height: 15px;
+		right: 10px;
+		top: 50%;
+		border-right: $theme-color solid 15px;
+		border-top: transparent solid 10px;
+		border-bottom: transparent solid 10px;
+		@include transition($delay: 0.3s);
+		.nav-open & {
+			left: 10px;
+			border-left: $theme-color solid 15px;
+			border-right: none;
+		}
+		@media #{$tablet}{
+			display: none;
+		}
+	}
+	right: -100%;
+
+
 	.initial-state &{
 		opacity: 0;
 	}
@@ -157,69 +178,79 @@ navigation{
 		@include transition($delay: 0s);
 	}
 	
-	&.faded{
-		opacity: 0.6;
-	}
-	.vert-pagination{
+	.pagination-wrapper{
+		color: $theme-color;
+		position: fixed;
+		top: 50%;
+		opacity: 1;
+		@include transition($delay: 0.3s);
+		display: inline-block;
+		right: -100%;
+		.nav-open &{
+			right: 15px;
+		}
+		.faded &{
+			opacity: 0.6;
+		}
 
-		.vert-pager{
-			margin-bottom: 5px;
-			height: 30px;
-			cursor: pointer;
-			&:after{
-				content: attr(data-title);
-				display: inline;
-				float: right;
-				text-align: right;
-				@media #{$tablet}{
-					opacity: 0;
-					
+		.vert-pagination{
+			.vert-pager{
+				margin-bottom: 5px;
+				height: 30px;
+				cursor: pointer;
+				&:after{
+					content: attr(data-title);
+					display: inline;
+					float: right;
+					text-align: right;
+					@media #{$tablet}{
+						opacity: 0;
+
+					}
+
 				}
-				
-			}
-			&:hover:after, &.active:after{
-				@media #{$tablet}{
-					opacity: 1;
+				&:hover:after, &.active:after{
+					@media #{$tablet}{
+						opacity: 1;
+					}
 				}
-			}
-			$half: $circle-size/2;
-			&:before{
-				content: '';
-				margin: 3px 10px;
-				float: right;
-				@include transition($duration: .1s);
-				@include circle($size: 20px, $color: $theme-color);
-				background-color: $theme-color;
-				display: inline;
-				position: relative;
-				
-				top: $half - 5;
-				left: 0;
-			}
-			&.active:before, &:hover:before{
-				@include circle($size: 15px, $color: $theme-color);
-				background-color: transparent;
-				top: 0;
-				left: $half - 5;
-			}
-			@media #{$tablet}{
+				$half: $circle-size/2;
 				&:before{
-					@include circle($size: 5px, $color: $theme-color);
+					content: '';
+					margin: 3px 10px;
+					float: right;
+					@include transition($duration: .1s);
+					@include circle($size: 20px, $color: $theme-color);
+					background-color: $theme-color;
+					display: inline;
+					position: relative;
+
+					top: $half - 5;
+					left: 0;
 				}
-				&.active:before, &:hover:before§	{
-					@include circle($size: $circle-size, $color: $theme-color);
+				&.active:before, &:hover:before{
+					@include circle($size: 15px, $color: $theme-color);
+					background-color: transparent;
+					top: 0;
+					left: $half - 5;
+				}
+				@media #{$tablet}{
+					&:before{
+						@include circle($size: 5px, $color: $theme-color);
+					}
+					&.active:before, &:hover:before§	{
+						@include circle($size: $circle-size, $color: $theme-color);
+					}
 				}
 			}
 		}
 	}
-	
 }
 
 
 
 //------------------info
-#info{
-	span{
+#info-pager{
 		float: right;
 		@media #{$tablet}{
 			margin: 0px 5px;
@@ -228,7 +259,7 @@ navigation{
 		font-size: large;
 		margin: 0 10px;
 	}
-
+#info{
 	#info-wrapper{
 		position: fixed;
 		top: 0;

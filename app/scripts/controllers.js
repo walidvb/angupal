@@ -10,6 +10,9 @@
     $scope.toggleInfo = function() {
       return $scope.infoOpen = !$scope.infoOpen;
     };
+    $scope.toggleNav = function() {
+      return $scope.navOpen = !$scope.navOpen;
+    };
     $scope.swipers = {
       vertical: null,
       horz: new Array

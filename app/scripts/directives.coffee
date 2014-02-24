@@ -114,7 +114,7 @@ angular.module('myApp').
 						#Create and Add pagers to the dom
 						pagination = $ '<div class="vert-pagination"/>'
 						scope.swipers.vertPagination = pagination
-						angular.element('navigation').prepend pagination
+						angular.element('.pagination-wrapper').prepend pagination
 						options.slideClass             = 'slide-vert'
 						options.mode                   = 'vertical'
 						options.pagination             = '.vert-pagination'
@@ -126,7 +126,7 @@ angular.module('myApp').
 						options.initialSlide	= 1
 						options.onSwiperCreated = (swiper) ->
 							#move pagination to center
-							angular.element('navigation').css 'marginTop', -pagination.height()/2
+							angular.element('.vert-pagination').css 'marginTop', -pagination.height()/2
 							scope.initPagers()
 						options.onSlideChangeStart = (swiper, direction) ->
 							angular.element('body').removeClass 'initial-state'

@@ -11,6 +11,8 @@ angular.module('myApp')
 	.controller 'mainCtrl', ($scope, $timeout) ->
 		$scope.toggleInfo = () ->
 			$scope.infoOpen = !$scope.infoOpen
+		$scope.toggleNav = () ->
+			$scope.navOpen = !$scope.navOpen
 		$scope.swipers = 
 			vertical: null
 			horz: new Array

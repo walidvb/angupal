@@ -17,6 +17,11 @@ body, #logo {
   transition: all 0.8s ease-out 0s; }
   .info-open #main {
     -webkit-filter: blur(4px); }
+  .navs-open #main {
+    -webkit-filter: blur(4px); }
+    @media (min-width: 767px) {
+      .navs-open #main {
+        -webkit-filter: blur(0px); } }
 
 #logo {
   background-color: #b8e0d0;
@@ -128,17 +133,28 @@ body, #logo {
         display: block; }
 
 navigation {
-  color: #b8e0d0;
-  position: fixed;
-  top: 50%;
-  right: 15px;
-  opacity: 1;
-  -webkit-transition: all 0.3s ease-out 0.3s;
-  -moz-transition: all 0.3s ease-out 0.3s;
-  -ms-transition: all 0.3s ease-out 0.3s;
-  -o-transition: all 0.3s ease-out 0.3s;
-  transition: all 0.3s ease-out 0.3s;
-  display: inline-block; }
+  right: -100%; }
+  navigation .nav-trigger {
+    position: fixed;
+    width: 15px;
+    height: 15px;
+    right: 10px;
+    top: 50%;
+    border-right: #b8e0d0 solid 15px;
+    border-top: transparent solid 10px;
+    border-bottom: transparent solid 10px;
+    -webkit-transition: all 0.3s ease-out 0.3s;
+    -moz-transition: all 0.3s ease-out 0.3s;
+    -ms-transition: all 0.3s ease-out 0.3s;
+    -o-transition: all 0.3s ease-out 0.3s;
+    transition: all 0.3s ease-out 0.3s; }
+    .nav-open navigation .nav-trigger {
+      left: 10px;
+      border-left: #b8e0d0 solid 15px;
+      border-right: none; }
+    @media (min-width: 767px) {
+      navigation .nav-trigger {
+        display: none; } }
   .initial-state navigation {
     opacity: 0; }
   .ready-state navigation {
@@ -147,73 +163,88 @@ navigation {
     -ms-transition: all 0.3s ease-out 0s;
     -o-transition: all 0.3s ease-out 0s;
     transition: all 0.3s ease-out 0s; }
-  navigation.faded {
-    opacity: 0.6; }
-  navigation .vert-pagination .vert-pager {
-    margin-bottom: 5px;
-    height: 30px;
-    cursor: pointer; }
-    navigation .vert-pagination .vert-pager:after {
-      content: attr(data-title);
-      display: inline;
-      float: right;
-      text-align: right; }
+  navigation .pagination-wrapper {
+    color: #b8e0d0;
+    position: fixed;
+    top: 50%;
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-out 0.3s;
+    -moz-transition: all 0.3s ease-out 0.3s;
+    -ms-transition: all 0.3s ease-out 0.3s;
+    -o-transition: all 0.3s ease-out 0.3s;
+    transition: all 0.3s ease-out 0.3s;
+    display: inline-block;
+    right: -100%; }
+    .nav-open navigation .pagination-wrapper {
+      right: 15px; }
+    .faded navigation .pagination-wrapper {
+      opacity: 0.6; }
+    navigation .pagination-wrapper .vert-pagination .vert-pager {
+      margin-bottom: 5px;
+      height: 30px;
+      cursor: pointer; }
+      navigation .pagination-wrapper .vert-pagination .vert-pager:after {
+        content: attr(data-title);
+        display: inline;
+        float: right;
+        text-align: right; }
+        @media (min-width: 767px) {
+          navigation .pagination-wrapper .vert-pagination .vert-pager:after {
+            opacity: 0; } }
       @media (min-width: 767px) {
-        navigation .vert-pagination .vert-pager:after {
-          opacity: 0; } }
-    @media (min-width: 767px) {
-      navigation .vert-pagination .vert-pager:hover:after, navigation .vert-pagination .vert-pager.active:after {
-        opacity: 1; } }
-    navigation .vert-pagination .vert-pager:before {
-      content: '';
-      margin: 3px 10px;
-      float: right;
-      -webkit-transition: all 0.1s ease-out 0s;
-      -moz-transition: all 0.1s ease-out 0s;
-      -ms-transition: all 0.1s ease-out 0s;
-      -o-transition: all 0.1s ease-out 0s;
-      transition: all 0.1s ease-out 0s;
-      width: 20px;
-      height: 20px;
-      -webkit-border-radius: 50%;
-      border-radius: 50%;
-      border: 1px solid rgba(184, 224, 208, 0.5);
-      background-color: #b8e0d0;
-      display: inline;
-      position: relative;
-      top: 2.5px;
-      left: 0; }
-    navigation .vert-pagination .vert-pager.active:before, navigation .vert-pagination .vert-pager:hover:before {
-      width: 15px;
-      height: 15px;
-      -webkit-border-radius: 50%;
-      border-radius: 50%;
-      border: 1px solid rgba(184, 224, 208, 0.5);
-      background-color: transparent;
-      top: 0;
-      left: 2.5px; }
-    @media (min-width: 767px) {
-      navigation .vert-pagination .vert-pager:before {
-        width: 5px;
-        height: 5px;
+        navigation .pagination-wrapper .vert-pagination .vert-pager:hover:after, navigation .pagination-wrapper .vert-pagination .vert-pager.active:after {
+          opacity: 1; } }
+      navigation .pagination-wrapper .vert-pagination .vert-pager:before {
+        content: '';
+        margin: 3px 10px;
+        float: right;
+        -webkit-transition: all 0.1s ease-out 0s;
+        -moz-transition: all 0.1s ease-out 0s;
+        -ms-transition: all 0.1s ease-out 0s;
+        -o-transition: all 0.1s ease-out 0s;
+        transition: all 0.1s ease-out 0s;
+        width: 20px;
+        height: 20px;
         -webkit-border-radius: 50%;
         border-radius: 50%;
-        border: 1px solid rgba(184, 224, 208, 0.5); }
-      navigation .vert-pagination .vert-pager.active:before, navigation .vert-pagination .vert-pager:hover:before§ {
+        border: 1px solid rgba(184, 224, 208, 0.5);
+        background-color: #b8e0d0;
+        display: inline;
+        position: relative;
+        top: 2.5px;
+        left: 0; }
+      navigation .pagination-wrapper .vert-pagination .vert-pager.active:before, navigation .pagination-wrapper .vert-pagination .vert-pager:hover:before {
         width: 15px;
         height: 15px;
         -webkit-border-radius: 50%;
         border-radius: 50%;
-        border: 1px solid rgba(184, 224, 208, 0.5); } }
+        border: 1px solid rgba(184, 224, 208, 0.5);
+        background-color: transparent;
+        top: 0;
+        left: 2.5px; }
+      @media (min-width: 767px) {
+        navigation .pagination-wrapper .vert-pagination .vert-pager:before {
+          width: 5px;
+          height: 5px;
+          -webkit-border-radius: 50%;
+          border-radius: 50%;
+          border: 1px solid rgba(184, 224, 208, 0.5); }
+        navigation .pagination-wrapper .vert-pagination .vert-pager.active:before, navigation .pagination-wrapper .vert-pagination .vert-pager:hover:before§ {
+          width: 15px;
+          height: 15px;
+          -webkit-border-radius: 50%;
+          border-radius: 50%;
+          border: 1px solid rgba(184, 224, 208, 0.5); } }
 
-#info span {
+#info-pager {
   float: right;
   font-size: large;
   margin: 0 10px; }
   @media (min-width: 767px) {
-    #info span {
+    #info-pager {
       margin: 0px 5px;
       font-size: normal; } }
+
 #info #info-wrapper {
   position: fixed;
   top: 0;

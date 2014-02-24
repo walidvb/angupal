@@ -144,7 +144,7 @@
               initialState = true;
               pagination = $('<div class="vert-pagination"/>');
               scope.swipers.vertPagination = pagination;
-              angular.element('navigation').prepend(pagination);
+              angular.element('.pagination-wrapper').prepend(pagination);
               options.slideClass = 'slide-vert';
               options.mode = 'vertical';
               options.pagination = '.vert-pagination';
@@ -155,7 +155,7 @@
               options.paginationClickable = true;
               options.initialSlide = 1;
               options.onSwiperCreated = function(swiper) {
-                angular.element('navigation').css('marginTop', -pagination.height() / 2);
+                angular.element('.vert-pagination').css('marginTop', -pagination.height() / 2);
                 return scope.initPagers();
               };
               options.onSlideChangeStart = function(swiper, direction) {

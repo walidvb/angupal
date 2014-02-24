@@ -1,5 +1,5 @@
 
-<div class="top-swiper-container" swiper="vert" my-fullscreen="y" ng-controller="mainCtrl" ng-class="{'info-open': infoOpen}">
+<div class="top-swiper-container" swiper="vert" my-fullscreen="y" ng-controller="mainCtrl" ng-class="{'info-open': infoOpen, 'nav-open': navOpen}">
   <div id="main"class="swiper-wrapper">
     <section id="logo" class="slide-vert" my-fullscreen="y" data-name="">
       <h1>CollinFontaine</h1>
@@ -19,15 +19,17 @@
     </section>
   </div>
   <navigation ng-controller="infoCtrl">
-  <div id="info">
-    <div id="info-wrapper">
-      <div id="info-content" my-html="data.info.body.value">
-      </div>
+  <div class="nav-trigger" ng-click="toggleNav();"></div>
+    <div class="pagination-wrapper">
+      <span class="glyphicon glyphicon-info-sign" id="info-pager" ng-click="toggleInfo()"></span>
     </div>
-    <span class="glyphicon glyphicon-info-sign" id="info-pager" ng-click="toggleInfo()">
-
-    </span>
-</div>
+    <div id="info">
+      <div id="info-wrapper">
+        <div id="info-content" my-html="data.info.body.value">
+        </div>
+      </div>
+      
+  </div>
 </navigation>
 </div>
 
