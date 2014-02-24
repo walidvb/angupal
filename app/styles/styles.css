@@ -64,7 +64,8 @@ body, #logo {
     display: inline-block;
     vertical-align: middle;
     position: relative;
-    height: 100%; }
+    height: 100%;
+    float: left; }
     .slides .slide img {
       max-height: 100%;
       margin: auto;

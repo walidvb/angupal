@@ -61,6 +61,7 @@ body, #logo{
 		vertical-align: middle;
 		position: relative;
 		height: 100%;
+		float: left;
 		img{
 			max-height: 100%;
 			@include center();
@@ -78,10 +79,6 @@ body, #logo{
 		}
 	}
 
-	@media #{$tablet} {
-
-
-}
 }
 }
 $circle-size: 15px;
