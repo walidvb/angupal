@@ -17,10 +17,10 @@ body, #logo {
   transition: all 0.8s ease-out 0s; }
   .info-open #main {
     -webkit-filter: blur(4px); }
-  .navs-open #main {
+  .nav-open #main {
     -webkit-filter: blur(4px); }
     @media (min-width: 767px) {
-      .navs-open #main {
+      .nav-open #main {
         -webkit-filter: blur(0px); } }
 
 #logo {
@@ -133,25 +133,37 @@ body, #logo {
         display: block; }
 
 navigation {
-  right: -100%; }
+  z-index: 10; }
   navigation .nav-trigger {
     position: fixed;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     right: 10px;
     top: 50%;
-    border-right: #b8e0d0 solid 15px;
-    border-top: transparent solid 10px;
-    border-bottom: transparent solid 10px;
+    z-index: 15;
+    cursor: pointer !important;
+    display: inline-block;
     -webkit-transition: all 0.3s ease-out 0.3s;
     -moz-transition: all 0.3s ease-out 0.3s;
     -ms-transition: all 0.3s ease-out 0.3s;
     -o-transition: all 0.3s ease-out 0.3s;
     transition: all 0.3s ease-out 0.3s; }
+    navigation .nav-trigger:after {
+      content: '';
+      border-right: #b8e0d0 solid 15px;
+      border-top: transparent solid 10px;
+      border-bottom: transparent solid 10px;
+      display: inline-block; }
     .nav-open navigation .nav-trigger {
-      left: 10px;
-      border-left: #b8e0d0 solid 15px;
-      border-right: none; }
+      -webkit-transition: all 0.3s ease-out 0s;
+      -moz-transition: all 0.3s ease-out 0s;
+      -ms-transition: all 0.3s ease-out 0s;
+      -o-transition: all 0.3s ease-out 0s;
+      transition: all 0.3s ease-out 0s;
+      right: 90%;
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      transform: rotateY(180deg); }
     @media (min-width: 767px) {
       navigation .nav-trigger {
         display: none; } }
@@ -174,12 +186,24 @@ navigation {
     -o-transition: all 0.3s ease-out 0.3s;
     transition: all 0.3s ease-out 0.3s;
     display: inline-block;
+    z-index: 10;
     right: -100%; }
     .nav-open navigation .pagination-wrapper {
+      -webkit-transition: all 0.3s ease-out 0s;
+      -moz-transition: all 0.3s ease-out 0s;
+      -ms-transition: all 0.3s ease-out 0s;
+      -o-transition: all 0.3s ease-out 0s;
+      transition: all 0.3s ease-out 0s;
       right: 15px; }
+    @media (min-width: 767px) {
+      navigation .pagination-wrapper {
+        right: 10px; } }
     .faded navigation .pagination-wrapper {
       opacity: 0.6; }
     navigation .pagination-wrapper .vert-pagination .vert-pager {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: right;
       margin-bottom: 5px;
       height: 30px;
       cursor: pointer; }
@@ -239,7 +263,8 @@ navigation {
 #info-pager {
   float: right;
   font-size: large;
-  margin: 0 10px; }
+  margin: 0 10px;
+  z-index: 15; }
   @media (min-width: 767px) {
     #info-pager {
       margin: 0px 5px;
@@ -250,25 +275,22 @@ navigation {
   top: 0;
   bottom: 0;
   right: 0;
-  left: 0;
+  left: 100%;
   text-align: center;
   background: rgba(255, 255, 255, 0.4);
-  opacity: 0;
-  display: none;
-  visibility: hiddden;
-  -webkit-transition: all 0.8s ease-out 0s;
-  -moz-transition: all 0.8s ease-out 0s;
-  -ms-transition: all 0.8s ease-out 0s;
-  -o-transition: all 0.8s ease-out 0s;
-  transition: all 0.8s ease-out 0s; }
+  z-index: 10;
+  -webkit-transition: opacity 0.8s ease-out 0s;
+  -moz-transition: opacity 0.8s ease-out 0s;
+  -ms-transition: opacity 0.8s ease-out 0s;
+  -o-transition: opacity 0.8s ease-out 0s;
+  transition: opacity 0.8s ease-out 0s;
+  opacity: 0; }
   .info-open #info #info-wrapper {
-    visibility: visible;
-    opacity: 1; }
+    opacity: 1;
+    left: 0%; }
   #info #info-wrapper #info-content {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 70%; }
+    margin-top: 25px;
+    height: 70%; }
 
 .debug section {
   border: 1px solid #b7e0cf;

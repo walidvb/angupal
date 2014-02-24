@@ -9,10 +9,11 @@ angular.module('myApp')
 		'hi'
 		)
 	.controller 'mainCtrl', ($scope, $timeout) ->
-		$scope.toggleInfo = () ->
-			$scope.infoOpen = !$scope.infoOpen
-		$scope.toggleNav = () ->
-			$scope.navOpen = !$scope.navOpen
+		$scope.toggleInfo = (toOpen = null) ->
+			$scope.infoOpen = toOpen || !$scope.infoOpen
+		$scope.toggleNav = (toOpen = null) ->
+			$scope.navOpen = toOpen || !$scope.navOpen
+			#$scope.toggleInfo(false)
 		$scope.swipers = 
 			vertical: null
 			horz: new Array
@@ -21,14 +22,27 @@ angular.module('myApp')
 			$timeout(() ->
 				slideNames = new Array
 				slideNames.push pager.attributes['data-name'].value for pager in $scope.swipers.vertical.slides
+				slideIcons = new Array
+				slideIcons.push pager.attributes['data-icon'].value for pager in $scope.swipers.vertical.slides
 				pagination =  angular.element('.vert-pagination')
 				pagers = pagination.find 'div.vert-pager'
 					
 				for item, i in pagers
 					classes = angular.element(item).attr('class') + ' vert-pager'
-					$(item).attr('data-title', slideNames[i]).append $('<div class="vert-pager-dot></div>')
-
+					$(item)
+						.attr('data-title', slideNames[i])
+						.css(
+							'background-image': 'url("' + slideIcons[i] + '")'
+							)
 			, 1000)
+		Mousetrap.bind('i', () ->
+			$scope.toggleInfo();
+			$scope.$digest();
+		)
+		Mousetrap.bind('m', () ->
+			$scope.toggleNav();
+			$scope.$digest();
+		)
 		window.onresize = ()->
 			console.log $scope
 			$scope.digest

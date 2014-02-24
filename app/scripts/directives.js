@@ -26,13 +26,8 @@
         scope: {
           project: "=myProject"
         },
-        contrsoller: function($scope) {
-          return $scope.$watchCollection($scope.project, function() {
-            return $scope.project.first = $scope.project.imgs.splice(0, 1)[0];
-          });
-        },
-        replace: true,
-        templateUrl: "sites/all/themes/angupal/app/views/project.html"
+        templateUrl: "sites/all/themes/angupal/app/views/project.html",
+        replace: true
       };
     }
   ]).directive('myMultipage', [
@@ -116,18 +111,11 @@
         templateUrl: "sites/all/themes/angupal/app/views/bio.html"
       };
     }
-  ]).directive("swiperSlide", [
-    function() {
-      return {
-        link: function(scope, elem, attrs) {
-          return console.log('Swiper slide', scope, elem);
-        }
-      };
-    }
   ]).directive("swiper", [
     '$timeout', function($timeout) {
       return {
         priority: 500,
+        transclude: false,
         link: function(scope, elem, attrs) {
           return $timeout(function() {
             var $this, initialState, options, pagination;
@@ -153,7 +141,7 @@
               options.paginationActiveClass = 'active';
               options.paginationVisibleClass = 'visible';
               options.paginationClickable = true;
-              options.initialSlide = 1;
+              options.initialSlide = 0;
               options.onSwiperCreated = function(swiper) {
                 angular.element('.vert-pagination').css('marginTop', -pagination.height() / 2);
                 return scope.initPagers();

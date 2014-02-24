@@ -16,7 +16,7 @@ body, #logo{
 	.info-open &{
 		-webkit-filter: blur(4px);
 	}
-	.navs-open &{
+	.nav-open &{
 		-webkit-filter: blur(4px);
 	@media #{$tablet} {
 			-webkit-filter: blur(0px);
@@ -149,27 +149,35 @@ body, #logo{
 
 $circle-size: 15px;
 navigation{
+	z-index: 10;
 	.nav-trigger{
 		position: fixed;
-		width: 15px;
-		height: 15px;
+		width: 20px;
+		height: 20px;
 		right: 10px;
 		top: 50%;
-		border-right: $theme-color solid 15px;
-		border-top: transparent solid 10px;
-		border-bottom: transparent solid 10px;
+		z-index: 15;
+		cursor: pointer!important;
+		display: inline-block;
+		&:after{
+			content: '';
+			border-right: $theme-color solid 15px;
+			border-top: transparent solid 10px;
+			border-bottom: transparent solid 10px;
+			display: inline-block;
+		}
 		@include transition($delay: 0.3s);
 		.nav-open & {
-			left: 10px;
-			border-left: $theme-color solid 15px;
-			border-right: none;
+			@include transition($delay: 0s);
+			right: 90%;
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			transform: rotateY(180deg);
 		}
 		@media #{$tablet}{
 			display: none;
 		}
-	}
-	right: -100%;
-
+	}	
 
 	.initial-state &{
 		opacity: 0;
@@ -185,9 +193,14 @@ navigation{
 		opacity: 1;
 		@include transition($delay: 0.3s);
 		display: inline-block;
+		z-index: 10;
 		right: -100%;
 		.nav-open &{
+			@include transition($delay: 0s);
 			right: 15px;
+		}
+		@media #{$tablet}{
+			right: 10px;
 		}
 		.faded &{
 			opacity: 0.6;
@@ -195,6 +208,9 @@ navigation{
 
 		.vert-pagination{
 			.vert-pager{
+				background-repeat: no-repeat;
+				background-size: contain;
+				background-position: right;
 				margin-bottom: 5px;
 				height: 30px;
 				cursor: pointer;
@@ -258,6 +274,7 @@ navigation{
 		}
 		font-size: large;
 		margin: 0 10px;
+		z-index: 15;
 	}
 #info{
 	#info-wrapper{
@@ -265,23 +282,20 @@ navigation{
 		top: 0;
 		bottom: 0;
 		right: 0;
-		left: 0;
+		left: 100%;
 		text-align: center;
 		background: rgba(255,255,255,0.4);
+		z-index: 10;
+		@include transition($property: opacity, $duration:0.8s);
 		opacity: 0;
-		display: none;
-		visibility: hiddden;
-		@include transition($property: all, $duration:0.8s);
+		
 		.info-open &{
-			visibility: visible;
 			opacity: 1;
-
+			left: 0%;
 		}
 		#info-content{
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			width: 70%;
+			margin-top: 25px;
+			height: 70%;
 		}
 
 	}

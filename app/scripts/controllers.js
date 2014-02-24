@@ -7,11 +7,17 @@
     console.log(input);
     return 'hi';
   }).controller('mainCtrl', function($scope, $timeout) {
-    $scope.toggleInfo = function() {
-      return $scope.infoOpen = !$scope.infoOpen;
+    $scope.toggleInfo = function(toOpen) {
+      if (toOpen == null) {
+        toOpen = null;
+      }
+      return $scope.infoOpen = toOpen || !$scope.infoOpen;
     };
-    $scope.toggleNav = function() {
-      return $scope.navOpen = !$scope.navOpen;
+    $scope.toggleNav = function(toOpen) {
+      if (toOpen == null) {
+        toOpen = null;
+      }
+      return $scope.navOpen = toOpen || !$scope.navOpen;
     };
     $scope.swipers = {
       vertical: null,
@@ -20,7 +26,7 @@
     $scope.data = {};
     $scope.initPagers = function() {
       return $timeout(function() {
-        var classes, i, item, pager, pagers, pagination, slideNames, _i, _j, _len, _len1, _ref, _results;
+        var classes, i, item, pager, pagers, pagination, slideIcons, slideNames, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
 
         slideNames = new Array;
         _ref = $scope.swipers.vertical.slides;
@@ -28,17 +34,33 @@
           pager = _ref[_i];
           slideNames.push(pager.attributes['data-name'].value);
         }
+        slideIcons = new Array;
+        _ref1 = $scope.swipers.vertical.slides;
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          pager = _ref1[_j];
+          slideIcons.push(pager.attributes['data-icon'].value);
+        }
         pagination = angular.element('.vert-pagination');
         pagers = pagination.find('div.vert-pager');
         _results = [];
-        for (i = _j = 0, _len1 = pagers.length; _j < _len1; i = ++_j) {
+        for (i = _k = 0, _len2 = pagers.length; _k < _len2; i = ++_k) {
           item = pagers[i];
           classes = angular.element(item).attr('class') + ' vert-pager';
-          _results.push($(item).attr('data-title', slideNames[i]).append($('<div class="vert-pager-dot></div>')));
+          _results.push($(item).attr('data-title', slideNames[i]).css({
+            'background-image': 'url("' + slideIcons[i] + '")'
+          }));
         }
         return _results;
       }, 1000);
     };
+    Mousetrap.bind('i', function() {
+      $scope.toggleInfo();
+      return $scope.$digest();
+    });
+    Mousetrap.bind('m', function() {
+      $scope.toggleNav();
+      return $scope.$digest();
+    });
     return window.onresize = function() {
       console.log($scope);
       return $scope.digest;

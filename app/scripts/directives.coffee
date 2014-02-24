@@ -18,12 +18,8 @@ angular.module('myApp').
 		  () ->  
 		      scope:
 		        project: "=myProject"
-		      contrsoller: ($scope) ->
-		      		$scope.$watchCollection($scope.project, () ->
-				      	$scope.project.first = $scope.project.imgs.splice(0, 1)[0]
-				     	)
-		      replace: true
 		      templateUrl: "sites/all/themes/angupal/app/views/project.html"
+		      replace: true
 		  
 	]).
 	directive('myMultipage', ['$timeout'
@@ -91,14 +87,10 @@ angular.module('myApp').
 				bio: "=myBio"
 			templateUrl: "sites/all/themes/angupal/app/views/bio.html"
 	]).
-	directive("swiperSlide", [ 
-		() ->
-			link: (scope, elem, attrs) ->
-				console.log 'Swiper slide', scope, elem
-	]).
 	directive("swiper", ['$timeout'
 		($timeout) ->
 			priority: 500
+			transclude: false
 			link: (scope, elem, attrs) ->
 				$timeout(() ->
 					$this = angular.element elem
@@ -123,7 +115,7 @@ angular.module('myApp').
 						options.paginationActiveClass  = 'active'
 						options.paginationVisibleClass = 'visible'
 						options.paginationClickable    = true
-						options.initialSlide	= 1
+						options.initialSlide	= 0
 						options.onSwiperCreated = (swiper) ->
 							#move pagination to center
 							angular.element('.vert-pagination').css 'marginTop', -pagination.height()/2
