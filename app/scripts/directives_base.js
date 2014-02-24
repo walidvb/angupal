@@ -27,6 +27,7 @@
           myHtml: "="
         },
         replace: false,
+        priority: 1000,
         template: "<span ng-bind-html='trustMe(myHtml)' class='html-content'></span>",
         controller: function($scope, $element) {
           $scope.trustMe = function(html) {

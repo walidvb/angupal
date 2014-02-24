@@ -18,8 +18,8 @@ angular.module('myApp').
 		    return (
 		      scope:
 		        myHtml: "="
-	
 		      replace: false
+		      priority: 1000
 		      template: "<span ng-bind-html='trustMe(myHtml)' class='html-content'></span>"
 		      controller: ($scope, $element) ->
 		        $scope.trustMe = (html) ->

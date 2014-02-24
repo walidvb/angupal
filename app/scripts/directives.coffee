@@ -1,4 +1,19 @@
 angular.module('myApp').
+	filter('notFirst', () ->
+		(input) ->
+			if input and input isnt "undefined"
+			    array = new Array()
+			    i = 1
+			    while i < input.length
+			      array.push input[i]
+			      i++
+			    return array			
+	).
+	filter('first', () ->
+		(input) ->
+			if input and input isnt "undefined"
+			    return input[0]			
+	).
 	directive("myProject", [
 		  () ->  
 		      scope:
@@ -6,14 +21,14 @@ angular.module('myApp').
 		      contrsoller: ($scope) ->
 		      		$scope.$watchCollection($scope.project, () ->
 				      	$scope.project.first = $scope.project.imgs.splice(0, 1)[0]
-				      	console.log 'project watched'
 				     	)
 		      replace: true
 		      templateUrl: "sites/all/themes/angupal/app/views/project.html"
 		  
 	]).
-	directive('myMultipage', [
-		() ->
+	directive('myMultipage', ['$timeout'
+		($timeout) ->
+			priority: 300
 			controller: ($scope) ->
 				$scope.next = () ->
 					goTo 'next'
@@ -48,33 +63,38 @@ angular.module('myApp').
 					$scope.pageIndex = if direction is 'next' then $scope.pageIndex+1 else $scope.pageIndex-1
 			# Runs during compile
 			link: (scope, elm, attrs) ->
-				scope.page = angular.element(elm)
-				console.log 'page height', scope.page.height(), 'content height', scope.page.find('.html-content').height()
-				console.log scope
-				if scope.page.height() <= scope.page.find('.html-content').height()
-					scope.pageIndex = null
-					return
-				# Runs during render
-				next = angular.element('<div class="control next"/>').text('+').bind('click', () ->
-					scope.next();
-				)
-				prev = angular.element('<div class="control prev"/>').text('-').bind('click', () ->
-					scope.prev();
-				)
-				controls = angular.element('<div class="page-controls">').append(prev).append(next)
-				angular.element(elm).append controls
-				
-				scope.controls = 
-					prev: prev
-					next: next
-				scope.pageOffset = 0
-				scope.pageIndex = 0
+					scope.page = angular.element(elm)
+					console.log 'page height', scope.page.height(), 'content height', scope.page.find('.html-content').height()
+					console.log scope.page.find('.html-content')
+					if scope.page.height() <= scope.page.find('.html-content').height()
+						scope.pageIndex = null
+						return
+					# Runs during render
+					next = angular.element('<div class="control next"/>').text('+').bind('click', () ->
+						scope.next();
+					)
+					prev = angular.element('<div class="control prev"/>').text('-').bind('click', () ->
+						scope.prev();
+					)
+					controls = angular.element('<div class="page-controls">').append(prev).append(next)
+					angular.element(elm).append controls
+					
+					scope.controls = 
+						prev: prev
+						next: next
+					scope.pageOffset = 0
+					scope.pageIndex = 0
 	]).
 	directive("myBio", [
 		() ->
 			scope:
 				bio: "=myBio"
 			templateUrl: "sites/all/themes/angupal/app/views/bio.html"
+	]).
+	directive("swiperSlide", [ 
+		() ->
+			link: (scope, elem, attrs) ->
+				console.log 'Swiper slide', scope, elem
 	]).
 	directive("swiper", ['$timeout'
 		($timeout) ->
@@ -103,7 +123,7 @@ angular.module('myApp').
 						options.paginationActiveClass  = 'active'
 						options.paginationVisibleClass = 'visible'
 						options.paginationClickable    = true
-						options.initialSlide	= 2
+						options.initialSlide	= 1
 						options.onSwiperCreated = (swiper) ->
 							#move pagination to center
 							angular.element('navigation').css 'marginTop', -pagination.height()/2
@@ -111,7 +131,6 @@ angular.module('myApp').
 						options.onSlideChangeStart = (swiper, direction) ->
 							angular.element('body').removeClass 'initial-state'
 							pagination.removeClass 'faded'
-							console.log 'startChange'
 							scope.initPagers()
 						options.onSlideChangeEnd = (swiper, direction) ->
 							if initialState
@@ -119,7 +138,6 @@ angular.module('myApp').
 								swiper.swipeTo(0, 0, false)
 								angular.element('body').addClass 'ready-state'
 								initialState = false
-							console.log 'endChange'
 							scope.initPagers()
 							
 						scope.swipers.vertical = $this.swiper(options)

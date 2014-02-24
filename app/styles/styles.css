@@ -89,36 +89,43 @@ body, #logo {
         height: 90%;
         overflow: hidden; }
         .slides .slide.slide-text .slide-text-wrapper:after, .slides .slide.slide-text .slide-text-wrapper:before {
+          content: '';
           width: 100%;
           height: 20px;
-          position: absolute;
+          position: absolute; }
+          .slides .slide.slide-text .slide-text-wrapper:after:before, .slides .slide.slide-text .slide-text-wrapper:before:before {
+            top: 0;
+            content: '';
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, transparent), color-stop(1, white));
+            background-image: -o-linear-gradient(bottom, transparent 0%, white 100%);
+            background-image: -moz-linear-gradient(bottom, transparent 0%, white 100%);
+            background-image: -webkit-linear-gradient(bottom, transparent 0%, white 100%);
+            background-image: -ms-linear-gradient(bottom, transparent 0%, white 100%);
+            background-image: linear-gradient(to bottom, transparent 0%, white 100%); }
+        .slides .slide.slide-text .slide-text-wrapper:after {
+          content: '';
+          bottom: 0;
           background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, transparent), color-stop(1, white));
           background-image: -o-linear-gradient(bottom, transparent 0%, white 100%);
           background-image: -moz-linear-gradient(bottom, transparent 0%, white 100%);
           background-image: -webkit-linear-gradient(bottom, transparent 0%, white 100%);
           background-image: -ms-linear-gradient(bottom, transparent 0%, white 100%);
           background-image: linear-gradient(to bottom, transparent 0%, white 100%); }
-        .slides .slide.slide-text .slide-text-wrapper.has-more-up:before {
-          top: 0;
-          content: ''; }
-        .slides .slide.slide-text .slide-text-wrapper.has-more-down:after {
-          content: '';
-          bottom: 0; }
-        .slides .slide.slide-text .slide-text-wrapper .page-controls {
-          position: absolute;
-          background: rgba(255, 255, 255, 0.8);
-          bottom: 0px;
-          right: 0px; }
-          .slides .slide.slide-text .slide-text-wrapper .page-controls .control {
-            width: 35px;
-            height: 35px;
-            padding: 0px 5px;
-            font-size: 1.8em;
-            line-height: 1.3em;
-            text-align: center;
-            display: inline-block; }
-        .slides .slide.slide-text .slide-text-wrapper .html-content {
-          display: block; }
+      .slides .slide.slide-text .page-controls {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.8);
+        bottom: 0px;
+        right: 0px; }
+        .slides .slide.slide-text .page-controls .control {
+          width: 35px;
+          height: 35px;
+          padding: 0px 5px;
+          font-size: 1.8em;
+          line-height: 1.3em;
+          text-align: center;
+          display: inline-block; }
+      .slides .slide.slide-text .html-content {
+        display: block; }
 
 navigation {
   color: #b8e0d0;
