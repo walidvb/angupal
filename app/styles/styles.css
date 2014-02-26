@@ -209,23 +209,36 @@ navigation {
       text-align: right; }
       navigation .pagination-wrapper .vert-pagination .vert-pager .icon {
         width: 30px; }
-      navigation .pagination-wrapper .vert-pagination .vert-pager:before {
+      navigation .pagination-wrapper .vert-pagination .vert-pager:before, navigation .pagination-wrapper .vert-pagination .vert-pager .title {
+        -webkit-transition: all 0.3s ease-out 0s;
+        -moz-transition: all 0.3s ease-out 0s;
+        -ms-transition: all 0.3s ease-out 0s;
+        -o-transition: all 0.3s ease-out 0s;
+        transition: all 0.3s ease-out 0s;
         content: attr(data-title);
         padding: 10px 10px;
-        display: inline;
-        text-align: right; }
+        white-space: no-wrap;
+        text-align: right;
+        margin-right: 0px; }
         @media (min-width: 767px) {
-          navigation .pagination-wrapper .vert-pagination .vert-pager:before {
-            opacity: 1; } }
-        navigation .pagination-wrapper .vert-pagination .vert-pager:before:before, navigation .pagination-wrapper .vert-pagination .vert-pager:before .icon {
+          navigation .pagination-wrapper .vert-pagination .vert-pager:before, navigation .pagination-wrapper .vert-pagination .vert-pager .title {
+            opacity: 0;
+            margin-right: -5px; } }
+        navigation .pagination-wrapper .vert-pagination .vert-pager:before:before, navigation .pagination-wrapper .vert-pagination .vert-pager:before .icon, navigation .pagination-wrapper .vert-pagination .vert-pager:before .title, navigation .pagination-wrapper .vert-pagination .vert-pager .title:before, navigation .pagination-wrapper .vert-pagination .vert-pager .title .icon, navigation .pagination-wrapper .vert-pagination .vert-pager .title .title {
           display: inline-block;
-          vertical-align: middle; }
-      @media (min-width: 767px) {
-        navigation .pagination-wrapper .vert-pagination .vert-pager:hover:before, navigation .pagination-wrapper .vert-pagination .vert-pager.active:before {
-          opacity: 1; } }
+          vertical-align: middle;
+          float: right; }
+      navigation .pagination-wrapper .vert-pagination .vert-pager:hover:before, navigation .pagination-wrapper .vert-pagination .vert-pager.active:before {
+        margin-right: 15px; }
+        @media (min-width: 767px) {
+          navigation .pagination-wrapper .vert-pagination .vert-pager:hover:before, navigation .pagination-wrapper .vert-pagination .vert-pager.active:before {
+            opacity: 1;
+            width: auto;
+            margin-right: 5px; } }
 
 #info-pager {
   float: right;
+  cursor: pointer;
   font-size: large;
   margin: 0 10px;
   z-index: 15; }

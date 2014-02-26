@@ -218,24 +218,31 @@ navigation{
 					width: 30px;
 					
 				}
-				&:before{
+				&:before, .title{
+					@include transition();
 					content: attr(data-title);
 					padding: 10px 10px;
-					display: inline;
-					
+					white-space: no-wrap;
 					text-align: right;
+					margin-right: 0px;
 					@media #{$tablet}{
-						opacity: 1;
-
+						opacity: 0;
+						margin-right: -5px;
 					}
-				&:before, .icon{
+				&:before, .icon, .title{
 					display: inline-block;
 					vertical-align: middle;
+					float: right;
+					
 				}
 				}
 				&:hover:before, &.active:before{
+					margin-right: 15px;
 					@media #{$tablet}{
 						opacity: 1;
+						width: auto;
+						margin-right: 5px;
+
 					}
 				}
 			}
@@ -248,6 +255,7 @@ navigation{
 //------------------info
 #info-pager{
 		float: right;
+		cursor: pointer;
 		@media #{$tablet}{
 			margin: 0px 5px;
 			font-size: normal;

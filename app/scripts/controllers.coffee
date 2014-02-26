@@ -1,13 +1,5 @@
 'use strict'
 angular.module('myApp')
-	.filter('first', (input) ->
-		console.log input
-		'hello'
-		)
-	.filter('notFirst', (input) ->
-		console.log input
-		'hi'
-		)
 	.controller 'mainCtrl', ($scope, $timeout, nodeService) ->
 		$scope.data = $scope.data || {}
 		nodeService.getProjects().then (data) ->
@@ -16,6 +8,7 @@ angular.module('myApp')
 			$scope.data.masai = data.data.nodes[0].node
 		$scope.toggleInfo = (toOpen = null) ->
 			$scope.infoOpen = toOpen || !$scope.infoOpen
+
 		$scope.toggleNav = (toOpen = null) ->
 			$scope.navOpen = toOpen || !$scope.navOpen
 			#$scope.toggleInfo(false)
@@ -33,13 +26,12 @@ angular.module('myApp')
 				pagers = pagination.find 'div.vert-pager'
 					
 				for item, i in pagers
-					title = angular.element('<div class="title">'+slideNames[i]+'</div>')
+					title = #angular.element('<div class="title">'+slideNames[i]+'</div>')
 					icon = angular.element('<img class="icon" src="'+slideIcons[i]+'"/>')
 					console.log icon
 					angular.element(item)
 						.attr('data-title', slideNames[i])
-						#.append title
-						.append icon
+						.append  icon
 			, 0)
 		Mousetrap.bind('i', () ->
 			$scope.toggleInfo();
