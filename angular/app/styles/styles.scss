@@ -1,0 +1,314 @@
+@import 'mixins';
+$tablet: "(min-width: 767px)";
+$theme-color: #b8e0d0;
+
+body, #logo{
+	@include transition($duration: 1s);
+	background-color: white;
+	&.initial-state, &.initial-state {
+		background-color: $theme-color;
+
+	}
+}
+
+#main{
+	@include transition($duration: 0.8s);
+	.info-open &{
+		-webkit-filter: blur(4px);
+	}
+	.nav-open &{
+		-webkit-filter: blur(4px);
+	@media #{$tablet} {
+			-webkit-filter: none;
+		}
+	}
+}
+#logo{
+	background-color: $theme-color;
+	position: relative;
+	h1{
+		visibility: hidden;
+	}
+	img{
+		@include center();
+		max-width: 60%;
+	}
+}
+
+
+.editable{
+	position: relative;
+	overflow: hidden;
+	.edit{
+		position: absolute;
+		top: -20px;
+		right: 10px;
+		@include transition($duration: 0.2s, $delay: 0.5s);
+		z-index: 10;
+	}
+
+	&:hover .edit{
+		top: 5px;
+		@include transition($duration: 0.2s);
+	}
+}
+
+//----------------sliders
+.project{
+	height: 100%;
+}
+
+.slides{
+	height: 100%;
+	white-space: nowrap;
+	.slide{
+		white-space: normal;
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
+		height: 100%;
+		float: left;
+		img{
+			max-height: 100%;
+			@include center();
+			
+		}
+	//------------------text slides
+	&.slide-text{
+		position: relative;
+		.slide-text-wrapper{
+			width: 70%;
+			@include center();
+			margin: auto;
+			text-align: justify;
+			height: 90%;
+			overflow: hidden;
+			&:after, &:before{
+				content: '';
+				width: 100%;
+				height: 20px;
+				position: absolute;
+				
+				&:before{
+					top: 0;
+					content: '';
+					background-image: -webkit-gradient(
+						linear,
+						left bottom,
+						left top,
+						color-stop(0, transparent),
+						color-stop(1, #FFFFFF)
+						);
+					background-image: -o-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+					background-image: -moz-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+					background-image: -webkit-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+					background-image: -ms-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+					background-image: linear-gradient(to bottom, transparent 0%, #FFFFFF 100%);
+				}
+			}
+			&:after{
+				content: '';
+				bottom: 0;
+				background-image: -webkit-gradient(
+					linear,
+					left top,
+					left bottom,
+					color-stop(0, transparent),
+					color-stop(1, #FFFFFF)
+					);
+				background-image: -o-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+				background-image: -moz-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+				background-image: -webkit-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+				background-image: -ms-linear-gradient(bottom, transparent 0%, #FFFFFF 100%);
+				background-image: linear-gradient(to bottom, transparent 0%, #FFFFFF 100%);
+			}
+		}
+		.page-controls{
+			position: absolute;
+			background: rgba(255,255,255,0.8);
+			bottom: 0px;
+			right: 0px;
+			.control{
+				width: 35px;
+				height: 35px;
+				padding: 0px 5px;
+				font-size: 1.8em;
+				line-height: 1.3em;
+				text-align: center;
+				display: inline-block;
+				z-index: 1;
+			}
+		}
+		.html-content{
+			display: block;
+		}
+	}
+}
+
+}
+
+$circle-size: 15px;
+navigation{
+	z-index: 10;
+	.nav-trigger{
+		position: fixed;
+		width: 20px;
+		height: 20px;
+		right: 10px;
+		top: 50%;
+		z-index: 15;
+		cursor: pointer!important;
+		display: inline-block;
+		&:after{
+			content: '';
+			border-right: $theme-color solid 15px;
+			border-top: transparent solid 10px;
+			border-bottom: transparent solid 10px;
+			display: inline-block;
+		}
+		@include transition($delay: 0.3s);
+		.nav-open & {
+			@include transition($delay: 0s);
+			right: 90%;
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			transform: rotateY(180deg);
+		}
+		@media #{$tablet}{
+			display: none;
+		}
+	}	
+
+	.initial-state &{
+		opacity: 0;
+	}
+	.ready-state &{
+		@include transition($delay: 0s);
+	}
+	
+	.pagination-wrapper{
+		color: $theme-color;
+		position: fixed;
+		top: 50%;
+		opacity: 1;
+		@include transition($delay: 0.3s);
+		display: inline-block;
+		z-index: 10;
+		right: -100%;
+		.nav-open &{
+			@include transition($delay: 0s);
+			right: 15px;
+		}
+		@media #{$tablet}{
+			right: 10px;
+		}
+		.faded &{
+			opacity: 0.6;
+		}
+
+		.vert-pagination{
+			.vert-pager{
+				background-repeat: no-repeat;
+				background-size: contain;
+				background-position: right;
+				margin-bottom: 5px;
+				height: 30px;
+				cursor: pointer;
+				&:after{
+					content: attr(data-title);
+					display: inline;
+					float: right;
+					text-align: right;
+					@media #{$tablet}{
+						opacity: 0;
+
+					}
+
+				}
+				&:hover:after, &.active:after{
+					@media #{$tablet}{
+						opacity: 1;
+					}
+				}
+				$half: $circle-size/2;
+				&:before{
+					content: '';
+					margin: 3px 10px;
+					float: right;
+					@include transition($duration: .1s);
+					@include circle($size: 20px, $color: $theme-color);
+					background-color: $theme-color;
+					display: inline;
+					position: relative;
+
+					top: $half - 5;
+					left: 0;
+				}
+				&.active:before, &:hover:before{
+					@include circle($size: 15px, $color: $theme-color);
+					background-color: transparent;
+					top: 0;
+					left: $half - 5;
+				}
+				@media #{$tablet}{
+					&:before{
+						@include circle($size: 5px, $color: $theme-color);
+					}
+					&.active:before, &:hover:before§	{
+						@include circle($size: $circle-size, $color: $theme-color);
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+//------------------info
+#info-pager{
+		float: right;
+		@media #{$tablet}{
+			margin: 0px 5px;
+			font-size: normal;
+		}
+		font-size: large;
+		margin: 0 10px;
+		z-index: 15;
+	}
+#info{
+	#info-wrapper{
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 100%;
+		text-align: center;
+		background: rgba(255,255,255,0.4);
+		z-index: 10;
+		@include transition($property: opacity, $duration:0.8s);
+		opacity: 0;
+		
+		.info-open &{
+			opacity: 1;
+			left: 0%;
+		}
+		#info-content{
+			margin-top: 25px;
+			height: 70%;
+		}
+
+	}
+}
+//------------------dev
+$debug-color: $theme-color;
+.debug{
+	section{
+		border: 1px solid darken($debug-color, 0.3);
+		background-color: fade-out($debug-color, 0.8)
+	}
+	.slide{
+		background-color: darken(complement($debug-color), 0.3);
+		border: 1px solid darken(complement($debug-color), 1);
+	}
+}
