@@ -1,0 +1,30 @@
+<?php 
+
+	/**
+	 * Implements hook_menu().
+	 */
+	function angupal_menu() {
+	  /*
+	   *$items['blog'] = array(
+	   *  'title' => 'blogs',
+	   *  'page callback' => 'blog_page',
+	   *  'access arguments' => array('access content'),
+	   *  'type' => MENU_SUGGESTED_ITEM,
+	   *);
+	   */
+	  $items['ng/home'] = array(
+	  	'title' => 'ng',
+	  	'page callback' => 'ng_index',
+	  	'access arguments' => array('View published content'),
+	  	);
+	  return $items;
+	}
+
+	function ng_index()
+	{
+
+		$path = base_path() . drupal_get_path('module', 'angupal') . '/app/index.html';
+		dpm($path, '$path');
+		header('Location: ' . $path);
+	}
+
