@@ -136,37 +136,68 @@ navigation {
   z-index: 10; }
   navigation .nav-trigger {
     position: fixed;
-    width: 20px;
-    height: 20px;
-    right: 10px;
+    z-index: 100;
     top: 50%;
-    z-index: 15;
-    cursor: pointer !important;
-    display: inline-block;
+    right: 5%;
     -webkit-transition: all 0.3s ease-out 0.3s;
     -moz-transition: all 0.3s ease-out 0.3s;
     -ms-transition: all 0.3s ease-out 0.3s;
     -o-transition: all 0.3s ease-out 0.3s;
     transition: all 0.3s ease-out 0.3s; }
-    navigation .nav-trigger:after {
-      content: '';
-      border-right: #b8e0d0 solid 15px;
-      border-top: transparent solid 10px;
-      border-bottom: transparent solid 10px;
-      display: inline-block; }
     .nav-open navigation .nav-trigger {
       -webkit-transition: all 0.3s ease-out 0s;
       -moz-transition: all 0.3s ease-out 0s;
       -ms-transition: all 0.3s ease-out 0s;
       -o-transition: all 0.3s ease-out 0s;
       transition: all 0.3s ease-out 0s;
-      right: 90%;
-      -webkit-transform: rotateY(180deg);
-      -moz-transform: rotateY(180deg);
-      transform: rotateY(180deg); }
-    @media (min-width: 767px) {
-      navigation .nav-trigger {
-        display: none; } }
+      background-color: transparent;
+      right: 85%; }
+    navigation .nav-trigger span {
+      display: block;
+      width: 30px;
+      height: 4px;
+      margin-top: -2px;
+      background-color: #b8e0d0;
+      font-size: 0px;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-transition: all 0.3s ease-out 0.3s;
+      -moz-transition: all 0.3s ease-out 0.3s;
+      -ms-transition: all 0.3s ease-out 0.3s;
+      -o-transition: all 0.3s ease-out 0.3s;
+      transition: all 0.3s ease-out 0.3s; }
+      .nav-open navigation .nav-trigger span {
+        -webkit-transition: all 0.3s ease-out 0s;
+        -moz-transition: all 0.3s ease-out 0s;
+        -ms-transition: all 0.3s ease-out 0s;
+        -o-transition: all 0.3s ease-out 0s;
+        transition: all 0.3s ease-out 0s;
+        background-color: transparent; }
+      navigation .nav-trigger span:before, navigation .nav-trigger span:after {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: #b8e0d0;
+        content: '';
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s; }
+      navigation .nav-trigger span:before {
+        -webkit-transform: translateY(-250%);
+        transform: translateY(-250%); }
+      navigation .nav-trigger span:after {
+        -webkit-transform: translateY(250%);
+        transform: translateY(250%); }
+      .nav-open navigation .nav-trigger span:before {
+        -webkit-transform: translateY(0) rotate(45deg);
+        transform: translateY(0) rotate(45deg); }
+      .nav-open navigation .nav-trigger span:after {
+        -webkit-transform: translateY(0) rotate(-45deg);
+        transform: translateY(0) rotate(-45deg); }
   .initial-state navigation {
     opacity: 0; }
   .ready-state navigation {

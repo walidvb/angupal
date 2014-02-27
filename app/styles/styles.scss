@@ -18,7 +18,7 @@ body, #logo{
 	}
 	.nav-open &{
 		-webkit-filter: blur(4px);
-	@media #{$tablet} {
+		@media #{$tablet} {
 			-webkit-filter: blur(0px);
 		}
 	}
@@ -147,37 +147,74 @@ body, #logo{
 
 }
 
-$circle-size: 15px;
 navigation{
 	z-index: 10;
-	.nav-trigger{
+	.nav-trigger 
+	{
 		position: fixed;
-		width: 20px;
-		height: 20px;
-		right: 10px;
+		z-index: 100;
 		top: 50%;
-		z-index: 15;
-		cursor: pointer!important;
-		display: inline-block;
-		&:after{
-			content: '';
-			border-right: $theme-color solid 15px;
-			border-top: transparent solid 10px;
-			border-bottom: transparent solid 10px;
-			display: inline-block;
-		}
-		@include transition($delay: 0.3s);
+		right: 5%;
+		@include transition($duration: 0.3s, $delay: 0.3s);
 		.nav-open & {
-			@include transition($delay: 0s);
-			right: 90%;
-			-webkit-transform: rotateY(180deg);
-			-moz-transform: rotateY(180deg);
-			transform: rotateY(180deg);
+			@include transition($duration: 0.3s);
+			background-color: transparent;
+			right: 85%;
 		}
-		@media #{$tablet}{
-			display: none;
+		$bar-thickness: 4px;
+		span {
+			display: block;
+			width: 30px;
+			height: $bar-thickness;
+			margin-top: -2px;
+			background-color: $theme-color;
+			font-size: 0px;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			@include transition($duration: 0.3s, $delay: 0.3s);
+			.nav-open & {
+				@include transition($duration: 0.3s);
+				background-color: transparent;
+			}
+			&:before,
+			&:after {
+				position: absolute;
+				left: 0;
+				width: 100%;
+				height: $bar-thickness;
+				background: $theme-color;
+				content: '';
+				-webkit-transition: -webkit-transform 0.3s;
+				transition: transform 0.3s;
+			}
+			&:before {
+				-webkit-transform: translateY(-250%);
+				transform: translateY(-250%);
+			}
+			&:after {
+				-webkit-transform: translateY(250%);
+				transform: translateY(250%);
+			}
+			.nav-open &:before {
+				-webkit-transform: translateY(0) rotate(45deg);
+				transform: translateY(0) rotate(45deg);
+			}
+
+			.nav-open &:after {
+				-webkit-transform: translateY(0) rotate(-45deg);
+				transform: translateY(0) rotate(-45deg);
+			}
 		}
-	}	
+	}
+
+
+
+
+	
 
 	.initial-state &{
 		opacity: 0;
@@ -229,12 +266,12 @@ navigation{
 						opacity: 0;
 						margin-right: -5px;
 					}
-				&:before, .icon, .title{
-					display: inline-block;
-					vertical-align: middle;
-					float: right;
-					
-				}
+					&:before, .icon, .title{
+						display: inline-block;
+						vertical-align: middle;
+						float: right;
+
+					}
 				}
 				&:hover:before, &.active:before{
 					margin-right: 15px;
@@ -254,16 +291,16 @@ navigation{
 
 //------------------info
 #info-pager{
-		float: right;
-		cursor: pointer;
-		@media #{$tablet}{
-			margin: 0px 5px;
-			font-size: normal;
-		}
-		font-size: large;
-		margin: 0 10px;
-		z-index: 15;
+	float: right;
+	cursor: pointer;
+	@media #{$tablet}{
+		margin: 0px 5px;
+		font-size: normal;
 	}
+	font-size: large;
+	margin: 0 10px;
+	z-index: 15;
+}
 #info{
 	#info-wrapper{
 		position: fixed;
