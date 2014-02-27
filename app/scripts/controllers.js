@@ -19,8 +19,7 @@
       if (toOpen == null) {
         toOpen = null;
       }
-      $scope.navOpen = toOpen || !$scope.navOpen;
-      return $scope.toggleInfo(false);
+      return $scope.navOpen = toOpen || !$scope.navOpen;
     };
     $scope.swipers = {
       vertical: null,

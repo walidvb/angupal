@@ -11,7 +11,7 @@ angular.module('myApp')
 			console.log 'togglingInfo to ', $scope.infoOpen, ' requested ', toOpen
 		$scope.toggleNav = (toOpen = null) ->
 			$scope.navOpen = toOpen || !$scope.navOpen
-			$scope.toggleInfo(false)
+			#$scope.toggleInfo(false)
 		$scope.swipers = 
 			vertical: null
 			horz: new Array

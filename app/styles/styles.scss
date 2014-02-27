@@ -4,23 +4,21 @@
 $tablet: "(min-width: 767px)";
 $theme-color: #b8e0d0;
 
-body, #logo{
+body{
 	font-family: 'graphikblack';
-	@include transition($duration: 1s);
+	@include transition($property: background-color, $duration: 1s);
 	background-color: white;
-	&.initial-state, &.initial-state {
+	&.initial-state{
 		background-color: $theme-color;
-
 	}
 }
 
 #main{
 	@include transition($duration: 0.8s);
-	.info-open &{
-		-webkit-filter: blur(4px);
-	}
-	.nav-open &{
-		-webkit-filter: blur(4px);
+	.info-open &, .nav-open &{
+		-webkit-filter: blur(6px);
+	    
+	    opacity: 0.4;
 	}
 }
 #logo{
@@ -31,7 +29,7 @@ body, #logo{
 	}
 	img{
 		@include center();
-		max-width: 60%;
+		max-width: 80%;
 	}
 }
 
@@ -86,7 +84,7 @@ body, #logo{
 			&:after, &:before{
 				content: '';
 				width: 100%;
-				height: 20px;
+				height: 80px;
 				position: absolute;
 				
 				&:before{
@@ -157,23 +155,30 @@ navigation{
 		@media #{$tablet}{
 			display: none;
 		}
+		
+		cursor: pointer;
 		position: fixed;
 		z-index: 100;
 		top: 50%;
-		right: 5%;
+		right: 0%;
+		width: 40px;
+		height: 40px;
+
 		@include transition($duration: 0.3s, $delay: 0.3s);
 		.nav-open & {
 			@include transition($duration: 0.3s);
 			background-color: transparent;
 			right: 85%;
 		}
-		$bar-thickness: 4px;
+		$bar-thickness: 2px;
+		$bar-width: 20px;
+		$bar-color: black;
 		span {
 			display: block;
-			width: 30px;
+			width: $bar-width;
 			height: $bar-thickness;
 			margin-top: -2px;
-			background-color: $theme-color;
+			background-color: $bar-color;
 			font-size: 0px;
 			-webkit-touch-callout: none;
 			-webkit-user-select: none;
@@ -187,9 +192,9 @@ navigation{
 			&:after {
 				position: absolute;
 				left: 0;
-				width: 100%;
+				width: $bar-width;
 				height: $bar-thickness;
-				background: $theme-color;
+				background: $bar-color;
 				content: '';
 				-webkit-transition: -webkit-transform 0.3s;
 				transition: transform 0.3s;
@@ -231,7 +236,7 @@ navigation{
 	}
 	
 	.pagination-wrapper{
-		color: $theme-color;
+		color: black;
 		position: fixed;
 		top: 50%;
 		opacity: 1;
@@ -263,11 +268,15 @@ navigation{
 				text-align: right;
 				.icon{
 					width: 30px;
-					
+					opacity: 0.7;
+					&:hover{
+						opacity: 1;
+					}
 				}
 				&:before, .title{
 					@include transition();
 					content: attr(data-title);
+					font-weight: bold;
 					padding: 10px 10px;
 					white-space: no-wrap;
 					text-align: right;
@@ -286,7 +295,7 @@ navigation{
 				&:hover:before, &.active:before{
 					margin-right: 15px;
 					@media #{$tablet}{
-						opacity: 1;
+						opacity: 0.8;
 						width: auto;
 						margin-right: 5px;
 
@@ -307,7 +316,7 @@ navigation{
 		margin: 0px 5px;
 		font-size: normal;
 	}
-	font-size: large;
+	font-size: x-large;
 	margin: 0 10px;
 	z-index: 10;
 }
@@ -342,8 +351,10 @@ navigation{
 			.info-details, .info-map{
 				display: inline-block;
 				padding: 1em 2em;
-				
 				height: 50%;
+				@media #{$tablet}{
+					height: auto;
+				}
 			}
 			@media #{$tablet}{
 				display: inline-flex;
@@ -353,13 +364,9 @@ navigation{
 					float: right;
 					margin: auto;
 					display: inline-flex;
-				}
-				.info-map{
-					width: 70%;
+					width: 50%;
 				}
 				.info-details{
-					
-					width: 30%;
 					text-align: left;
 					height: auto;
 				}

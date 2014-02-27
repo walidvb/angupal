@@ -23,8 +23,8 @@
     </section>
     <section id="bio" class="slide-vert" ng-controller="officeCtrl" swiper="horz" my-fullscreen="y" data-name="Bio" data-icon="http://placehold.it/64x64">
       <div class="slides swiper-wrapper">
-        <div class="slide slide-horz slide-text" my-bio="data.blaise"></div>
         <div class="slide slide-horz slide-text" my-bio="data.didier"></div>
+        <div class="slide slide-horz slide-text" my-bio="data.blaise"></div>
       </div>
     </section>
     <section ng-repeat="project in data.projects" id="projects" class="slide-vert" data-name="{{project.node.title}}" data-icon="{{project.node.icon}}">

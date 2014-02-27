@@ -34,7 +34,7 @@ angular.module('myApp').
 					h = $scope.page.height()
 					console.log 'page', $scope.page
 					newOffset = if direction is 'next' then $scope.pageOffset-h else $scope.pageOffset+h
-					#newOffset += 3
+					newOffset += 10
 					page = $scope.page.find('.html-content')
 					console.log 'newOffset', newOffset, 'h', h, 'page.height', page.height()
 					if newOffset > 0  
