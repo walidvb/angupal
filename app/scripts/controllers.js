@@ -12,13 +12,15 @@
       if (toOpen == null) {
         toOpen = null;
       }
-      return $scope.infoOpen = toOpen || !$scope.infoOpen;
+      $scope.infoOpen = toOpen || !$scope.infoOpen;
+      return console.log('togglingInfo to ', $scope.infoOpen, ' requested ', toOpen);
     };
     $scope.toggleNav = function(toOpen) {
       if (toOpen == null) {
         toOpen = null;
       }
-      return $scope.navOpen = toOpen || !$scope.navOpen;
+      $scope.navOpen = toOpen || !$scope.navOpen;
+      return $scope.toggleInfo(false);
     };
     $scope.swipers = {
       vertical: null,
@@ -47,7 +49,6 @@
         for (i = _k = 0, _len2 = pagers.length; _k < _len2; i = ++_k) {
           item = pagers[i];
           title = icon = angular.element('<img class="icon" src="' + slideIcons[i] + '"/>');
-          console.log(icon);
           _results.push(angular.element(item).attr('data-title', slideNames[i]).append(icon));
         }
         return _results;
@@ -59,6 +60,10 @@
     });
     Mousetrap.bind('m', function() {
       $scope.toggleNav();
+      return $scope.$digest();
+    });
+    Mousetrap.bind('esc', function() {
+      $scope.toggleInfo();
       return $scope.$digest();
     });
     return window.onresize = function() {

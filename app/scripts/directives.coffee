@@ -65,10 +65,10 @@ angular.module('myApp').
 						scope.pageIndex = null
 						return
 					# Runs during render
-					next = angular.element('<div class="control next"/>').text('+').bind('click', () ->
+					next = angular.element('<div class="control next"/>').html('&darr;').bind('click', () ->
 						scope.next();
 					)
-					prev = angular.element('<div class="control prev"/>').text('-').bind('click', () ->
+					prev = angular.element('<div class="control prev"/>').html('&uarr;').bind('click', () ->
 						scope.prev();
 					)
 					controls = angular.element('<div class="page-controls">').append(prev).append(next)
@@ -82,9 +82,13 @@ angular.module('myApp').
 	]).
 	directive("myInfo", [
 		() ->
+			transclude: false
 			scope:
 				info: "=myInfo"
 			templateUrl: "views/info.html"
+			link: (scope, elem, attrs) ->  
+				console.log scope, elem, attrs
+
 	]).
 	directive("myBio", [
 		() ->

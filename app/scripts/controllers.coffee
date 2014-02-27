@@ -8,10 +8,10 @@ angular.module('myApp')
 			$scope.data.masai = data.data.nodes[0].node
 		$scope.toggleInfo = (toOpen = null) ->
 			$scope.infoOpen = toOpen || !$scope.infoOpen
-
+			console.log 'togglingInfo to ', $scope.infoOpen, ' requested ', toOpen
 		$scope.toggleNav = (toOpen = null) ->
 			$scope.navOpen = toOpen || !$scope.navOpen
-			#$scope.toggleInfo(false)
+			$scope.toggleInfo(false)
 		$scope.swipers = 
 			vertical: null
 			horz: new Array
@@ -28,7 +28,6 @@ angular.module('myApp')
 				for item, i in pagers
 					title = #angular.element('<div class="title">'+slideNames[i]+'</div>')
 					icon = angular.element('<img class="icon" src="'+slideIcons[i]+'"/>')
-					console.log icon
 					angular.element(item)
 						.attr('data-title', slideNames[i])
 						.append  icon
@@ -39,6 +38,10 @@ angular.module('myApp')
 		)
 		Mousetrap.bind('m', () ->
 			$scope.toggleNav();
+			$scope.$digest();
+		)
+		Mousetrap.bind('esc', () ->
+			do $scope.toggleInfo
 			$scope.$digest();
 		)
 		window.onresize = ()->

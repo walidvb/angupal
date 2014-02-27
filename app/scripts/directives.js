@@ -83,10 +83,10 @@
             scope.pageIndex = null;
             return;
           }
-          next = angular.element('<div class="control next"/>').text('+').bind('click', function() {
+          next = angular.element('<div class="control next"/>').html('&darr;').bind('click', function() {
             return scope.next();
           });
-          prev = angular.element('<div class="control prev"/>').text('-').bind('click', function() {
+          prev = angular.element('<div class="control prev"/>').html('&uarr;').bind('click', function() {
             return scope.prev();
           });
           controls = angular.element('<div class="page-controls">').append(prev).append(next);
@@ -103,10 +103,14 @@
   ]).directive("myInfo", [
     function() {
       return {
+        transclude: false,
         scope: {
           info: "=myInfo"
         },
-        templateUrl: "views/info.html"
+        templateUrl: "views/info.html",
+        link: function(scope, elem, attrs) {
+          return console.log(scope, elem, attrs);
+        }
       };
     }
   ]).directive("myBio", [
