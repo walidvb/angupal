@@ -165,18 +165,11 @@ navigation {
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-      -webkit-transition: all 0.3s ease-out 0.3s;
-      -moz-transition: all 0.3s ease-out 0.3s;
-      -ms-transition: all 0.3s ease-out 0.3s;
-      -o-transition: all 0.3s ease-out 0.3s;
-      transition: all 0.3s ease-out 0.3s; }
-      .nav-open navigation .nav-trigger span {
-        -webkit-transition: all 0.3s ease-out 0s;
-        -moz-transition: all 0.3s ease-out 0s;
-        -ms-transition: all 0.3s ease-out 0s;
-        -o-transition: all 0.3s ease-out 0s;
-        transition: all 0.3s ease-out 0s;
-        background-color: transparent; }
+      -webkit-transition: all 0.3s ease-out 0s;
+      -moz-transition: all 0.3s ease-out 0s;
+      -ms-transition: all 0.3s ease-out 0s;
+      -o-transition: all 0.3s ease-out 0s;
+      transition: all 0.3s ease-out 0s; }
       navigation .nav-trigger span:before, navigation .nav-trigger span:after {
         position: absolute;
         left: 0;
@@ -192,12 +185,14 @@ navigation {
       navigation .nav-trigger span:after {
         -webkit-transform: translateY(250%);
         transform: translateY(250%); }
-      .nav-open navigation .nav-trigger span:before {
-        -webkit-transform: translateY(0) rotate(45deg);
-        transform: translateY(0) rotate(45deg); }
-      .nav-open navigation .nav-trigger span:after {
-        -webkit-transform: translateY(0) rotate(-45deg);
-        transform: translateY(0) rotate(-45deg); }
+      .nav-open navigation .nav-trigger span {
+        background-color: transparent; }
+        .nav-open navigation .nav-trigger span:before {
+          -webkit-transform: translateY(0) rotate(45deg);
+          transform: translateY(0) rotate(45deg); }
+        .nav-open navigation .nav-trigger span:after {
+          -webkit-transform: translateY(0) rotate(-45deg);
+          transform: translateY(0) rotate(-45deg); }
   .initial-state navigation {
     opacity: 0; }
   .ready-state navigation {
@@ -272,7 +267,7 @@ navigation {
   cursor: pointer;
   font-size: large;
   margin: 0 10px;
-  z-index: 15; }
+  z-index: 25; }
   @media (min-width: 767px) {
     #info-pager {
       margin: 0px 5px;
@@ -285,8 +280,8 @@ navigation {
   right: 0;
   left: 100%;
   text-align: center;
-  background: rgba(255, 255, 255, 0.4);
-  z-index: 10;
+  background: rgba(255, 255, 255, 0.6);
+  z-index: 15;
   -webkit-transition: opacity 0.8s ease-out 0s;
   -moz-transition: opacity 0.8s ease-out 0s;
   -ms-transition: opacity 0.8s ease-out 0s;
@@ -296,9 +291,36 @@ navigation {
   .info-open #info #info-wrapper {
     opacity: 1;
     left: 0%; }
-  #info #info-wrapper #info-content {
-    margin-top: 25px;
-    height: 70%; }
+  #info #info-wrapper .info-content {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto; }
+    #info #info-wrapper .info-content .info-map img {
+      max-width: 100%; }
+    #info #info-wrapper .info-content .info-details {
+      padding: 1em 2em; }
+    @media (min-width: 767px) {
+      #info #info-wrapper .info-content {
+        display: inline-flex;
+        width: 90%; }
+        #info #info-wrapper .info-content .info-map, #info #info-wrapper .info-content .info-details {
+          padding: 0 2em;
+          float: right;
+          margin: auto;
+          display: inline-flex; }
+        #info #info-wrapper .info-content .info-map {
+          width: 70%; }
+        #info #info-wrapper .info-content .info-details {
+          width: 30%;
+          text-align: left;
+          height: auto; } }
 
 .debug section {
   border: 1px solid #b7e0cf;

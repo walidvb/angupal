@@ -175,11 +175,8 @@ navigation{
 			-moz-user-select: none;
 			-ms-user-select: none;
 			user-select: none;
-			@include transition($duration: 0.3s, $delay: 0.3s);
-			.nav-open & {
-				@include transition($duration: 0.3s);
-				background-color: transparent;
-			}
+			@include transition($duration: 0.3s);
+			
 			&:before,
 			&:after {
 				position: absolute;
@@ -199,14 +196,18 @@ navigation{
 				-webkit-transform: translateY(250%);
 				transform: translateY(250%);
 			}
-			.nav-open &:before {
-				-webkit-transform: translateY(0) rotate(45deg);
-				transform: translateY(0) rotate(45deg);
-			}
+			.nav-open & {
+				background-color: transparent;
+			
+				&:before {
+					-webkit-transform: translateY(0) rotate(45deg);
+					transform: translateY(0) rotate(45deg);
+				}
 
-			.nav-open &:after {
-				-webkit-transform: translateY(0) rotate(-45deg);
-				transform: translateY(0) rotate(-45deg);
+				&:after {
+					-webkit-transform: translateY(0) rotate(-45deg);
+					transform: translateY(0) rotate(-45deg);
+				}
 			}
 		}
 	}
@@ -299,7 +300,7 @@ navigation{
 	}
 	font-size: large;
 	margin: 0 10px;
-	z-index: 15;
+	z-index: 25;
 }
 #info{
 	#info-wrapper{
@@ -309,8 +310,8 @@ navigation{
 		right: 0;
 		left: 100%;
 		text-align: center;
-		background: rgba(255,255,255,0.4);
-		z-index: 10;
+		background: rgba(255,255,255,0.6);
+		z-index: 15;
 		@include transition($property: opacity, $duration:0.8s);
 		opacity: 0;
 		
@@ -318,9 +319,37 @@ navigation{
 			opacity: 1;
 			left: 0%;
 		}
-		#info-content{
-			margin-top: 25px;
+		.info-content{
+			@include center();
 			height: 70%;
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+			.info-map img{
+				max-width: 100%;
+			}
+			.info-details{
+				padding: 1em 2em;
+			}
+			@media #{$tablet}{
+				display: inline-flex;
+				width: 90%;
+				.info-map, .info-details{
+					padding: 0 2em;
+					float: right;
+					margin: auto;
+					display: inline-flex;
+				}
+				.info-map{
+					width: 70%;
+				}
+				.info-details{
+					
+					width: 30%;
+					text-align: left;
+					height: auto;
+				}
+			}
 		}
 
 	}

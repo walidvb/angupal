@@ -79,8 +79,6 @@
           var controls, next, prev;
 
           scope.page = angular.element(elm);
-          console.log('page height', scope.page.height(), 'content height', scope.page.find('.html-content').height());
-          console.log(scope.page.find('.html-content'));
           if (scope.page.height() <= scope.page.find('.html-content').height()) {
             scope.pageIndex = null;
             return;
@@ -100,6 +98,15 @@
           scope.pageOffset = 0;
           return scope.pageIndex = 0;
         }
+      };
+    }
+  ]).directive("myInfo", [
+    function() {
+      return {
+        scope: {
+          info: "=myInfo"
+        },
+        templateUrl: "views/info.html"
       };
     }
   ]).directive("myBio", [

@@ -60,8 +60,7 @@ angular.module('myApp').
 			# Runs during compile
 			link: (scope, elm, attrs) ->
 					scope.page = angular.element(elm)
-					console.log 'page height', scope.page.height(), 'content height', scope.page.find('.html-content').height()
-					console.log scope.page.find('.html-content')
+					#console.log 'page height', scope.page.height(), 'content height', scope.page.find('.html-content').height()
 					if scope.page.height() <= scope.page.find('.html-content').height()
 						scope.pageIndex = null
 						return
@@ -80,6 +79,12 @@ angular.module('myApp').
 						next: next
 					scope.pageOffset = 0
 					scope.pageIndex = 0
+	]).
+	directive("myInfo", [
+		() ->
+			scope:
+				info: "=myInfo"
+			templateUrl: "views/info.html"
 	]).
 	directive("myBio", [
 		() ->

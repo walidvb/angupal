@@ -2,12 +2,9 @@
 <div class="top-swiper-container" swiper="vert" my-fullscreen="y" ng-controller="mainCtrl" ng-class="{'info-open': infoOpen, 'nav-open': navOpen}">
   <navigation ng-controller="infoCtrl">
     <div id="info">
-      <div id="info-wrapper">
-        <div id="info-content" >
-          <img class="info-map" ng-src="{{data.info.field_image.file.uri}}"></img>
-          <div class="info-body" my-html="data.info.body.value"></div>
+        <div id="info-wrapper" my-info="data.info">
         </div>
-      </div>
+
       
   </div>
   <div class="nav-trigger" ng-click="toggleNav();"><span></span></div>
