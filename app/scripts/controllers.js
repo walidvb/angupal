@@ -28,7 +28,7 @@
     $scope.data = {};
     $scope.initPagers = function() {
       return $timeout(function() {
-        var i, icon, item, pager, pagers, pagination, slideIcons, slideNames, title, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
+        var $item, i, icon, item, pager, pagers, pagination, slideIcons, slideNames, title, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
 
         slideNames = new Array;
         _ref = $scope.swipers.vertical.slides;
@@ -48,7 +48,14 @@
         for (i = _k = 0, _len2 = pagers.length; _k < _len2; i = ++_k) {
           item = pagers[i];
           title = icon = angular.element('<img class="icon" src="' + slideIcons[i] + '"/>');
-          _results.push(angular.element(item).attr('data-title', slideNames[i]).append(icon));
+          $item = angular.element(item);
+          icon.item = $item;
+          console.log(icon);
+          $item.attr('data-title', slideNames[i]).append(icon);
+          _results.push(icon.bind('click', function() {
+            console.log(this);
+            return this.item.click();
+          }));
         }
         return _results;
       }, 0);
@@ -63,6 +70,7 @@
     });
     Mousetrap.bind('esc', function() {
       $scope.toggleInfo();
+      $scope.toggleNav(false);
       return $scope.$digest();
     });
     return window.onresize = function() {

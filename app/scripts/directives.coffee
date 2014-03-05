@@ -56,7 +56,7 @@ angular.module('myApp').
 							'ease-out');
 					)
 					$scope.pageOffset = newOffset
-					$scope.pageIndex = if direction is 'next' then $scope.pageIndex+1 else $scope.pageIndex-1
+					$scope.pageIndex = if direction is 'next' then $scope.pageIndex++ else $scope.pageIndex--
 			# Runs during compile
 			link: (scope, elm, attrs) ->
 					scope.page = angular.element(elm)
@@ -65,15 +65,21 @@ angular.module('myApp').
 						scope.pageIndex = null
 						return
 					# Runs during render
-					next = angular.element('<div class="control next"/>').html('&darr;').bind('click', () ->
-						scope.next();
-					)
-					prev = angular.element('<div class="control prev"/>').html('&uarr;').bind('click', () ->
-						scope.prev();
-					)
+					prev = angular.element('<div class="control prev"/>').html('&uarr;')
+					next = angular.element('<div class="control next"/>').html('&darr;')
 					controls = angular.element('<div class="page-controls">').append(prev).append(next)
 					angular.element(elm).append controls
+
 					
+					next.bind 'click', () ->
+						console.log 'clicked next'
+						scope.next();
+					
+					
+					prev.bind 'click', () ->
+						console.log 'clicked prev'
+						scope.prev();
+
 					scope.controls = 
 						prev: prev
 						next: next
@@ -95,6 +101,7 @@ angular.module('myApp').
 			scope:
 				bio: "=myBio"
 			templateUrl: "views/bio.html"
+			replace: false
 	]).
 	directive("swiper", ['$timeout'
 		($timeout) ->

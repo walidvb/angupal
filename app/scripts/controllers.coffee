@@ -28,9 +28,15 @@ angular.module('myApp')
 				for item, i in pagers
 					title = #angular.element('<div class="title">'+slideNames[i]+'</div>')
 					icon = angular.element('<img class="icon" src="'+slideIcons[i]+'"/>')
-					angular.element(item)
+					$item = angular.element(item)
+					icon.item = $item
+					console.log icon
+					$item
 						.attr('data-title', slideNames[i])
 						.append  icon
+					icon.bind 'click', () ->
+						console.log this
+						this.item.click()
 			, 0)
 		Mousetrap.bind('i', () ->
 			$scope.toggleInfo();
@@ -42,6 +48,7 @@ angular.module('myApp')
 		)
 		Mousetrap.bind('esc', () ->
 			do $scope.toggleInfo
+			$scope.toggleNav false
 			$scope.$digest();
 		)
 		window.onresize = ()->

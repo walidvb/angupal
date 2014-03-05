@@ -147,12 +147,12 @@ navigation{
 				vertical-align: middle;
 				white-space: no-wrap;
 				text-align: right;
-				margin-right: 0px;
+				margin-right: 15px;
 				@media #{$tablet}{
 					background: white;
 					padding: 0px 5px;
 					opacity: 0;
-					margin-right: 0px;
+					margin-right: 10px;
 				}
 				&:before, .icon, .title{
 					display: inline-block;
@@ -162,12 +162,10 @@ navigation{
 				}
 			}
 			&:hover:before, &.active:before{
-				margin-right: 15px;
+				margin-right: 5px;
 				@media #{$tablet}{
 					opacity: 1;
 					width: auto;
-					margin-right: 5px;
-
 				}
 			}
 		}
@@ -179,6 +177,9 @@ navigation{
 //------------------info
 #info-pager{
 	@include pager();
+	.info-open &{
+		opacity: 1;
+	}
 	background-image: url(../images/info.png);
 	background-size: cover;
 	float: right;

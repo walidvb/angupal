@@ -73,7 +73,7 @@
               }, 'ease-out');
             });
             $scope.pageOffset = newOffset;
-            return $scope.pageIndex = direction === 'next' ? $scope.pageIndex + 1 : $scope.pageIndex - 1;
+            return $scope.pageIndex = direction === 'next' ? $scope.pageIndex++ : $scope.pageIndex--;
           };
         },
         link: function(scope, elm, attrs) {
@@ -84,14 +84,18 @@
             scope.pageIndex = null;
             return;
           }
-          next = angular.element('<div class="control next"/>').html('&darr;').bind('click', function() {
-            return scope.next();
-          });
-          prev = angular.element('<div class="control prev"/>').html('&uarr;').bind('click', function() {
-            return scope.prev();
-          });
+          prev = angular.element('<div class="control prev"/>').html('&uarr;');
+          next = angular.element('<div class="control next"/>').html('&darr;');
           controls = angular.element('<div class="page-controls">').append(prev).append(next);
           angular.element(elm).append(controls);
+          next.bind('click', function() {
+            console.log('clicked next');
+            return scope.next();
+          });
+          prev.bind('click', function() {
+            console.log('clicked prev');
+            return scope.prev();
+          });
           scope.controls = {
             prev: prev,
             next: next
@@ -120,7 +124,8 @@
         scope: {
           bio: "=myBio"
         },
-        templateUrl: "views/bio.html"
+        templateUrl: "views/bio.html",
+        replace: false
       };
     }
   ]).directive("swiper", [
