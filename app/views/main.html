@@ -9,19 +9,19 @@
   </div>
   <div class="nav-trigger" ng-click="toggleNav();"><span></span></div>
   <div class="pagination-wrapper">
-    <span class="glyphicon glyphicon-info-sign" id="info-pager" ng-click="toggleInfo()"></span>
+    <span class="pager" id="info-pager" ng-click="toggleInfo()"></span>
   </div>
     
 </navigation>
   <div id="main"class="swiper-wrapper">
-    <section id="logo" class="slide-vert" my-fullscreen="y" data-name="" data-icon="http://placehold.it/64x64">
+    <section id="logo" class="slide-vert" my-fullscreen="y" data-name="" data-icon="">
       <h1>CollinFontaine</h1>
-        <img src="http://localhost/collinfontaine/sites/all/themes/angupal/app/images/collin_Fontaine.svg" alt="" class="img-responsive">
+        <img src="http://cf.vbbros.net/sites/all/themes/angupal/app/images/collin_Fontaine.svg" alt="" class="img-responsive">
     </section>
-    <section id="masai" class="slide-vert" my-fullscreen="y" data-name="Masai" data-icon="{{data.masai.icon}}">
+    <section id="masai" class="slide-vert" my-fullscreen="y" data-name="{{data.masai.title}}" data-icon="{{data.masai.icon}}">
       <div my-project="data.masai"></div>
     </section>
-    <section id="bio" class="slide-vert" ng-controller="officeCtrl" swiper="horz" my-fullscreen="y" data-name="Bio" data-icon="http://placehold.it/64x64">
+    <section id="bio" class="slide-vert" ng-controller="officeCtrl" swiper="horz" my-fullscreen="y" data-name="Bio" data-icon="images/cv.png">
       <div class="slides swiper-wrapper">
         <div class="slide slide-horz slide-text" my-bio="data.didier"></div>
         <div class="slide slide-horz slide-text" my-bio="data.blaise"></div>

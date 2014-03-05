@@ -138,7 +138,8 @@
               mousewheelControlForceToAxis: true,
               keyboardControl: true,
               resizeReInit: true,
-              grabCursor: true
+              grabCursor: true,
+              longSwipesRatio: 0.1
             };
             if (attrs.swiper === 'vert') {
               initialState = true;
@@ -174,6 +175,7 @@
               scope.swipers.vertical = $this.swiper(options);
               return;
             } else {
+              options.loop = true;
               options.slideClass = 'slide-horz';
               options.onSlideChangeStart = function() {
                 return angular.element('.vert-pagination').addClass('faded');

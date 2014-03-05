@@ -1,0 +1,193 @@
+$pagerSize: 30px;
+@mixin pager(){
+	width: $pagerSize;
+	height: $pagerSize;
+	opacity: 1;
+	@include transition();
+	@media #{$tablet} {
+		opacity: 0.4;
+		&:hover, &.active{
+			opacity: 1;
+		}
+	}
+}
+
+navigation{
+	z-index: 10;
+	.nav-trigger 
+	{
+		@media #{$tablet}{
+			display: none;
+		}
+		
+		cursor: pointer;
+		position: fixed;
+		z-index: 100;
+		top: 50%;
+		right: 0%;
+		width: 40px;
+		height: 40px;
+
+		@include transition($duration: 0.3s, $delay: 0.3s);
+		.nav-open & {
+			@include transition($duration: 0.3s);
+			background-color: transparent;
+			right: 85%;
+		}
+		$bar-thickness: 2px;
+		$bar-width: 20px;
+		$bar-color: black;
+		span {
+			display: block;
+			width: $bar-width;
+			height: $bar-thickness;
+			margin-top: -2px;
+			background-color: $bar-color;
+			font-size: 0px;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			@include transition($duration: 0.3s);
+			
+			&:before,
+			&:after {
+				position: absolute;
+				left: 0;
+				width: $bar-width;
+				height: $bar-thickness;
+				background: $bar-color;
+				content: '';
+				-webkit-transition: -webkit-transform 0.3s;
+				transition: transform 0.3s;
+			}
+			&:before {
+				-webkit-transform: translateY(-250%);
+				transform: translateY(-250%);
+			}
+			&:after {
+				-webkit-transform: translateY(250%);
+				transform: translateY(250%);
+			}
+			.nav-open & {
+				background-color: transparent;
+
+				&:before {
+					-webkit-transform: translateY(0) rotate(45deg);
+					transform: translateY(0) rotate(45deg);
+				}
+
+				&:after {
+					-webkit-transform: translateY(0) rotate(-45deg);
+					transform: translateY(0) rotate(-45deg);
+				}
+			}
+		}
+	}
+
+
+
+
+	
+
+	.initial-state &{
+		opacity: 0;
+	}
+	.ready-state &{
+		@include transition($delay: 0s);
+	}
+	
+	.pagination-wrapper{
+		color: black;
+		position: fixed;
+		top: 50%;
+		opacity: 1;
+		@include transition($delay: 0.3s);
+		display: inline-block;
+		z-index: 10;
+		right: -100%;
+		.nav-open &{
+			@include transition($delay: 0s);
+			right: 15px;
+		}
+		@media #{$tablet}{
+			right: 10px;
+		}
+		.faded &{
+			opacity: 0.6;
+		}
+
+		.vert-pager{
+			.info-open &{
+				visibility: hidden;
+			}
+			height: $pagerSize;
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: right;
+			margin-bottom: 10px;
+			cursor: pointer;
+			text-align: right;
+			.icon{
+				@include pager();
+			}
+			&.active .icon, &:hover .icon{
+				opacity: 1;
+			}
+			&:before, .title{
+				@include transition();
+				content: attr(data-title);
+				font-weight: bold;
+				line-height: $pagerSize;
+				height: $pagerSize;
+
+				display: inline-block;
+				vertical-align: middle;
+				white-space: no-wrap;
+				text-align: right;
+				margin-right: 0px;
+				@media #{$tablet}{
+					background: white;
+					padding: 0px 5px;
+					opacity: 0;
+					margin-right: 0px;
+				}
+				&:before, .icon, .title{
+					display: inline-block;
+					vertical-align: middle;
+					float: right;
+
+				}
+			}
+			&:hover:before, &.active:before{
+				margin-right: 15px;
+				@media #{$tablet}{
+					opacity: 1;
+					width: auto;
+					margin-right: 5px;
+
+				}
+			}
+		}
+	}
+}
+
+
+
+//------------------info
+#info-pager{
+	@include pager();
+	background-image: url(../images/info.png);
+	background-size: cover;
+	float: right;
+	cursor: pointer;
+	display: inline-block;
+	@media #{$tablet}{
+		font-size: normal;
+	}
+	font-size: x-large;
+	margin: 0 0px;
+	z-index: 10;
+}
