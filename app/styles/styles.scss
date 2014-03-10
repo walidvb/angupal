@@ -65,11 +65,12 @@ body{
 //----------------sliders
 .project{
 	height: 100%;
-	.slides .slide .slide-text-wrapper{
-		width: 50%;
-		@include center($right: auto!important);
-		
-		margin: 0;
+	@media #{$tablet}{
+		.slides .slide .slide-text-wrapper{
+			width: 50%;
+			@include center($right: auto!important);	
+			margin: 0;
+		}
 	}
 }
 
