@@ -3,16 +3,52 @@
   angular.module('myApp').directive('swiperCtrl', function() {
     var mySwiper, obj;
 
-    mySwiper = null;
+    mySwiper = new Array;
     obj = {
       priority: 1000,
       controller: function($scope, $attrs, $timeout) {
-        console.log($scope);
-        console.log($attrs);
-        this.ready = function() {
-          var $this, options, pagination;
+        var $this;
 
-          $this = $attrs.$$element;
+        $this = this;
+        $this.initialState = true;
+        $this.initPagers = function() {
+          var $item, i, icon, item, pager, pagers, pagination, slideIcons, slideNames, title, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
+
+          slideNames = new Array;
+          _ref = angular.element('.slide-vert');
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            pager = _ref[_i];
+            slideNames.push(pager.attributes['data-name'].value);
+          }
+          slideIcons = new Array;
+          _ref1 = angular.element('.slide-vert');
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            pager = _ref1[_j];
+            slideIcons.push(pager.attributes['data-icon'].value);
+          }
+          pagination = angular.element('.vert-pagination');
+          pagers = pagination.find('div.vert-pager');
+          _results = [];
+          for (i = _k = 0, _len2 = pagers.length; _k < _len2; i = ++_k) {
+            item = pagers[i];
+            title = $item = angular.element(item);
+            icon = {
+              img: angular.element('<img class="icon" src="' + slideIcons[i] + '"/>'),
+              item: $item
+            };
+            $item.attr('data-title', slideNames[i]).append(icon.img);
+            _results.push($item.bind('click', function() {
+              console.log(this);
+              return this.click();
+            }));
+          }
+          return _results;
+        };
+        $this.ready = function() {
+          var $thisSwiper, options, pagination;
+
+          console.log('mySwiper', mySwiper);
+          $thisSwiper = $attrs.$$element;
           options = {
             mousewheelControl: true,
             mousewheelControlForceToAxis: true,
@@ -35,25 +71,26 @@
             options.paginationClickable = true;
             options.initialSlide = 0;
             options.onSwiperCreated = function(swiper) {
-              angular.element('.vert-pagination').css('marginTop', -pagination.height() / 2);
-              return $scope.initPagers();
+              return angular.element('.vert-pagination').css('marginTop', -pagination.height() / 2);
             };
             options.onSlideChangeStart = function(swiper, direction) {
               angular.element('body').removeClass('initial-state');
               return pagination.removeClass('faded');
             };
             options.onSlideChangeEnd = function(swiper, direction) {
-              var initialState;
-
-              if (initialState) {
+              if ($this.initialState) {
                 swiper.removeSlide(0);
                 swiper.swipeTo(0, 0, false);
                 angular.element('body').addClass('ready-state');
-                initialState = false;
-                return $scope.initPagers();
+                $this.initialState = false;
+                swiper.reInit();
+                return $this.initPagers();
               }
             };
-            return mySwiper = $this.swiper(options);
+            return $timeout(function() {
+              mySwiper.push($thisSwiper.swiper(options));
+              return $this.initPagers();
+            });
           } else {
             options.slideClass = 'slide-horz';
             options.onSlideClicka = function(swiper) {
@@ -62,20 +99,17 @@
             options.aonSlideToucha = function(swiper) {
               return swiper.swipeNext();
             };
-            options.aonSlideChangeStart = function(swiper, direction) {
-              return console.log('horizontal change ', swiper);
-            };
+            options.aonSlideChangeStart = function(swiper, direction) {};
             options.loop = true;
             if ($attrs.id === 'bio' && window.innerWidth > 767) {
               options.slidesPerView = 2;
             }
             return $timeout(function() {
-              mySwiper = $this.swiper(options);
-              return console.log('swiper horz instantiated');
+              return mySwiper.push($thisSwiper.swiper(options));
             });
           }
         };
-        return this;
+        return $this;
       }
     };
     return obj;
@@ -87,7 +121,6 @@
       compile: function() {
         return {
           post: function(scope, elem, attrs, swiperCtrl) {
-            console.log(scope);
             if (scope.$last || attrs.swiperSlide === 'last') {
               return swiperCtrl.ready();
             }

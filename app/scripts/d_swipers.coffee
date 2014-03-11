@@ -1,13 +1,39 @@
 angular.module('myApp')
 	.directive 'swiperCtrl', () ->
-			mySwiper = null
+			mySwiper = new Array
 			obj = 
 				priority: 1000
 				controller: ($scope, $attrs, $timeout) ->
-					console.log $scope
-					console.log $attrs
-					this.ready = () ->
-						$this   = $attrs.$$element
+					$this = this
+					$this.initialState = true
+					
+					$this.initPagers = () ->
+						slideNames = new Array
+						slideNames.push pager.attributes['data-name'].value for pager in angular.element '.slide-vert'
+						slideIcons = new Array
+						slideIcons.push pager.attributes['data-icon'].value for pager in angular.element '.slide-vert'
+						pagination =  angular.element('.vert-pagination')
+						pagers = pagination.find 'div.vert-pager'
+							
+						for item, i in pagers
+							title = #angular.element('<div class="title">'+slideNames[i]+'</div>')
+							$item = angular.element(item)
+							icon = 
+								img: angular.element('<img class="icon" src="'+slideIcons[i]+'"/>')
+								item: $item
+
+							$item
+								.attr('data-title', slideNames[i])
+								.append  icon.img
+							$item.bind 'click', () ->
+								console.log this
+								this.click()
+					$this.ready = () ->
+						console.log 'mySwiper', mySwiper
+						#if mySwiper then do mySwiper.reInit 
+						#else
+
+						$thisSwiper   = $attrs.$$element
 						options = 
 							mousewheelControl: true
 							mousewheelControlForceToAxis: true
@@ -35,18 +61,20 @@ angular.module('myApp')
 							options.onSwiperCreated = (swiper) ->
 								#move pagination to center
 								angular.element('.vert-pagination').css 'marginTop', -pagination.height()/2
-								$scope.initPagers()
 							options.onSlideChangeStart = (swiper, direction) ->
 								angular.element('body').removeClass 'initial-state'
 								pagination.removeClass 'faded'
 							options.onSlideChangeEnd = (swiper, direction) ->
-								if initialState
+								if $this.initialState
 									swiper.removeSlide 0
 									swiper.swipeTo(0, 0, false)
 									angular.element('body').addClass 'ready-state'
-									initialState = false
-									$scope.initPagers()	
-							mySwiper = $this.swiper(options)
+									$this.initialState = false
+									do swiper.reInit
+									do $this.initPagers
+							$timeout () ->
+								mySwiper.push $thisSwiper.swiper(options)
+								do $this.initPagers
 						# if horizontal
 						else
 							#horizontal
@@ -56,22 +84,18 @@ angular.module('myApp')
 							options.aonSlideToucha = (swiper) ->
 								do swiper.swipeNext
 							options.aonSlideChangeStart = (swiper, direction) ->
-								console.log 'horizontal change ', swiper
 							options.loop = true	
 							if $attrs.id == 'bio' and window.innerWidth > 767
 								options.slidesPerView = 2	
 
-							$timeout( () ->
-								mySwiper = $this.swiper(options)
-								console.log 'swiper horz instantiated'
-							)
-					return this						
+							$timeout () ->
+								mySwiper.push $thisSwiper.swiper(options)
+					return $this						
 			return obj
 	.directive 'swiperSlide', () ->
 		dirobj = 
 			require: '^swiperCtrl'
 			compile: ()->
 				post: (scope, elem, attrs, swiperCtrl) ->
-					console.log scope
 					do swiperCtrl.ready if scope.$last or attrs.swiperSlide is 'last'
 		return dirobj
