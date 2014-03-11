@@ -26,10 +26,11 @@ angular.module('myApp')
 								.attr('data-title', slideNames[i])
 								.append  icon.img
 							$item.bind 'click', () ->
-								console.log this
 								this.click()
+								$scope.navOpen = false
+								$scope.infoOpen = false
+								do $scope.$digest
 					$this.ready = () ->
-						console.log 'mySwiper', mySwiper
 						#if mySwiper then do mySwiper.reInit 
 						#else
 
@@ -46,7 +47,7 @@ angular.module('myApp')
 						if $attrs.swiperCtrl is 'vert'
 							#Create and Add pagers to the dom
 							pagination = $ '<div class="vert-pagination"/>'
-							$scope.swipers.vertPagination = pagination
+							
 							angular.element('.pagination-wrapper').prepend pagination
 							options.slideClass             = 'slide-vert'
 							options.mode                   = 'vertical'
@@ -79,11 +80,6 @@ angular.module('myApp')
 						else
 							#horizontal
 							options.slideClass = 'slide-horz'
-							options.onSlideClicka = (swiper) ->
-								do swiper.swipeNext
-							options.aonSlideToucha = (swiper) ->
-								do swiper.swipeNext
-							options.aonSlideChangeStart = (swiper, direction) ->
 							options.loop = true	
 							if $attrs.id == 'bio' and window.innerWidth > 767
 								options.slidesPerView = 2	

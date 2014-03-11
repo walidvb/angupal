@@ -28,12 +28,13 @@ navigation{
 		right: 0%;
 		width: 40px;
 		height: 40px;
-
+		padding: 20px 0px;
 		@include transition($duration: 0.3s, $delay: 0.3s);
 		.nav-open & {
 			@include transition($duration: 0.3s);
 			background-color: transparent;
 			right: 85%;
+			padding: 20px ;
 		}
 		$bar-thickness: 2px;
 		$bar-width: 20px;
@@ -162,9 +163,10 @@ navigation{
 
 				}
 			}
-			&:hover:before{
-				margin-right: $pagerGap;
+			&:hover:before, &.active:before{
+				margin-right: 25px;
 				@media #{$tablet}{
+					margin-right: $pagerGap;
 					opacity: 1;
 					width: auto;
 				}

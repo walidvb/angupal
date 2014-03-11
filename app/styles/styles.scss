@@ -136,6 +136,7 @@ body{
 
 #info{
 	#info-wrapper{
+		cursor: alias;
 		position: fixed;
 		top: 0;
 		bottom: 0;
@@ -152,6 +153,7 @@ body{
 			left: 0%;
 		}
 		.info-content{
+			cursor: auto;
 			@include center();
 			height: 70%;
 			width: 80%;

@@ -92,9 +92,6 @@ angular.module('myApp').
 			scope:
 				info: "=myInfo"
 			templateUrl: "views/info.html"
-			link: (scope, elem, attrs) ->  
-				console.log scope, elem, attrs
-
 	]).
 	directive("myBios", [
 		() ->

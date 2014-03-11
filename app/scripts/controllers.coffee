@@ -1,64 +1,42 @@
 'use strict'
 angular.module('myApp')
 	.controller 'mainCtrl', ($scope, $timeout, nodeService) ->
+		# All data is stored in the mainCtrl, very bad idea, but good enough for this
 		$scope.data = $scope.data || {}
 		nodeService.getProjects().then (data) ->
 			$scope.data.projects = data.data.nodes
 		nodeService.getNode(4).then (data) ->
 			$scope.data.masai = data.data.nodes[0].node
+
+
 		$scope.toggleInfo = (toOpen = null) ->
+			console.log  ' requested ', toOpen
 			$scope.infoOpen = toOpen || !$scope.infoOpen
-			console.log 'togglingInfo to ', $scope.infoOpen, ' requested ', toOpen
+			console.log 'togglingInfo to ', $scope.infoOpen
 		$scope.toggleNav = (toOpen = null) ->
 			$scope.navOpen = toOpen || !$scope.navOpen
-			#$scope.toggleInfo(false)
-		$scope.swipers = 
-			vertical: null
-			horz: new Array
-		$scope.data = {};
-		$scope.initPagers = () ->
-			return
-			$timeout(() ->
-				slideNames = new Array
-				slideNames.push pager.attributes['data-name'].value for pager in $scope.swipers.vertical.slides
-				slideIcons = new Array
-				slideIcons.push pager.attributes['data-icon'].value for pager in $scope.swipers.vertical.slides
-				pagination =  angular.element('.vert-pagination')
-				pagers = pagination.find 'div.vert-pager'
-					
-				for item, i in pagers
-					title = #angular.element('<div class="title">'+slideNames[i]+'</div>')
-					icon = angular.element('<img class="icon" src="'+slideIcons[i]+'"/>')
-					$item = angular.element(item)
-					icon.item = $item
-					console.log icon
-					$item
-						.attr('data-title', slideNames[i])
-						.append  icon
-					icon.bind 'click', () ->
-						console.log this
-						this.item.click()
-			, 0)
+			console.log '$scope', $scope
+			$scope.infoOpen = false
+
 		Mousetrap.bind('i', () ->
-			$scope.toggleInfo();
-			$scope.$digest();
+			do $scope.toggleInfo
+			do $scope.digest
 		)
 		Mousetrap.bind('m', () ->
-			$scope.toggleNav();
-			$scope.$digest();
+			do $scope.toggleNav
+			do $scope.digest
 		)
 		Mousetrap.bind('esc', () ->
-			do $scope.toggleInfo
-			$scope.toggleNav false
-			$scope.$digest();
+			$scope.infoOpen false
+			do $scope.$digest
 		)
 		window.onresize = ()->
 			$scope.digest
 	.controller('officeCtrl', ['$scope', 'nodeService', ($scope, service) ->
 		$scope.data.bios = new Array
-		service.getNode(1).then (data) ->
-			$scope.data.bios.push data.data.nodes[0].node
 		service.getNode(2).then (data) ->
+			$scope.data.bios.push data.data.nodes[0].node
+		service.getNode(1).then (data) ->
 			$scope.data.bios.push data.data.nodes[0].node
 	])
 	.controller('infoCtrl', ['$scope', 'nodeService', ($scope, service) ->
