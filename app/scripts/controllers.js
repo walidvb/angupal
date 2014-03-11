@@ -79,7 +79,6 @@
     };
   }).controller('officeCtrl', [
     '$scope', 'nodeService', function($scope, service) {
-      $scope.data = $scope.data || {};
       service.getNode(1).then(function(data) {
         return $scope.data.blaise = data.data.nodes[0].node;
       });
@@ -89,7 +88,6 @@
     }
   ]).controller('infoCtrl', [
     '$scope', 'nodeService', function($scope, service) {
-      $scope.data = $scope.data || {};
       return service.getNode(5).then(function(data) {
         return $scope.data.info = data.data.nodes[0].node;
       });

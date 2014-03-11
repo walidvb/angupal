@@ -1,11 +1,11 @@
 <div class="project slide-vert" data-icon="project.icon" swiper-ctrl="horz">
 		<div drupal-edit="project.nid"></div>
 		<div class="slides swiper-wrapper">
-			<div class="slide slide-horz" my-fullscreen="x">
+			<div class="slide slide-horz">
 					<img ng-src="{{project.imgs | first}}" class="img-responsive">
 			</div>
 			<div ng-if="project.body.length > 1" class="slide slide-text slide-horz">
-				<div class="slide-text-wrapper" my-multipage>
+				<div class="slide-text-wrapper" my-msultipage>
 					<div class="project-body slide-body" my-html="project.body" ></div>
 				</div>
 			</div>
