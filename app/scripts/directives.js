@@ -117,14 +117,13 @@
         }
       };
     }
-  ]).directive("myBio", [
+  ]).directive("myBios", [
     function() {
       return {
         scope: {
-          bio: "=myBio"
+          bios: "=myBios"
         },
-        templateUrl: "views/bio.html",
-        replace: false
+        templateUrl: "views/bio.html"
       };
     }
   ]);

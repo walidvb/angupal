@@ -79,11 +79,12 @@
     };
   }).controller('officeCtrl', [
     '$scope', 'nodeService', function($scope, service) {
+      $scope.data.bios = new Array;
       service.getNode(1).then(function(data) {
-        return $scope.data.blaise = data.data.nodes[0].node;
+        return $scope.data.bios.push(data.data.nodes[0].node);
       });
       return service.getNode(2).then(function(data) {
-        return $scope.data.didier = data.data.nodes[0].node;
+        return $scope.data.bios.push(data.data.nodes[0].node);
       });
     }
   ]).controller('infoCtrl', [

@@ -96,10 +96,10 @@ angular.module('myApp').
 				console.log scope, elem, attrs
 
 	]).
-	directive("myBio", [
+	directive("myBios", [
 		() ->
 			scope:
-				bio: "=myBio"
+				bios: "=myBios"
 			templateUrl: "views/bio.html"
-			replace: false
+			
 	])

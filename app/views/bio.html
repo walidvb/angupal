@@ -1,5 +1,8 @@
-
-<article class="slide-text-wrapper bio-content" my-multipage>
-	<div drupal-edit="bio.nid"></div>
-	<div class="bio-body" my-html="bio.body" ></div>
-</article>
+<div class="slides swiper-wrapper">
+    <div class="slide slide-horz slide-text" swiper-slide  ng-repeat="bio in bios">
+		<article  class="slide-text-wrapper bio-content" my-multipage>
+			<div drupal-edit="bio.nid"></div>
+			<div class="bio-body" my-html="bio.body" ></div>
+		</article>
+    </div>
+  </div>

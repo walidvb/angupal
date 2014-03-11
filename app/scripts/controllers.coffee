@@ -55,11 +55,11 @@ angular.module('myApp')
 		window.onresize = ()->
 			$scope.digest
 	.controller('officeCtrl', ['$scope', 'nodeService', ($scope, service) ->
-		#$scope.data = $scope.data || {}
+		$scope.data.bios = new Array
 		service.getNode(1).then (data) ->
-			$scope.data.blaise = data.data.nodes[0].node
+			$scope.data.bios.push data.data.nodes[0].node
 		service.getNode(2).then (data) ->
-			$scope.data.didier = data.data.nodes[0].node
+			$scope.data.bios.push data.data.nodes[0].node
 	])
 	.controller('infoCtrl', ['$scope', 'nodeService', ($scope, service) ->
 			#$scope.data = $scope.data || {}
