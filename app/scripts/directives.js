@@ -8,8 +8,7 @@
         array = new Array();
         i = 1;
         while (i < input.length) {
-          array.push(input[i]);
-          i++;
+          array.push(input[i++]);
         }
         return array;
       }
@@ -126,74 +125,6 @@
         },
         templateUrl: "views/bio.html",
         replace: false
-      };
-    }
-  ]).directive("swiper", [
-    '$timeout', function($timeout) {
-      return {
-        priority: 500,
-        transclude: false,
-        link: function(scope, elem, attrs) {
-          return $timeout(function() {
-            var $this, initialState, options, pagination;
-
-            $this = angular.element(elem);
-            options = {
-              mousewheelControl: true,
-              mousewheelControlForceToAxis: true,
-              keyboardControl: true,
-              resizeReInit: true,
-              grabCursor: true,
-              longSwipesRatio: 0.1
-            };
-            if (attrs.swiper === 'vert') {
-              initialState = true;
-              pagination = $('<div class="vert-pagination"/>');
-              scope.swipers.vertPagination = pagination;
-              angular.element('.pagination-wrapper').prepend(pagination);
-              options.slideClass = 'slide-vert';
-              options.mode = 'vertical';
-              options.pagination = '.vert-pagination';
-              options.paginationElement = 'div';
-              options.paginationElementClass = 'vert-pager';
-              options.paginationActiveClass = 'active';
-              options.paginationVisibleClass = 'visible';
-              options.paginationClickable = true;
-              options.initialSlide = 0;
-              options.onSwiperCreated = function(swiper) {
-                angular.element('.vert-pagination').css('marginTop', -pagination.height() / 2);
-                return scope.initPagers();
-              };
-              options.onSlideChangeStart = function(swiper, direction) {
-                angular.element('body').removeClass('initial-state');
-                return pagination.removeClass('faded');
-              };
-              options.onSlideChangeEnd = function(swiper, direction) {
-                if (initialState) {
-                  swiper.removeSlide(0);
-                  swiper.swipeTo(0, 0, false);
-                  angular.element('body').addClass('ready-state');
-                  initialState = false;
-                  return scope.initPagers();
-                }
-              };
-              scope.swipers.vertical = $this.swiper(options);
-              return;
-            } else {
-              options.loop = true;
-              options.slideClass = 'slide-horz';
-              options.onSlideChangeStart = function() {
-                return angular.element('.vert-pagination').addClass('faded');
-              };
-            }
-            if (attrs.id === 'bio') {
-              if (window.innerWidth > 767) {
-                options.slidesPerView = 2;
-              }
-            }
-            return $this.swiper(options);
-          }, 1000);
-        }
       };
     }
   ]);

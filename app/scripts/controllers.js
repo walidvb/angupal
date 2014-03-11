@@ -27,6 +27,7 @@
     };
     $scope.data = {};
     $scope.initPagers = function() {
+      return;
       return $timeout(function() {
         var $item, i, icon, item, pager, pagers, pagination, slideIcons, slideNames, title, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _results;
 

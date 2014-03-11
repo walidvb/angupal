@@ -66,10 +66,12 @@ body{
 .project{
 	height: 100%;
 	@media #{$tablet}{
-		.slides .slide .slide-text-wrapper{
+		.slides .slide.slide-text {
+		.slide-text-wrapper{
 			width: 50%;
 			@include center($right: auto!important);	
 			margin: 0;
+		}
 		}
 	}
 }

@@ -5,8 +5,8 @@ angular.module('myApp').
 			    array = new Array()
 			    i = 1
 			    while i < input.length
-			      array.push input[i]
-			      i++
+			      array.push input[i++]
+			      
 			    return array			
 	).
 	filter('first', () ->
@@ -102,62 +102,4 @@ angular.module('myApp').
 				bio: "=myBio"
 			templateUrl: "views/bio.html"
 			replace: false
-	]).
-	directive("swiper", ['$timeout'
-		($timeout) ->
-			priority: 500
-			transclude: false
-			link: (scope, elem, attrs) ->
-				$timeout(() ->
-					$this = angular.element elem
-					options = 
-						mousewheelControl: true
-						mousewheelControlForceToAxis: true
-						keyboardControl: true
-						resizeReInit: true
-						grabCursor: true
-						longSwipesRatio: 0.1
-					if attrs.swiper == 'vert'
-						initialState = true
-						#Create and Add pagers to the dom
-						pagination = $ '<div class="vert-pagination"/>'
-						scope.swipers.vertPagination = pagination
-						angular.element('.pagination-wrapper').prepend pagination
-						options.slideClass             = 'slide-vert'
-						options.mode                   = 'vertical'
-						options.pagination             = '.vert-pagination'
-						options.paginationElement      = 'div'
-						options.paginationElementClass = 'vert-pager'
-						options.paginationActiveClass  = 'active'
-						options.paginationVisibleClass = 'visible'
-						options.paginationClickable    = true
-						options.initialSlide           = 0
-						
-						options.onSwiperCreated = (swiper) ->
-							#move pagination to center
-							angular.element('.vert-pagination').css 'marginTop', -pagination.height()/2
-							scope.initPagers()
-						options.onSlideChangeStart = (swiper, direction) ->
-							angular.element('body').removeClass 'initial-state'
-							pagination.removeClass 'faded'
-						options.onSlideChangeEnd = (swiper, direction) ->
-							if initialState
-								swiper.removeSlide 0
-								swiper.swipeTo(0, 0, false)
-								angular.element('body').addClass 'ready-state'
-								initialState = false
-								scope.initPagers()
-							
-						scope.swipers.vertical = $this.swiper(options)
-						return
-					else
-						options.loop                   = true
-						options.slideClass = 'slide-horz'
-						options.onSlideChangeStart = () ->
-							angular.element('.vert-pagination').addClass 'faded'
-					if attrs.id == 'bio'
-						if window.innerWidth > 767
-							options.slidesPerView = 2
-					$this.swiper(options)
-				, 1000)
 	])

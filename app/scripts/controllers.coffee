@@ -17,6 +17,7 @@ angular.module('myApp')
 			horz: new Array
 		$scope.data = {};
 		$scope.initPagers = () ->
+			return
 			$timeout(() ->
 				slideNames = new Array
 				slideNames.push pager.attributes['data-name'].value for pager in $scope.swipers.vertical.slides
