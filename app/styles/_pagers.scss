@@ -4,7 +4,7 @@ $pagerGap: 0px;
 	width: $pagerSize;
 	height: $pagerSize;
 	opacity: 1;
-	@include transition();
+	
 	@media #{$tablet} {
 		opacity: 0.4;
 		&:hover, &.active{
@@ -139,7 +139,7 @@ navigation{
 				opacity: 1;
 			}
 			&:before, .title{
-				@include transition();
+				// @include transition();
 				content: attr(data-title);
 				font-weight: bold;
 				line-height: $pagerSize;

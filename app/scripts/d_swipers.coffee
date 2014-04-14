@@ -42,7 +42,7 @@ angular.module('myApp')
 							resizeReInit: true
 							grabCursor: true
 							longSwipesRatio: 0.1
-							calculateHeight: true
+							calculateHeight: false
 						#if vertical
 						if $attrs.swiperCtrl is 'vert'
 							#Create and Add pagers to the dom

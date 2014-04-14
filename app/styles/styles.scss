@@ -6,7 +6,7 @@ $font-color: black;
 @import 'pagers';
 @import 'sizing';
 @import 'slick';
-
+@import 'info';
 body{
 	font-family: 'graphikblack';
 	@include transition($property: background-color, $duration: 0.2s);
@@ -102,8 +102,8 @@ body{
 		float: left;
 		img{
 			max-height: 100%;
-			@include center();
-			
+			margin: auto;
+			display: inline-block;
 		}
 	//------------------text slides
 	&.slide-text{
@@ -114,7 +114,12 @@ body{
 			text-align: justify;
 			height: 90%;
 			overflow: hidden;
+			.text-body{
+				top: 0;
+				position: relative;
+			}
 		}
+
 		.page-controls{
 			position: absolute;
 			background: rgba(255,255,255,0.8);
@@ -142,67 +147,7 @@ body{
 
 }
 
-#info{
-	#info-wrapper{
-		cursor: alias;
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 100%;
-		text-align: center;
-		background: rgba(255,255,255,0.6);
-		z-index: 1;
-		@include transition($property: opacity, $duration:0.3s);
-		opacity: 0;
-		
-		.info-open &{
-			opacity: 1;
-			left: 0%;
-		}
-		.info-content{
-			cursor: auto;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			
-			
-			margin-left: auto;
-			margin-right: auto;
-			
-			.info-map img{
-				max-width: 100%;
-				height: auto;
-			}
-			.info-details, .info-map{
-				display: inline-block;
-				padding: 1em 2em;
-				height: 50%;
-				@media #{$tablet}{
-					height: auto;
-				}
-			}
-			@media #{$tablet}{
-				display: inline-flex;
-				width: 90%;
-				.info-map, .info-details{
-					padding: 0 2em;
-					float: right;
-					margin: auto;
-					display: inline-flex;
-					width: 50%;
-				}
-				.info-details{
-					text-align: left;
-					height: auto;
-				}
-			}
-		}
 
-	}
-}
 //------------------dev
 $debug-color: $theme-color;
 .debug{

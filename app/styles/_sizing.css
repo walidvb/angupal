@@ -1,0 +1,6 @@
+html, body, .top-swiper-container, .swiper-wrapper, .slide-vert, .project-container, .project-container .project, .project-container .project .slide {
+  height: 100%;
+  overflow: hidden; }
+
+img {
+  max-height: 100%; }

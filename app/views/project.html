@@ -2,15 +2,20 @@
 		<div drupal-edit="project.nid"></div>
 		<div class="slides swiper-wrapper">
 			<div class="slide slide-horz">
+				<div class="img-wrapper">
 					<img ng-src="{{project.imgs | first}}" class="img-responsive">
+				</div>	
 			</div>
 			<div ng-if="project.body.length > 1" class="slide slide-text slide-horz">
-				<div class="slide-text-wrapper" my-msultipage>
-					<div class="project-body slide-body" my-html="project.body" ></div>
+				<div class="slide-text-wrapper">
+					<div class="project-body text-body slide-body" ng-bind-html="project.body | trust" ></div>
+					<my-pager>
 				</div>
 			</div>
 			<div class="slide slide-horz" swiper-slide my-fullscreen="x" ng-repeat="slide in project.imgs | notFirst">
+				<div class="img-wrapper">
 					<img ng-src="{{slide}}" class="img-responsive"/>
+				</div>
 			</div>
 		</div>
 </div>
