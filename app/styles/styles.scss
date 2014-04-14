@@ -4,11 +4,12 @@ $font-color: black;
 @import 'fonts';
 @import 'mixins';
 @import 'pagers';
-
+@import 'sizing';
+@import 'slick';
 
 body{
 	font-family: 'graphikblack';
-	@include transition($property: background-color, $duration: 1s);
+	@include transition($property: background-color, $duration: 0.2s);
 	background-color: white;
 	&.initial-state{
 		background-color: $theme-color;
@@ -25,7 +26,7 @@ body{
 }
 
 #main{
-	@include transition($duration: 0.8s);
+	@include transition($duration: 0.2s);
 	-webkit-filter: blur(0px);
 	.info-open &, .nav-open &{
 		-webkit-filter: blur(6px);
@@ -145,7 +146,7 @@ body{
 		text-align: center;
 		background: rgba(255,255,255,0.6);
 		z-index: 1;
-		@include transition($property: opacity, $duration:0.8s);
+		@include transition($property: opacity, $duration:0.3s);
 		opacity: 0;
 		
 		.info-open &{
