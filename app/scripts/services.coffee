@@ -32,6 +32,8 @@ angular.module('myApp', ['ngResource'])
 .service('nodeService', ['$http', ($http) ->
 	@getNode = (nid)->
 		get 'node/'+nid+'/details.json'
+	@getBios = () ->
+		get 'nodes/1+2/details.json'
 	@getProjects = ->
 		get 'projects.json'
 	get = (url) ->

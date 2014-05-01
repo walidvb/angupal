@@ -34,10 +34,8 @@ angular.module('myApp')
 			$scope.digest
 	.controller('officeCtrl', ['$scope', 'nodeService', ($scope, service) ->
 		$scope.data.bios = new Array
-		service.getNode(2).then (data) ->
-			$scope.data.bios.push data.data.nodes[0].node
-		service.getNode(1).then (data) ->
-			$scope.data.bios.push data.data.nodes[0].node
+		service.getBios().then (data) ->
+			$scope.data.bios = data.data
 	])
 	.controller('infoCtrl', ['$scope', 'nodeService', ($scope, service) ->
 			#$scope.data = $scope.data || {}

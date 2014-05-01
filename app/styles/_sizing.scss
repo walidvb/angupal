@@ -1,0 +1,20 @@
+html, body, .top-swiper-container, .bio-container, .swiper-wrapper, .slide-vert, .project-container, .project-container .project, .project-container .project .slide{
+	height: 100%;
+}
+
+.img-wrapper{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	img{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+}
+img{
+	max-height: 100%;
+	display: inline-block;
+}

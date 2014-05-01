@@ -1,9 +1,25 @@
 angular.module('myApp')
 	.directive 'swiperCtrl', () ->
 			mySwiper = new Array
+			swiperVert = {}
 			obj = 
 				priority: 1000
 				controller: ($scope, $attrs, $timeout) ->
+					Mousetrap.bind 'left', (e) ->
+						e.preventDefault()
+						console.log 
+						currentSwiper().swipePrev()
+					Mousetrap.bind 'right', (e) ->
+						e.preventDefault()
+						currentSwiper().swipeNext()
+					currentSwiper = () ->
+						result = null
+						for swiper in mySwiper
+							if $(swiper.container).hasClass 'swiper-slide-active'
+									result = swiper
+							else if $(swiper.container).parents('.slide-vert').hasClass 'swiper-slide-active'
+									result = swiper
+						return result
 					$this = this
 					$this.initialState = true
 					
@@ -38,7 +54,6 @@ angular.module('myApp')
 						options = 
 							mousewheelControl: true
 							mousewheelControlForceToAxis: true
-							keyboardControl: true
 							resizeReInit: true
 							grabCursor: true
 							longSwipesRatio: 0.1
@@ -58,6 +73,7 @@ angular.module('myApp')
 							options.paginationVisibleClass = 'visible'
 							options.paginationClickable    = true
 							options.initialSlide           = 0
+							options.keyboardControl				 = true
 
 							options.onSwiperCreated = (swiper) ->
 								#move pagination to center
@@ -74,7 +90,7 @@ angular.module('myApp')
 									do swiper.reInit
 									do $this.initPagers
 							$timeout () ->
-								mySwiper.push $thisSwiper.swiper(options)
+								swiperVert = $thisSwiper.swiper(options)
 								do $this.initPagers
 						# if horizontal
 						else

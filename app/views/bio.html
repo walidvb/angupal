@@ -1,8 +1,8 @@
 <div class="slides swiper-wrapper">
-    <div class="slide slide-horz slide-text" swiper-slide="horz"  ng-repeat="bio in bios">
-    <div drupal-edit="bio.nid"></div>
+    <div class="slide slide-horz slide-text" swiper-slide="horz"  ng-repeat="bio in bios.nodes">
+    <div drupal-edit="bio.node.nid"></div>
 		<article class="slide-text-wrapper bio-content" >
-			<div class="bio-body text-body" ng-bind-html="bio.body | trust"></div>
+			<div class="bio-body text-body" ng-bind-html="bio.node.body | trust"></div>
       <my-pager>
 		</article>
     </div>
