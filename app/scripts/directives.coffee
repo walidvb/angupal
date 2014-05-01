@@ -22,69 +22,43 @@ angular.module('myApp').
 		      replace: true
 		  
 	]).
-	directive('myMultipage', ['$timeout'
-		($timeout) ->
-			priority: 300
-			controller: ($scope) ->
-				$scope.next = () ->
-					goTo 'next'
-				$scope.prev = () ->
-					goTo 'prev'
-				goTo = (direction) ->
-					h = $scope.page.height()
-					console.log 'page', $scope.page
-					newOffset = if direction is 'next' then $scope.pageOffset-h else $scope.pageOffset+h
-					newOffset += 10
-					page = $scope.page.find('.html-content')
-					console.log 'newOffset', newOffset, 'h', h, 'page.height', page.height()
-					if newOffset > 0  
-						newOffset = 0
-						return
-					if -newOffset > page.height() 
-						newOffset = $scope.pageOffset
-						return
-					page.animate(
-							'opacity': 0, 
-						'ease-out', ()->
-							$(this).css({
-								'-webkit-transform' : 'translateY('+newOffset+'px)'
-								'-moz-transform' : 'translateY('+newOffset+'px)'
-								'transform' : 'translateY('+newOffset+'px)'
-							})
-							page.stop().animate(
-								'opacity': 1, 
-							'ease-out');
-					)
-					$scope.pageOffset = newOffset
-					$scope.pageIndex = if direction is 'next' then $scope.pageIndex++ else $scope.pageIndex--
-			# Runs during compile
-			link: (scope, elm, attrs) ->
-					scope.page = angular.element(elm)
-					#console.log 'page height', scope.page.height(), 'content height', scope.page.find('.html-content').height()
-					if scope.page.height() <= scope.page.find('.html-content').height()
-						scope.pageIndex = null
-						return
-					# Runs during render
-					prev = angular.element('<div class="control prev"/>').html('&uarr;')
-					next = angular.element('<div class="control next"/>').html('&darr;')
-					controls = angular.element('<div class="page-controls">').append(prev).append(next)
-					angular.element(elm).append controls
+	directive('myPager', ['$timeout', '$compile',
+	($timeout, $compile) ->
+		restrict: 'E'
+		priority: 0
+		transclude: true
+		template: '<div class="page-controls swiper-no-swiping">' +
+			'<div class="control prev">&uarr;</div>' +
+			'<div class="control next">&darr;</div>'+
+			'</div>'
+		link: (scope, elem, attrs) ->
+			scope.goTo = (dir, pager) ->
+				console.log 'scope.goTo ' + dir
+				parent = pager.parents('.slide-text-wrapper')
+				content = parent.children('.text-body')
+				pageHeight = do parent.height
+				contentHeight = do content.height
+				currentOffset = parseInt(content.css 'top')
+				newOffset = currentOffset + dir*pageHeight - 10
+				newOffset = Math.min(0, Math.max(newOffset, pageHeight-(contentHeight+15) ) )
+				if newOffset != currentOffset
+					content.animate
+						'top': newOffset
 
-					
-					next.bind 'click', () ->
-						console.log 'clicked next'
-						scope.next();
-					
-					
-					prev.bind 'click', () ->
-						console.log 'clicked prev'
-						scope.prev();
-
-					scope.controls = 
-						prev: prev
-						next: next
-					scope.pageOffset = 0
-					scope.pageIndex = 0
+			$timeout () ->
+				console.log 'compiled'
+				
+				setTimeout () ->
+					contentHeight = elem.parents('.slide-text-wrapper').children('.text-body').height()
+					console.log elem.parents('.slide-text-wrapper').children('.text-body').height(), 'contentHeight', contentHeight
+				, 2000
+				angular.element('.control:not(.processed)').addClass('processed').click () ->
+					if($(this).hasClass('next')) 
+						scope.goTo -1, $(this) 
+					else 
+						scope.goTo 1, $(this)
+					console.log 'clicked'
+			, 4000
 	]).
 	directive("myInfo", [
 		() ->

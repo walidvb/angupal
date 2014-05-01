@@ -83,6 +83,10 @@ body{
 
 .slide-text-wrapper{
 	margin-top: 5%!important;
+	.text-body{
+		position: relative;
+		top: 0;
+	}
 }
 .slide-text-wrapper, .slide-body{
 	width: 70%;
