@@ -19,12 +19,12 @@
         <img src="http://cf.vbbros.net/sites/all/themes/angupal/app/images/collin_Fontaine.svg" alt="" class="img-responsive">
     </section>
     <section id="masai" class="slide-vert" my-fullscreen="y" data-name="{{data.masai.title}}" data-icon="{{data.masai.icon}}">
-      <div class="project-container" my-project="data.masai"></div>
+      <div my-project="data.masai"></div>
     </section>
     <section id="bio" class="slide-vert" ng-controller="officeCtrl" swiper-ctrl="horz" my-fullscreen="y" data-name="Bio" data-icon="images/cv.png" my-bios="data.bios">
     </section>
     <section swiper-slide ng-repeat="project in data.projects" id="projects" class="slide-vert" data-name="{{project.node.title}}" data-icon="{{project.node.icon}}">
-        <div class="project-container" my-project="project.node" my-fullscreen="y"></div>
+        <div my-project="project.node" my-fullscreen="y"></div>
     </section>
   </div>
   

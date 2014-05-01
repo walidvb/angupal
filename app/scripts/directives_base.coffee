@@ -44,3 +44,7 @@ angular.module('myApp').
         setSize()
       timer setSize, 0
  	])
+ 	.filter 'trust', ['$sce', ($sce) ->
+		 (input) ->
+				$sce.trustAsHtml(input);
+	]
