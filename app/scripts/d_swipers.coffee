@@ -46,23 +46,32 @@ angular.module('myApp')
 								$scope.navOpen = false
 								$scope.infoOpen = false
 								do $scope.$digest
+					$scope.setHeights = (cb) ->
+						orientation = window.orientation || 0
+						height = if orientation is 0 then window.innerHeight else window.screen.width
+						console.log 'height', height
+						cb()
+						$('.top-swiper-container, .slide-vert, .slide, #main .swiper-wrapper').height(height)
 					$this.ready = () ->
 						#if mySwiper then do mySwiper.reInit 
 						#else
-
+						$(window).bind('orientationchange, resize', (e) ->
+							$scope.setHeights(swiperVert.reInit)
+							
+						)
 						$thisSwiper   = $attrs.$$element
 						options = 
 							mousewheelControl: true
 							mousewheelControlForceToAxis: true
-							resizeReInit: true
 							grabCursor: true
 							longSwipesRatio: 0.1
-							calculateHeight: true
+							calculateHeight: false
+
 						#if vertical
 						if $attrs.swiperCtrl is 'vert'
 							#Create and Add pagers to the dom
 							pagination = $ '<div class="vert-pagination"/>'
-							
+
 							angular.element('.pagination-wrapper').prepend pagination
 							options.slideClass             = 'slide-vert'
 							options.mode                   = 'vertical'
@@ -74,13 +83,20 @@ angular.module('myApp')
 							options.paginationClickable    = true
 							options.initialSlide           = 0
 							options.keyboardControl				 = true
+							options.resizeReInit					 = true
 
+							options.onInit	= (swiper) ->
+								$scope.setHeights(() ->
+									for swiper in mySwiper
+										swiper.reInit()
+									)
 							options.onSwiperCreated = (swiper) ->
 								#move pagination to center
 								angular.element('.vert-pagination').css 'marginTop', -pagination.height()/2
 							options.onSlideChangeStart = (swiper, direction) ->
 								angular.element('body').removeClass 'initial-state'
 								pagination.removeClass 'faded'
+								window.hideAddressBar()
 							options.onSlideChangeEnd = (swiper, direction) ->
 								if $this.initialState
 									swiper.removeSlide 0

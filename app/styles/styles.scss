@@ -10,6 +10,7 @@ body{
 	font-family: 'graphikblack';
 	@include transition($property: background-color, $duration: 0.2s);
 	background-color: white;
+	overflow: hidden;
 	&.initial-state{
 		background-color: $theme-color;
 	}
@@ -38,7 +39,7 @@ body{
 	h1{
 		visibility: hidden;
 	}
-	img{
+	#svg{
 		position: absolute;
 		top: 0;
 		bottom: 0;
@@ -48,8 +49,32 @@ body{
 		margin: auto
 	}
 }
+#arrows{
+	position: absolute;
+	bottom: 50px;
+	right: 50px;
+	opacity: 0.8;
+	max-width: 15%;
+	animation: fade 2s 3s forwards;
+	-webkit-animation: fade 2s 3s forwards;
+}
 
-
+@-webkit-keyframes fade{
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes fade{
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
 .editable{
 	position: relative;
 	overflow: hidden;
@@ -83,6 +108,7 @@ body{
 
 .slide-text-wrapper{
 	margin-top: 5%!important;
+	position: relative;
 	.text-body{
 		position: relative;
 		top: 0;
@@ -105,7 +131,7 @@ body{
 		float: left;
 		img{
 			max-height: 100%;
-			@include center();
+			margin: auto;
 			
 		}
 	//------------------text slides
@@ -119,13 +145,19 @@ body{
 			overflow: hidden;
 		}
 		.page-controls{
-			position: absolute;
-			background: rgba(255,255,255,0.8);
-			bottom: 0px;
-			right: 0px;
-			z-index: 1;
+			position: fixed;
+			top: 50%;
+			left: -40px;
+			@media #{$tablet}
+			{
+				position: absolute;
+				bottom: 0px;
+				right: 0px;
+				z-index: 1;
+			}
 
 			.control{
+				background: rgba(255,255,255,0.8);
 				cursor: pointer;
 				width: 35px;
 				height: 35px;
@@ -133,8 +165,16 @@ body{
 				font-size: 1.8em;
 				line-height: 1.3em;
 				text-align: center;
-				display: inline-block;
+				&:first-child{
+					position: relative;
+					top: -40px;
 
+					@media #{$tablet}
+					{
+					
+					  position: absolute;
+					}
+				}
 			}
 		}
 		.html-content{
@@ -194,7 +234,6 @@ body{
 					padding: 0 2em;
 					float: right;
 					margin: auto;
-					display: inline-flex;
 					width: 50%;
 				}
 				.info-details{

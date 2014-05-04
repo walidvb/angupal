@@ -1,6 +1,6 @@
 angular.module('myApp').
-	directive('drupalEdit', ['drupal', (backend) ->
-		if not backend.user and not true
+	directive('drupsalEdit', ['drupal', (backend) ->
+		if not backend.user
 			replace: true
 			template: '<span>no edit</span>'
 		else

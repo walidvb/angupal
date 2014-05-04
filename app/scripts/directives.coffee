@@ -33,7 +33,6 @@ angular.module('myApp').
 			'</div>'
 		link: (scope, elem, attrs) ->
 			scope.goTo = (dir, pager) ->
-				console.log 'scope.goTo ' + dir
 				parent = pager.parents('.slide-text-wrapper')
 				content = parent.children('.text-body')
 				pageHeight = do parent.height
@@ -45,19 +44,28 @@ angular.module('myApp').
 					content.animate
 						'top': newOffset
 
-			$timeout () ->
-				console.log 'compiled'
-				
+			scope.checkHeight = (pager) ->
+				parent = pager.parents('.slide-text-wrapper')
+				content = parent.children('.text-body')
+				pageHeight = do parent.height
+				contentHeight = do content.height
+				if contentHeight <= pageHeight
+					elem.hide()
+				else
+					elem.show()
+			$timeout () ->				
 				setTimeout () ->
 					contentHeight = elem.parents('.slide-text-wrapper').children('.text-body').height()
-					console.log elem.parents('.slide-text-wrapper').children('.text-body').height(), 'contentHeight', contentHeight
 				, 2000
 				angular.element('.control:not(.processed)').addClass('processed').click () ->
 					if($(this).hasClass('next')) 
 						scope.goTo -1, $(this) 
 					else 
 						scope.goTo 1, $(this)
-					console.log 'clicked'
+				$(window).bind('resize', () ->
+					scope.checkHeight($(this));
+				)
+				scope.checkHeight($(this));
 			, 4000
 	]).
 	directive("myInfo", [
