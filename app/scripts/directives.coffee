@@ -49,7 +49,7 @@ angular.module('myApp').
 				content = parent.children('.text-body')
 				pageHeight = do parent.height
 				contentHeight = do content.height
-				if contentHeight <= pageHeight
+				if contentHeight >= pageHeight
 					elem.hide()
 				else
 					elem.show()

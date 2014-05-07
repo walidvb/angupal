@@ -1,8 +1,8 @@
 <div class="info-content" my-fullscreen ng-click="$event.stopPropagation()" >
-  <div class="info-details" ng-bind-html="info.body | trust"></div>
-	<div class="info-map">
+  <div class="info-map">
 		<a href="https://goo.gl/maps/tmrY9" target="_blank">
 			<img alt="carte du bureau"  ng-src="{{info.img}}">
 		</a>
 	</div>
+  <div class="info-details" ng-bind-html="info.body | trust"></div>
 </div>

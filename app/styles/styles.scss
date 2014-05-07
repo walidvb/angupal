@@ -28,13 +28,14 @@ body{
 #main{
 	@include transition($duration: 0.2s);
 	-webkit-filter: blur(0px);
+	-moz-filter: blur(0px);
 	.info-open &, .nav-open &{
 		-webkit-filter: blur(6px);
+	  -moz-filter: blur(6px);
 		opacity: 0.4;
 	}
 }
 #logo{
-	background-color: $theme-color;
 	position: relative;
 	h1{
 		visibility: hidden;
@@ -153,6 +154,8 @@ body{
 				position: absolute;
 				bottom: 0px;
 				right: 0px;
+				top: auto;
+				left: auto;
 				z-index: 1;
 			}
 
@@ -171,8 +174,8 @@ body{
 
 					@media #{$tablet}
 					{
-					
-					  position: absolute;
+
+					  top: 0px;
 					}
 				}
 			}
@@ -228,8 +231,8 @@ body{
 				}
 			}
 			@media #{$tablet}{
-				display: inline-flex;
 				width: 90%;
+				
 				.info-map, .info-details{
 					padding: 0 2em;
 					float: right;

@@ -10,12 +10,9 @@ angular.module('myApp')
 
 
 		$scope.toggleInfo = (toOpen = null) ->
-			console.log  ' requested ', toOpen
 			$scope.infoOpen = toOpen || !$scope.infoOpen
-			console.log 'togglingInfo to ', $scope.infoOpen
 		$scope.toggleNav = (toOpen = null) ->
 			$scope.navOpen = toOpen || !$scope.navOpen
-			console.log '$scope', $scope
 			$scope.infoOpen = false
 
 		Mousetrap.bind('i', () ->

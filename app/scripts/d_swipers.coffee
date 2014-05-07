@@ -7,7 +7,6 @@ angular.module('myApp')
 				controller: ($scope, $attrs, $timeout) ->
 					Mousetrap.bind 'left', (e) ->
 						e.preventDefault()
-						console.log 
 						currentSwiper().swipePrev()
 					Mousetrap.bind 'right', (e) ->
 						e.preventDefault()
@@ -46,18 +45,18 @@ angular.module('myApp')
 								$scope.navOpen = false
 								$scope.infoOpen = false
 								do $scope.$digest
-					$scope.setHeights = (cb) ->
-						orientation = window.orientation || 0
-						height = if orientation is 0 then window.innerHeight else window.screen.width
-						console.log 'height', height
-						cb()
+					$scope.setHeights = (e = {orientation: "portrait"}, cb = $.noop) ->
+						height = if orientation isnt 0 then window.innerHeight else  window.innerHeight
 						$('.top-swiper-container, .slide-vert, .slide, #main .swiper-wrapper').height(height)
+						console.log e
+						console.log 'w.o: ', e.orientation, "orientation: ", orientation,  "w.i:", window.innerWidth, "w.s.w: ", document.documentElement.clientHeight, "computed heigth:", height
+						cb()
 					$this.ready = () ->
 						#if mySwiper then do mySwiper.reInit 
 						#else
 						$(window).bind('orientationchange, resize', (e) ->
-							$scope.setHeights(swiperVert.reInit)
-							
+							console.log 'event', e
+							$scope.setHeights(e, swiperVert.reInit)
 						)
 						$thisSwiper   = $attrs.$$element
 						options = 
@@ -93,18 +92,22 @@ angular.module('myApp')
 							options.onSwiperCreated = (swiper) ->
 								#move pagination to center
 								angular.element('.vert-pagination').css 'marginTop', -pagination.height()/2
+								$scope.setHeights()
 							options.onSlideChangeStart = (swiper, direction) ->
-								angular.element('body').removeClass 'initial-state'
+								if swiper.activeIndex is 0
+									angular.element('body').addClass 'initial-state'
+								else
+									angular.element('body').removeClass 'initial-state'
 								pagination.removeClass 'faded'
 								window.hideAddressBar()
 							options.onSlideChangeEnd = (swiper, direction) ->
 								if $this.initialState
-									swiper.removeSlide 0
-									swiper.swipeTo(0, 0, false)
+									# swiper.removeSlide 0
+									# swiper.swipeTo(0, 0, false)
 									angular.element('body').addClass 'ready-state'
 									$this.initialState = false
 									do swiper.reInit
-									do $this.initPagers
+									# do $this.initPagers
 							$timeout () ->
 								swiperVert = $thisSwiper.swiper(options)
 								do $this.initPagers
