@@ -45,11 +45,11 @@ angular.module('myApp')
 								$scope.navOpen = false
 								$scope.infoOpen = false
 								do $scope.$digest
-					$scope.setHeights = (e = {orientation: "portrait"}, cb = $.noop) ->
-						height = if orientation isnt 0 then window.innerHeight else  window.innerHeight
+					$scope.setHeights = (orientat, cb = $.noop) ->
+						height = window.innerHeight
 						$('.top-swiper-container, .slide-vert, .slide, #main .swiper-wrapper').height(height)
-						console.log e
-						console.log 'w.o: ', e.orientation, "orientation: ", orientation,  "w.i:", window.innerWidth, "w.s.w: ", document.documentElement.clientHeight, "computed heigth:", height
+						#console.log e
+						#console.log 'w.o: ', e.orientation, "orientation: ", orientation,  "w.i:", window.innerWidth, "w.s.w: ", document.documentElement.clientHeight, "computed heigth:", height
 						cb()
 					$this.ready = () ->
 						#if mySwiper then do mySwiper.reInit 
