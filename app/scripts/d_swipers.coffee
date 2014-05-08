@@ -101,25 +101,24 @@ angular.module('myApp')
 									angular.element('body').removeClass 'initial-state'
 								pagination.removeClass 'faded'
 								window.hideAddressBar()
+								$('.control').trigger('reset')
+
 							options.onSlideChangeEnd = (swiper, direction) ->
 								if $this.initialState
-									# swiper.removeSlide 0
-									# swiper.swipeTo(0, 0, false)
 									angular.element('body').addClass 'ready-state'
 									$this.initialState = false
 									do swiper.reInit
-									# do $this.initPagers
 							$timeout () ->
 								swiperVert = $thisSwiper.swiper(options)
 								do $this.initPagers
 						# if horizontal
 						else
-							#horizontal
 							options.slideClass = 'slide-horz'
 							options.loop = true	
 							if $attrs.id == 'bio' and window.innerWidth > 767
 								options.slidesPerView = 2	
-
+							options.onSlideChangeStart = (swiper, direction) ->
+								$('.control').trigger('reset')
 							$timeout () ->
 								mySwiper.push $thisSwiper.swiper(options)
 					return $this						

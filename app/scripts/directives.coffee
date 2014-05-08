@@ -32,18 +32,19 @@ angular.module('myApp').
 			'<div class="control next">&darr;</div>'+
 			'</div>'
 		link: (scope, elem, attrs) ->
-			scope.goTo = (dir, pager) ->
+			scope.goTo = (dir, pager, reset = false) ->
 				parent = pager.parents('.slide-text-wrapper')
 				content = parent.children('.text-body')
 				pageHeight = do parent.height
 				contentHeight = do content.height
 				currentOffset = parseInt(content.css 'top')
-				newOffset = currentOffset + dir*pageHeight - 10
+				newOffset = if reset is true then 0 else currentOffset + dir*pageHeight - 10
 				newOffset = Math.min(0, Math.max(newOffset, pageHeight-(contentHeight+15) ) )
 				if newOffset != currentOffset
 					content.animate
 						'top': newOffset
-
+			scope.reset = (pager) ->
+				scope.goTo 1, pager, true
 			scope.checkHeight = (pager) ->
 				parent = pager.parents('.slide-text-wrapper')
 				content = parent.children('.text-body')
@@ -57,16 +58,16 @@ angular.module('myApp').
 				setTimeout () ->
 					contentHeight = elem.parents('.slide-text-wrapper').children('.text-body').height()
 				, 2000
-				angular.element('.control:not(.processed)').addClass('processed').click () ->
+				$this = angular.element('.control:not(.processed)')
+				$this.addClass('processed').click () ->
 					if($(this).hasClass('next')) 
 						scope.goTo -1, $(this) 
 					else 
 						scope.goTo 1, $(this)
-				$(window).bind('resize', () ->
-					scope.checkHeight($(this));
+				$this.bind('reset', () ->
+					scope.reset $(this)
 				)
-				scope.checkHeight($(this));
-			, 4000
+			, 2000
 	]).
 	directive("myInfo", [
 		() ->
