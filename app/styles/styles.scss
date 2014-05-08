@@ -14,7 +14,26 @@ body{
 	&.initial-state{
 		background-color: $theme-color;
 	}
-
+	&:before{
+		content: '';
+		position: fixed;
+		top:0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background-image: url('/app/images/massai.png');
+		background-color: $theme-color;
+		background-position: center;
+		background-repeat: no-repeat;
+		z-index: 1;
+		-webkit-animation: hover .5s infinite ease-in-out alternate;
+		-moz-animation: hover .5s infinite ease-in-out alternate;
+		-ms-animation: hover .5s infinite ease-in-out alternate;
+		-o-animation: hover .5s infinite ease-in-out alternate;
+	}
+	&.swiper-ready:before{
+		content: none;
+	}
 	a{
 		text-decoration: underline;
 		color: $font-color;
@@ -37,6 +56,10 @@ body{
 }
 #logo{
 	position: relative;
+	background-image: url("/app/images/logo.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 75% auto;
 	h1{
 		visibility: hidden;
 	}
@@ -146,7 +169,7 @@ body{
 			overflow: hidden;
 		}
 		.page-controls{
-			position: fixed;
+			position: absolute;
 			top: 50%;
 			left: -40px;
 			@media #{$tablet}
@@ -242,6 +265,12 @@ body{
 				.info-details{
 					text-align: left;
 					height: auto;
+					
+					&:before{
+					content: '';
+					display: inline-block;
+					margin-top: 35%;
+					}
 				}
 			}
 		}

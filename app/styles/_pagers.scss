@@ -106,7 +106,7 @@ navigation{
 		position: fixed;
 		top: 50%;
 		opacity: 1;
-		@include transition($delay: 0.3s);
+		@include transition($delay: 0s);
 		display: inline-block;
 		z-index: 10;
 		right: -100%;

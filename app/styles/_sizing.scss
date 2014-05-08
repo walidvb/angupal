@@ -19,3 +19,89 @@ img{
 	max-height: 100%;
 	display: inline-block;
 }
+
+@-moz-keyframes hover {
+	0% {
+		background-position: 50% 49%;
+
+	}
+
+	100% {
+		background-position: 50% 51%;
+
+	}
+}
+
+@-webkit-keyframes hover {
+	0% {
+		background-position: 50% 49%;
+
+	}
+
+	100% {
+		background-position: 50% 51%;
+
+	}
+}
+
+@keyframes hover {
+	0% {
+		background-position: 50% 49%;
+
+
+	}
+
+	100% {
+		background-position: 50% 51%;
+
+
+	}
+}
+
+@-moz-keyframes hover-top {
+	0% {
+		background-position: 50% 35px;
+
+	}
+
+	50% {
+		background-position: 50% 95px;
+	}
+	100% {
+		background-position: 50% 35px;
+	}
+
+
+}
+
+@-webkit-keyframes hover-top {
+	0% {
+		background-position: 50% 35px;
+
+	}
+
+	50% {
+		background-position: 50% 95px;
+	}
+	100% {
+		background-position: 50% 35px;
+	}
+
+
+}
+
+@keyframes hover-top {
+	0% {
+		background-position: 50% 35px;
+
+
+	}
+
+	50% {
+		background-position: 50% 95px;
+	}
+	100% {
+		background-position: 50% 35px;
+	}
+
+}

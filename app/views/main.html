@@ -1,5 +1,6 @@
 
 <div class="top-swiper-container" swiper-ctrl="vert" my-fullscreen="y" ng-controller="mainCtrl" ng-class="{'info-open': infoOpen, 'nav-open': navOpen}">
+  <div ng-if="siteLoading"></div>
   <navigation ng-controller="infoCtrl">
     <div id="info">
         <div id="info-wrapper" my-info="data.info" ng-click="toggleInfo()">
@@ -16,7 +17,6 @@
   <div id="main" class="swiper-wrapper">
     <section id="logo" class="slide-vert" my-fullscreen="y" data-name="" data-icon="">
       <h1>CollinFontaine</h1>
-        <img id="svg" src="/app/images/logo.png" alt="" class="img-responsive">
         <img id="arrows" src="/app/images/arrows.png">
     </section>
     <section id="masai" class="slide-vert" my-fullscreen="y" data-name="{{data.masai.title}}" data-icon="{{data.masai.icon}}">

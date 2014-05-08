@@ -1,6 +1,0 @@
-name               = angupal
-description        =  Themes main and only page
-version            = 0.0
-core               = 7.x
-engine             = phptemplate
-stylesheets[all][] = style.css

@@ -93,6 +93,7 @@ angular.module('myApp')
 								#move pagination to center
 								angular.element('.vert-pagination').css 'marginTop', -pagination.height()/2
 								$scope.setHeights()
+								angular.element('body').addClass 'swiper-ready'
 							options.onSlideChangeStart = (swiper, direction) ->
 								if swiper.activeIndex is 0
 									angular.element('body').addClass 'initial-state'
