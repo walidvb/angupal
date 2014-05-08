@@ -2,4 +2,4 @@ app/styles/.sass-cache/*
 *.js
 *.css
 *.map
-drupal/*
+drupal
