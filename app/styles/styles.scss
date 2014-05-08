@@ -123,7 +123,6 @@ body{
 		.slides .slide.slide-text {
 		.slide-text-wrapper{
 			width: 50%;
-			@include center($right: auto!important);	
 			margin: 0;
 		}
 		}
@@ -131,7 +130,7 @@ body{
 }
 
 .slide-text-wrapper{
-	margin-top: 5%!important;
+	margin-top: 2.5%!important;
 	position: relative;
 	.text-body{
 		position: relative;
@@ -166,12 +165,12 @@ body{
 			margin: auto;
 			text-align: justify;
 			height: 90%;
-			overflow: hidden;
+			overflow-y: hidden;
 		}
 		.page-controls{
 			position: absolute;
 			top: 50%;
-			left: -40px;
+			left: 0px;
 			@media #{$tablet}
 			{
 				position: absolute;
@@ -193,11 +192,9 @@ body{
 				text-align: center;
 				&:first-child{
 					position: relative;
-					top: -40px;
-
+					top: 0px;
 					@media #{$tablet}
 					{
-
 					  top: 0px;
 					}
 				}
@@ -208,7 +205,6 @@ body{
 		}
 	}
 }
-
 }
 
 #info{
